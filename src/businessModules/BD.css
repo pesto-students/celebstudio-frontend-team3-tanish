@@ -1,0 +1,165 @@
+.bDashboard{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100vw;
+    height: 100vh;
+}
+
+.BDnav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:100%;
+    height: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+    position: fixed;
+    font-size: 3em;
+}
+
+.camp{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 50px;
+    width: 70%;
+}
+
+.camp > *{
+    width:45%;
+    height:80px;
+    font-size: xx-large;
+    border-style: outset;
+    background-color: #accae8c2;
+}
+
+
+.BDnav :first-child{
+    padding-left:20px ;
+}
+
+.BDnav :last-child{
+    padding-right: 20px;
+}
+
+
+.navbar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:10%;
+    min-width: 100px;
+    height: 100vh;
+    background-color: #1c4e80;
+}
+
+.navbar > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    text-decoration: double;
+    text-decoration: double;
+    height: 18%;
+    width: 90%;
+    border-radius: 3px;
+}
+
+.navbar :first-child{
+    margin-top: 10px;
+}
+
+
+.navbar > *:hover{
+    background-color: rgba(91, 162, 225, 0.386);
+    font-size: x-large;
+}
+
+.BDcontainer{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    margin-top: 70px;
+    width: 100vw;
+    background-color: #a5d8dd;
+}
+
+.BDCcampaign{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    width: 100%;
+    height: 90vh;
+    background-color:#a5d8dd;
+    overflow-y: scroll;
+}
+
+.disCAMP{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 90%;
+    height: fit-content;
+    background-color:#1c4e8093;
+    margin: 10px;
+    border-radius: 5px;
+    color: white;
+    padding: 15px;
+}
+
+.disCAMP > * {
+    text-align: center;
+    width: 350px;
+    min-width: fit-content;
+    padding:10px;
+    font-size: 1.5em;
+}
+
+
+
+.disCAMP:hover{
+    background-color: #1c4e80;
+}
+
+
+
+@media screen and (max-width:1400px) {
+
+    .navbar{
+        width: 20px;
+    }
+
+    .navbar > *{
+        height: 15vh;
+    }
+
+    .navbar > *:hover{
+        font-size: large;
+    }
+
+    .disCAMP > *{
+        min-width: 200px;
+    }
+    
+}
+
+@media screen and (max-width:500px) {
+    .BDnav:first-child{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: x-large;
+        padding-left: 0;
+    }
+
+    .disCAMP > *{
+        width: 100%;
+    }
+    
+}

@@ -1,0 +1,430 @@
+/*have to add media query for get started part*/
+
+    .HomePage{
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+    }
+    /*header*/
+
+    .header{
+        display: flex;
+        flex-direction: row;
+        justify-items:flex-end;
+        justify-content: space-between;
+        width:100%;
+        background-color:aliceblue;
+        height:clamp(60px,8vh,10vh);
+    }
+
+
+.celebstudio{
+    position: relative;
+    align-self: center;
+    font-family: 'Oswald';
+    font-size: xx-large;
+    padding-left: 20px;
+    padding-top:clamp(8px,0.3vh,0.3vh);
+    padding-bottom:clamp(8px,1.5vh,2vh);
+    color:black
+}
+
+/*media query required for ipad vertical*/
+
+.getStarted{
+    position: relative;
+    align-self: center;
+    justify-self: flex-end;
+    border: soild red;
+    width:470px;
+    padding-top:clamp(8px,1.5vh,2vh);
+    padding-bottom:clamp(8px,2vh,2vh);
+}
+
+.getStarted > button{
+    bottom:6px;
+}
+
+
+.headerList > li {
+    display: relative;
+    float: left;
+    list-style: none;
+    text-align: center;
+}
+
+.headerList > :nth-child(1) {
+    padding-right: 12px;
+}
+
+.headerList > :nth-last-child(1){
+    padding-right: 38px;
+}
+
+
+
+.startedButton{
+    position: relative;
+    border:2px solid #FFFFFF;
+    font-size: large;
+    border-radius: 6.5px;
+    background-color: black;
+    color:aliceblue;
+    width:fit-content;
+    padding: 5px;
+    padding-right:8px;    
+}
+.startedButton:hover{
+    border:2px solid #0fb7f4;
+    color:#0fb7f4;
+}
+.arrowIcon{
+    position:relative;
+    top:2.5px;
+    padding-left: 8px;
+}
+
+/*content*/
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-image: linear-gradient(to bottom, #86f3cdd6,#91b8af);
+/*    margin-top:clamp(60px,8vh,10vh);*/
+    height:fit-content;
+    width: 100%;
+    overflow-y: show;
+}
+
+.first{
+    position: relative;
+    width:fit-content;
+    padding: 20px 20px 30px 30px;
+    background-color: #ffffff49;
+    border-radius: 10px;
+    margin:35px;
+    margin-right: 60px;
+    align-self: center;
+}
+
+.firstHeader{
+    font-size:clamp(48px,3em,3em);
+    text-decoration: double;
+    text-align: center;
+}
+
+.firstHeader2{
+    font-size:clamp(38px,2em,2em);
+    text-decoration: double;
+    text-align:center;
+}
+
+.firstContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 10px;
+    font-size:clamp(23px,1em,1em);
+    text-decoration: double;
+    text-align: center;
+}
+.FCcontent > div {
+    text-align: center;
+}
+
+.second{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width:100%;
+    margin-top:2vh ;
+    
+}
+
+.SeconContent{
+    margin-top: 30px;
+    width:100%;
+    height:fit-content;
+    padding:15px;
+    padding-left:7vw ;
+    text-align: center;
+}
+
+.SCcontent{
+    margin-top: 5vh;
+    margin-left:clamp(1vw,7vw,8vw);
+    font-size:50px;
+    width:80%;
+    text-decoration: double;
+    font-family: sans-serif;
+}
+
+.SCcontent2{
+    width:80%;
+    position: relative;
+    font-size:clamp(30px,1.2em,1.2em);
+    margin-left:7vw;
+}
+
+.SecondImage{
+    margin-top: 4vh;
+    width:48%;
+    height:fit-content;
+}
+
+.SecondImage > img {
+    border-radius: 5px;
+    width: 100%;
+}
+
+.third{
+    font-family:'Roboto';
+    text-align: center;
+    padding:15px;
+    background-color: #072e7c17;
+    width: 100%;
+    align-self: center;
+    margin-top: 10vh;
+    border-radius: 6px;
+    height: fit-content;
+}
+
+.thirdTtile{
+    padding-top: 2vh;
+    font-size: 45px;
+    text-decoration: double;
+}
+
+.thirdDesc{
+    font-size: 25px;
+}
+
+.getStarted2{
+    height: 35px;
+    width: 220px;
+    float: center;
+    background-color: #BFB1D7;
+    border-style: none;
+    font-size: x-large;
+    border-radius: 3px;
+    margin-top: 2vh;
+}
+
+.getStarted2:hover{
+    background-color: #9875d4;
+    
+}
+
+
+.fourth{
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 40px;
+}
+
+.fourthImage{
+    display: flex;
+    justify-content: center;
+    padding:15px;
+    margin-top: 40px;
+    width:30%;
+}
+
+.fourthReview{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 25px;
+    width:48%;
+}
+
+.footer{
+        height:fit-content;
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    
+}
+
+div > hr {
+    color:black;
+}
+
+@media screen and (min-width:600px) and (max-width:1400px){
+   
+    .SeconContent{
+    width:100%;
+   }
+
+   .SCcontent{
+    text-align: center;
+    width:80%;
+    font-size: 2.5rem;
+    padding-left: 2vw;
+   }
+
+   .SCcontent2{
+    text-align: center;
+    width: 78%;
+    font-size: 2em;
+    padding-left: 3vw;
+   }
+
+   .SecondImage > img {
+    width: 110%;
+   }
+
+   .fourth{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+   }
+
+   .fourthImage{
+    display: flex;
+    justify-content: center;
+    padding:15px;
+    margin-top: 40px;
+    width:100%;
+   }
+
+   .fourthImage > img{
+    border-radius: 5px;
+   }
+
+   .fourthReview{
+    position: relative;
+    align-items: center;
+    width: 100%;
+    margin-top:5px;
+   }
+
+
+}
+
+
+@media screen and (max-width:600px) {
+
+    .celebstudio{
+        clear: both;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: relative;   
+    }
+
+    .getStarted{
+        visibility: hidden;
+        width: 0px;
+    }
+
+    .container{
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        width: 100%;
+        margin: 0vw;
+        padding: 0vw;
+        clear: both;
+    }
+
+    .first{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width:80%;
+        padding: 10px;
+    }
+
+    .first > div{
+        position: relative;
+        align-self: center;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .firstHeader{
+        font-size:1.5em;
+    }
+
+    .firstHeader2{
+        font-size: 1em;
+    }
+    .firstContent{
+        font-size: 0.8em;
+    }
+
+    .second{
+        padding-left: 2vw;
+    }
+
+    .SeconContent{
+        margin-top: -6vh;
+        padding-top: 0px;
+    }
+
+    .SCcontent{
+        font-size: 1.8em;
+    }
+
+    .SCcontent2{
+        font-size: 1em;
+        text-decoration: double;
+    }
+
+    .SecondImage{
+        width: 80%;
+    }
+
+    .third{
+        position: relative;
+        width: 99%;
+        right: 3vw;
+    }
+
+    .thirdTtile{
+        text-align: center;
+        font-size: 1.7em;
+    }
+
+    .thirdDesc{
+        text-align: center;
+        font-size: 1em;
+        text-decoration: double;
+    }
+
+    .fourth{
+        margin-top: -1vh;
+    }
+
+    .fourthImage{
+        width: 100%;
+        position: relative;
+        justify-items: center;
+        margin-top: 0.5vh;
+    }
+
+    .fourthImage > img{
+        width: 90%;
+        position: relative;
+        right: 3.5vw;
+    }
+
+    .fourthReview{
+        position: relative;
+        text-align: center;
+        width: 90%;
+        right: 2.5vw;
+        margin-top: -5vh;
+    }
+}
