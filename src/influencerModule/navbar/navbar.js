@@ -1,7 +1,8 @@
 import React, { Component, useState } from 'react';
 import {ImMenu} from 'react-icons/im'; 
 import './navbar.css';
-import {AiFillHome,AiFillSetting} from 'react-icons/ai';
+import {AiFillHome} from 'react-icons/ai';
+import {FaUserAlt} from 'react-icons/fa';
 import {IoIosNotifications, IoIosLogOut} from 'react-icons/io';
 import {SiCampaignmonitor} from 'react-icons/si';
 import { logout } from '../../signup/authSlice';
@@ -54,7 +55,7 @@ const Navbar = ({children})  => {
               <div className="navbaritems">
                 <div className='navlist' name="hello"  onClick={handleDasboardClick}><AiFillHome/><div>Dashboard</div></div>
                 <div className='navlist' name="hello" onClick={handleCampaignClick}><SiCampaignmonitor/><div>Campaign</div></div>
-                <div className='navlist' name="hello" onClick={handleSettingClick}><AiFillSetting/><div>Setting</div></div>
+                <div className='navlist' name="hello" onClick={handleSettingClick}><FaUserAlt/><div>Profile</div></div>
                 <div className='navlist' name="hello" onClick={handleINotification}><IoIosNotifications/><div>Notificaion</div></div>
                 <div className='navlist' name="hello"onClick={handleLogout} ><IoIosLogOut/><div>Logout</div></div>
               </div>:null

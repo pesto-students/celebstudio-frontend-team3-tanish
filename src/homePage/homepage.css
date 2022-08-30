@@ -4,16 +4,18 @@
         display: flex;
         flex-direction: column;
         overflow-x: hidden;
+        font-family: Roboto;
     }
     /*header*/
 
     .header{
+        position: fixed;
         display: flex;
         flex-direction: row;
         justify-items:flex-end;
         justify-content: space-between;
         width:100%;
-        background-color:aliceblue;
+        background-color:white;
         height:clamp(60px,8vh,10vh);
     }
 
@@ -91,7 +93,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    background-image: linear-gradient(to bottom, #86f3cdd6,#91b8af);
+    background-image: url("https://www.freepik.com/free-vector/white-gold-hexagon-pattern-background_16330847.htm#query=simple%20background&position=24&from_view=keyword");
 /*    margin-top:clamp(60px,8vh,10vh);*/
     height:fit-content;
     width: 100%;

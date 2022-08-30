@@ -15,13 +15,13 @@ const Signup = (props) => {
     password:'',
   })
   console.log(props);
+  const token = "byTheRiverSide"
   const request = {
     method:'post',
-    header:'application/json',
-    url:'http://localhost:8000/signup/influencer',
+    header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+    url:'https://celebackend.herokuapp.com/users/login',
     data: useLogin,
   }
-
   const handleChange = (event) => {
    const utype = event.target.value;
    setUserType(utype);
@@ -35,7 +35,7 @@ const Signup = (props) => {
     const handleLogin = (event) => {
       event.preventDefault();
       axios.post(request)
-      .then((res) => {  dispatch(getTOKEN(res.json())) })
+      .then((res) => {  dispatch(getTOKEN(res.json()));console.log(res) })
       .catch((err) => {console.log(err);})
     }
    
