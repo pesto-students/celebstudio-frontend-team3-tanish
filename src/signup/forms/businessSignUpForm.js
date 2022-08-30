@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import '../css/businessSignup.css';
 import axios from 'axios';
 import {BsArrowRight} from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 
 const BusinessSignUP = () => {
   const [formDetails,setFormDetails] = useState({fname:'',lname: '', cname: '', curl: '', email: '', password: ''});
+  const select = useSelector(((state) => state.authDetails.token));
+  const token = select;
   const request = {
     method:'post',
-    header:'application/json',
-    url:'http://localhost:8000/signup/business',
+    header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+    url:'https://celebackend.herokuapp.com/users/signup/business/',
     data: formDetails,
   }
   
@@ -17,11 +20,11 @@ const BusinessSignUP = () => {
     setFormDetails({...formDetails, [name]:value, });
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     console.log("sending details to backend for processing");
-    axios(request)
-    .then((res) => {console.log(res)})
+    await axios(request)
+    .then((res) => {console.log(res.json())})
     .catch((err) => {console.log(err)})
   }
 

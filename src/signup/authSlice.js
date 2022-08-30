@@ -6,7 +6,7 @@ export const authSlice = createSlice({
     name:'authNtoken',
     initialState:{
         status:true,
-        token:"",
+        token:"justAdummyToken",
         userID:"BU1234AIR",
         userType:"business",
     },

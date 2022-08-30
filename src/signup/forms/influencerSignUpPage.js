@@ -5,10 +5,11 @@ import axios from 'axios';
 
 const InfluencerSignUP = () => {
   const [formDetails,setFormDetails] = useState({fname:'',lname: '',cno:'', email: '', password: ''});
+  const token = "justForFun"
   const request = {
     method:'post',
-    header:'application/json',
-    url:'http://localhost:8000/signup/influencer',
+    header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+    url:'https://celebackend.herokuapp.com/users/signup/influencer/',
     data: formDetails,
   }
 
