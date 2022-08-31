@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import '../css/influencerSignup.css';
 import influencer from '../influencer.PNG';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const InfluencerSignUP = () => {
+  const navigate = useNavigate();
+  const [displayStatus, setDispalyStatus] = useState("");
   const [formDetails,setFormDetails] = useState({fname:'',lname: '',cno:'', email: '', password: ''});
   const token = "justForFun"
   const request = {
@@ -14,7 +18,8 @@ const InfluencerSignUP = () => {
   }
 
   const setChange = (event) => {
-    const {name,value} = event.target
+    setDispalyStatus("");
+    const {name,value} = event.target;
     setFormDetails({...formDetails, [name]:value, });
   }
 
@@ -22,11 +27,31 @@ const InfluencerSignUP = () => {
     event.preventDefault();
     console.log("sending details to backend for processing");
     axios(request)
-    .then((res) => {console.log(res)})
+    .then((res) => {
+      
+      if(res.status === 201 && res.data.status === 'success'){
+        setDispalyStatus("success");
+        setTimeout(() => {setDispalyStatus("");navigate('/signup')},1000);
+      }
+      else{
+        setDispalyStatus("failed")
+      }
+    })
     .catch((err) => {console.log(err)})
+    
   }
   return (
     <div className='IScontainer'>
+      {displayStatus === 'success' ? 
+      <div className='responseStatus'>
+        Login Successfull!! Redirecting to login Page.
+      </div>:null}
+
+      {displayStatus === 'failed' ? 
+      <div className='responseStatus'>
+        Something went wrong:(. Please try again
+      </div>:null}
+      
     <div className='influencerSignUp'>
       <h1>Signup with celebStudio</h1>
       

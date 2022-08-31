@@ -73,6 +73,21 @@ label {
   height:28px;
   background-color: black;
 }
+
+.responseStatus{
+  position: absolute;
+    z-index: 1000;
+    height: fit-content;
+    padding: 5px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background-color: green;
+    color: white;
+}
 }
 
 @media screen and (min-width: 500px) {

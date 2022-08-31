@@ -4,10 +4,10 @@ import {BrowserRouter, Route,Routes } from 'react-router-dom';
 import Signup from './signup/signup';
 import InfluencerSignUP from './signup/forms/influencerSignUpPage';
 import BusinessSignUP from './signup/forms/businessSignUpForm';
-import BusinessDashboard from './businessModules/businessDashboard';
-import Notification from './businessModules/notification';
-import CreateCampaign from './businessModules/createCampaign';
-import Bprofile from './businessModules/bprofile';
+import Bdashboard from './businessModules/businessModule/dashboard/Bdashboard';
+import Bnotification from './businessModules/businessModule/bnotification';
+import CreateCampaign from './businessModules/businessModule/createCamapign/createCampaign';
+import BusinessProfile from './businessModules/businessModule/businessProfile/businessProfile';
 import Idashboard from './influencerModule/influencerModules/dashboard/Idashboard';
 import EligibleCampaign from './influencerModule/influencerModules/influencerEligibleCampaign/influencerEligibleCampaign';
 import Inotification from './influencerModule/influencerModules/inotification';
@@ -23,10 +23,10 @@ const App = () => {
         <Route exact path='/signup' element={<Signup />}/>
         <Route exact path='/signup/business' element={<BusinessSignUP />}/>
         <Route exact path='/signup/influencer' element={<InfluencerSignUP />}/>
-        <Route exact path="/Bdashboard" element={<BusinessDashboard />} />
-        <Route exact path="/notification" element={<Notification />} />
+        <Route exact path="/Bdashboard" element={<Bdashboard />} />
+        <Route exact path="/notification" element={<Bnotification />} />
         <Route exact path="/newCampaign" element={<CreateCampaign />} />
-        <Route exact path="/bprofile" element={<Bprofile />} />
+        <Route exact path="/bprofile" element={<BusinessProfile />} />
         <Route exact path="/Idashboard" element={<Idashboard />} />
         <Route exact path="/Iprofile" element={<InfluencerProfile />} />
         <Route exact path="/eligibleCampaign" element={<EligibleCampaign />} />
