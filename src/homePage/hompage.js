@@ -89,8 +89,8 @@ const Hompage = () => {
                 
 
                 <footer className='footer'>
-                    <div className='footerDiv'>first list</div>
-                    <div className='footerDiv'>second list</div>
+                    <div className='footerDiv'><Link to='Idashboard'>Idashbaord</Link></div>
+                    <div className='footerDiv'><Link to='Bdashboard'>bdashbaord</Link></div>
                     <div className='footerDiv'>third list</div>
                 </footer>
 

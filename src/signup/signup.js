@@ -11,7 +11,7 @@ const Signup = (props) => {
   const dispatch = useDispatch();
   const [userType,setUserType] = useState("");
   const [useLogin,setuseLogin] = useState({
-    email:'',
+    userid:'',
     password:'',
   })
   const token = "byTheRiverSide"
