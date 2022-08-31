@@ -7,7 +7,7 @@ const EligibleCampaign = () => {
   const [showCampaignEnroll,setShowCampaignEnroll] = useState('');
   const [applyNote, setApplynote] = useState('');
   const [fname, setFname] = useState("Jitender");
-  const [submitSucess, setSubmitSuccess] = useState(false);
+  const [submitSucess, setSubmitSuccess] = useState();
   const [showSuccessMsg, setShowSuccessmessage] = useState(false);
   const campList = [{id:1234,company:"Kotak",name:'Amazon Fashion Week 2022-brand Endosment ',earning:"2000",desc:"just a description",objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
   {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:1200,name:'jitasdfghjkxcvbnm,xcvbnm,',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
@@ -28,10 +28,8 @@ const EligibleCampaign = () => {
   {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:1267,name:'jit',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'}]
 
   const handleCampaignCardclick = ({tag}) => {
-    if(showCampaignEnroll.length === 0){
      setShowCampaignEnroll(tag);
-    }
-  
+   
    }
 
    const handleChange = (event) => {
@@ -39,13 +37,13 @@ const EligibleCampaign = () => {
    }
 
    const apply = (event) => {
-    if(submitSucess){
-
+    if(submitSucess == null){
+      setSubmitSuccess()
     }
    }
 
    const cancleApply = (event) => {
-
+      setShowCampaignEnroll("");
    }
  
    return (
@@ -60,7 +58,7 @@ const EligibleCampaign = () => {
              {campList.map((items) =>(
                <div className='campaignCard' key={items.id} title='Click to apply' onClick={() => {handleCampaignCardclick({tag:items.id})}}>
                  <div>{items.company}</div>
-                 <div classname="campaignName">{items.name}</div>
+                 <div className="campaignName">{items.name}</div>
                  <div><CgCalendarDates/>{items.start} - <CgCalendarDates />{items.end}</div>
                  <div>Campaign Description:{items.desc}</div>
                  <div className='apply campaign'>
@@ -70,10 +68,10 @@ const EligibleCampaign = () => {
                     <div className='lineeli'>
                       <h3>Apply for this campaign</h3>
                     </div>
-                    <label>Your message</label>
-                    <input type="textare" cols={60} rows={5} onChange={handleChange} />
+                    <label>Message for the business
+                    <textarea rows={5} cols={50} onChange={handleChange} />
                     <button className='profileEditButton update' onClick={apply}>Apply</button> 
-                    <button className='profileEditButton cancle' onClick={cancleApply}>Cancle</button>
+                    <button className='profileEditButton cancle' onClick={cancleApply}>Cancle</button></label>
                   </div>:null}
                  </div>
                </div>

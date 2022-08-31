@@ -3,8 +3,11 @@ import '../css/businessSignup.css';
 import axios from 'axios';
 import {BsArrowRight} from 'react-icons/bs';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const BusinessSignUP = () => {
+  const [displayStatus, setDispalyStatus] = useState("");
+  const navigate = useNavigate();
   const [formDetails,setFormDetails] = useState({fname:'',lname: '', cname: '', curl: '', email: '', password: ''});
   const select = useSelector(((state) => state.authDetails.token));
   const token = select;
@@ -20,18 +23,37 @@ const BusinessSignUP = () => {
     setFormDetails({...formDetails, [name]:value, });
   }
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     console.log("sending details to backend for processing");
-    await axios(request)
-    .then((res) => {console.log(res.json())})
+    axios(request)
+    .then((res) => {
+      
+      if(res.status === 201 && res.data.status === 'success'){
+        setDispalyStatus("success");
+        setTimeout(() => {setDispalyStatus("");navigate('/signup')},1000);
+      }
+      else{
+        setDispalyStatus("failed")
+      }
+    })
     .catch((err) => {console.log(err)})
+    
   }
 
   
   return (
   
     <div className='businessSignUp'>
+      {displayStatus === 'success' ? 
+      <div className='responseStatus'>
+        Login Successfull!! Redirecting to login Page.
+      </div>:null}
+
+      {displayStatus === 'failed' ? 
+      <div className='responseStatus'>
+        Something went wrong:(. Please try again
+      </div>:null}
     <form onSubmit={handleSubmit}>
   
     <div className='cS'>celebStudio</div>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../influencerModule.css';
+import '../../businessModule.css';
 import axios from 'axios';
 import {CgCalendarDates} from 'react-icons/cg';
 
 
-const Campaign = () => {
+const EditCampaign = () => {
   const [campList,setCampList] = useState([]);
   const [showCampaignDetails,setShowCampaignDetails] = useState('');
   const [fname, setFname] = useState("Jitender");
@@ -40,26 +40,8 @@ const Campaign = () => {
   return (
     <div className='dashboardCampaign'>
         <div className='dashboardgreet'>
-        <h1>Welcome {fname},</h1> 
-        </div>
-        
-        <div className='performance' >
-            <div>
-              <div className='score'>12000</div>
-              You earned
-            </div>
-            <div>
-            <div className='score'>120</div>
-              Post Share
-              </div>
-            <div >
-            <div className='score'>20</div>
-            Collaboration
-            </div>
-            <div >
-            <div className='score'>3</div>
-            Platform 
-            </div>
+        <h1>Welcome {fname},</h1>
+        Edit your configured campaign here. 
         </div>
         <div className='line'></div>
         <div className='campaigncardConatiner'>
@@ -82,4 +64,4 @@ const Campaign = () => {
   )
 }
 
-export default Campaign;
+export default EditCampaign;
