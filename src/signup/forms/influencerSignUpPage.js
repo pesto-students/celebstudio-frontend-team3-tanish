@@ -25,20 +25,21 @@ const InfluencerSignUP = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const timer = () => {setTimeout(() => {setDispalyStatus("");navigate('/signup')},1000)};
     console.log("sending details to backend for processing");
     axios(request)
     .then((res) => {
       
       if(res.status === 201 && res.data.status === 'success'){
         setDispalyStatus("success");
-        setTimeout(() => {setDispalyStatus("");navigate('/signup')},1000);
+        timer();
       }
       else{
         setDispalyStatus("failed")
       }
     })
     .catch((err) => {console.log(err)})
-    
+    clearTimeout(timer());
   }
   return (
     <div className='IScontainer'>

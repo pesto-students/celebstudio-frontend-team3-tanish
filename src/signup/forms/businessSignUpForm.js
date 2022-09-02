@@ -28,7 +28,7 @@ const BusinessSignUP = () => {
     console.log("sending details to backend for processing");
     axios(request)
     .then((res) => {
-      
+      console.log(res);
       if(res.status === 201 && res.data.status === 'success'){
         setDispalyStatus("success");
         setTimeout(() => {setDispalyStatus("");navigate('/signup')},1000);

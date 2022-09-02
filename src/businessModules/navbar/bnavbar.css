@@ -71,7 +71,7 @@
 
 .navbaritems > *:hover{
     background-color: rgba(91, 162, 225, 0.61);
-    font-size: x-large;
+    font-size: xx-large;
     border-style: outset;
     border: rgb(60, 103, 140);
 }

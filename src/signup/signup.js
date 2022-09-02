@@ -11,8 +11,8 @@ const Signup = (props) => {
   const dispatch = useDispatch();
   const [userType,setUserType] = useState("");
   const [useLogin,setuseLogin] = useState({
-    userid:'',
     password:'',
+    email:'',
   })
   const token = "byTheRiverSide"
 
@@ -32,10 +32,11 @@ const Signup = (props) => {
       setuseLogin({...useLogin, [name]:value});
     }
 
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
       event.preventDefault();
-      axios(request)
-      .then((res) => {  dispatch(getTOKEN(res.json()));console.log(res) })
+      console.log(request.data);
+      await axios(request)
+      .then((res) => {console.log(res)})
       .catch((err) => {console.log(err);})
     }
    
@@ -58,7 +59,7 @@ const Signup = (props) => {
           <div>
             <form onSubmit={handleLogin}>
               <h3>Already a user</h3>
-              <input className='loginInput' required type='text' placeholder='E-mail' name="userid" value={useLogin.value} onChange={setChange} /><br/>
+              <input className='loginInput' required type='text' placeholder='E-mail' name="email" value={useLogin.value} onChange={setChange} /><br/>
               <input className='loginInput' required type='password' placeholder='password' name="password" value={useLogin.value} onChange={setChange} /><br/>
               <button className='button' type='submit'>Login</button>
             </form>

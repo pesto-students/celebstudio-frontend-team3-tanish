@@ -2,10 +2,12 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router';
 import Navbar from '../../navbar/bnavbar';
-import '../../businessModule.css';
-import DisplayCampaign from './DisplayCampaign';
+import {useLocation} from 'react-router-dom';
+import Show from './show';
 
-const Bdashboard = () => {
+const ShowCampaign= () => {
+  const location = useLocation();
+  let campDetails = location.state.data.data[0];
     const userID = useSelector((state) => state.authDetails.userID);
     const userType = useSelector((state) => state.authDetails.userType);
     const status = useSelector((state) => state.authDetails.status);
@@ -14,8 +16,7 @@ const Bdashboard = () => {
     {userID != null && userType != null && status ? 
     <>
     <div className='Idashboard'>
-      
-        <Navbar children={<DisplayCampaign />}/>
+        <Navbar children={<Show data={campDetails}/>}/>
     </div>
     </>:<>
     <Navigate to="/signup" />
@@ -24,4 +25,4 @@ const Bdashboard = () => {
   )
 }
 
-export default Bdashboard;
+export default ShowCampaign;

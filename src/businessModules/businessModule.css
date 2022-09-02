@@ -1,3 +1,29 @@
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.788); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: grey; 
+}
+   
+
+
+
 /********************************************************dashboard module*******/
 .Idashboard{
     width: 100vw;
@@ -7,10 +33,6 @@
 /*influencer dashboard*/
 
 /********************************************************campaing module*******/
-.campaign{
-    width: 100%;
-    height: 100%;
-}
 
 .dashboardCampaign{
     display: flex;
@@ -23,29 +45,6 @@
     font-family: Roboto;
 }
 
-.performance{
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    height: fit-content;
-    border-radius: 5px;
-    padding: 15px;
-    margin-top: 30px;
-    padding-left: 23px;
-}
-
-
-.performance > * {
-    width: 22%;
-    min-width: fit-content;
-    height:120px;
-    border-radius: 5px;
-    padding: 10px;
-    background-color:#4abdac;
-    color: white;
-}
 
 .dashboardgreet > h1{
     font-family:Roboto;
@@ -106,7 +105,8 @@ padding: 20px;
 }
 
 .campaignName{
-    font-size: 1.8em;
+
+    display: inline-block;
 }
 
 @media screen and (max-width:1400px) {
@@ -237,22 +237,21 @@ padding: 20px;
     
 }
 
-input[type="text"],input[type="date"],input[type="email"],input[type="password"]{
+input[type="text"],input[type="date"],input[type="email"],input[type="password"],select{
     display: inline-block;
     width: 500px;
     border: 0.4px solid black;
-    background-color: azure;
+    background-color: white;
     padding: 12px 5px 16px 12px;
     border-radius: 4px;
     color:black;
 }
 
-input[type="text"],input[type="date"],input[type="email"]:hover{
+input[type="text"],input[type="number"],input[type="date"],input[type="email"]:hover{
     background-color: white;
     display: inline-block;
     width: 500px;
     border: 0.4px solid black;
-    background-color: azure;
     padding: 12px 5px 16px 12px;
     border-radius: 4px;
     color: black;
@@ -308,9 +307,130 @@ input[type="text"],input[type="date"],input[type="email"]:hover{
 
 .selected{
     background-color: blue;
+    color:white;
+    border-radius: 4px;
 }
 
 .platform{
     padding-left: 20px;
 }
+
+/*******************************************create campaign************************/
+
+.CreateCampaing{
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    padding: 10px;
+    height: 85vh;
+    font-family: Roboto;
+    overflow-y: hidden;
+}
+.campType{
+    width: 30%;
+    min-width: fit-content;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    height:35px;
+    margin-top: 15px;
+}
+
+.CCleft{
+    overflow-y: scroll;
+    height: 85vh;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    width:60% ;
+}
+
+.campType:hover{
+    background-color: #0eeccf9f;
+    border-radius: 4px;
+}
+
+.lineCC{
+    width: 90%;
+    border-top: 0.8px solid black;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.opted{
+    width: 30%;
+    background-color: rgba(12, 209, 209, 0.781);
+    border-radius: 3px;
+    color: white;
+}
+
+
+.CCright{
+    width: 38%;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.CCname{
+    margin-bottom: 40px;
+}
+
+.CCrightContainer{   
+    width: 70%;
+    height: fit-content;
+    background-color: rgba(50, 195, 176, 0.336);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.CCrightContainer > img{
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+/****************************************display campaign*************/
+
+.pre-launch{
+     width: fit-content !important;
+     padding: 5px !important;
+     padding-top: 2px !important;
+     padding-bottom: 2px !important;
+     position: relative;
+     bottom: 3px;
+     background-color: rgb(226, 105, 61);
+     font-size: 0.7em !important;
+     border-radius: 10px;
+}
+.launch{
+    width: fit-content !important;
+    padding: 5px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    position: relative;
+    bottom: 3px;
+    background-color: yellowgreen;
+    font-size: 0.7em !important;
+    border-radius: 10px;
+}
+
+.budget{
+    font-size: larger;
+}
+
+.desc{
+    font-size: medium;
+    margin-top: 10px;
+}
+
+ .buttonEdit{
+    float: right;
+    width: 20px !important;
+}
+
 
