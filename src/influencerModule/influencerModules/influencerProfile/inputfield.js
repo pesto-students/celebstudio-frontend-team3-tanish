@@ -10,6 +10,10 @@ const Editform = (props) => {
     })
 
     const handleSubmit = (e) => {
+      if(!update || /^\s*$/.test(update )){
+        alert("oops!! you left the the data empty");
+        return;
+      }
         props.sendUpdate(update);
         setUpdate("");
     }

@@ -1,26 +1,37 @@
 
+import useSelection from 'antd/lib/table/hooks/useSelection';
+import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import pIMG from '../../../img/profileimg.PNG';
 import Editform from './inputfield';
 
 const Bprofile = () => {
+
+  const token = useSelector(state => state.authDetails.token);
+  const userID = useSelector(state => state.authDetails.userID);
+  const userData = useSelector(state => state.authDetails.userData);
+
+
     const [showEditButton, setShowEditButton] = useState();
     const [setEdit, updateSetEdit] = useState("");
     const [showPasswordEdit, setshowPasswordEdit] = useState(false);
     //image
+    const [addImg, setAddImage] = useState(false);
+    const [sendImg, setSendImg] = useState([]);
     const [userImg,setuserImg]= useState();
     //personal details
-    const [fname,setFname]= useState(["jitender"])
-    const [lname,setLname]= useState(["prasad"])
-    const [DOB, setDOB]= useState(["04-JAN-2022"])
-
-    //contact details
-    const [email, setEmail]= useState(["wwww.abc@gmail.com"])
-    const [contact, setContact]= useState(["9741236890"])
+    const [profilData, setProfileData] = useState({
+      first_name:userData.first_name,
+      last_name:userData.last_name,
+      email:userData.email,
+      company_name:"",
+      company_url:"",
+    })
 
     //security
     const [password, setPasswrod]= useState(["1234vbnmkl"]);
-    const [oldpassword, setoldPasswrod]= useState([]);
+    const [oldpassword, setoldPasswrod]= useState();
     const [newpassword, setNewPassword] = useState([])
     const [verifypassword, setverifyPassword] = useState([]);
 
@@ -28,6 +39,13 @@ const Bprofile = () => {
 
     const handleupdateSetEdit = ({tag}) => {
       updateSetEdit(tag);
+    }
+
+    const request = {
+      method:'patch',
+      header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+      url:`https://celebackend.herokuapp.com/api/v1/business/${userID}`,
+      data:profilData,
     }
 
     const handleupdateChange = (data) => {
@@ -38,27 +56,33 @@ const Bprofile = () => {
       }
 
       switch(setEdit){
-        case "fname":{
-          setFname(data);
+        case "first_name":{
+          setProfileData({...profilData, first_name:data});
+          axios(request)
+          .then(res => console.log(res))
+          .catch(err => console.log(err));
           updateSetEdit("");
           break;
         }
-        case "lname":{
-          setLname(data);
+
+        case "last_name":{
+          setProfileData({...profilData, last_name:data});
+          axios(request)
+          .then(res => console.log(res))
+          .catch(err => console.log(err));
           updateSetEdit("");
           break;
         }
        
         case "email":{
-          setEmail(data);
+          setProfileData({...profilData, email:data});
+          axios(request)
+          .then(res => console.log(res))
+          .catch(err => console.log(err));
           updateSetEdit("");
           break;
         }
-        case "contact":{
-          setContact(data);
-          updateSetEdit("");
-          break;
-        }
+      
         default: console.log("something went wrong in handle update change");
       }
 
@@ -80,6 +104,8 @@ const Bprofile = () => {
       setverifyPassword(event.target.value);
     }
 
+   
+
     const handlePasswordSubmit = (event) => {
       event.preventDefault();
       if(oldpassword == password){
@@ -98,6 +124,33 @@ const Bprofile = () => {
 
     }
 
+    const handleAddImage = (event) => {
+      setAddImage(true);
+    }
+
+    const handleImgChange = (event) => {
+      setSendImg({...sendImg,selectedFile:event.target.files[0]});
+      console.log(event.target.files[0]);
+    }
+
+
+    const handleimgUpload = (event) =>{
+      const formData = new FormData();
+    
+      console.log(sendImg);
+
+      // formData.append(
+      //   "myFile",
+      //   addImg.selectedFile,
+      //   addImg.selectedFile.name
+      // );
+      // const requestPack = {...request, data:formData};
+      // console.log(requestPack);
+
+    
+    
+    }
+
  
 
 
@@ -109,28 +162,34 @@ return(
           
             <div className='imgtitle'>Profile Picture</div>
             <div className='imgContainer'>
-            
-                <div className='imgDiv'>
-                  {
-                    userImg ? userImg : <img src={pIMG} alt="profile"/>
-                  }
+                <div className='imgSubcontainer'>
+                  <div className='imgDiv'>
+                    {
+                      userImg ? userImg : <img src={pIMG} alt="profile"/>
+                    }
+                  </div>
+                  
+                  <div className='editbutton'>
+                    <button className='imgButton change' type='primary'  onClick={() => {handleAddImage()}}> Change</button>
+                    <button className='imgButton delete' type='primary'  > Delete</button>
+                  </div>
                 </div>
-                <div className='editbutton'>
-                  <button className='imgButton change' type='primary'  > Change</button>
-                  <button className='imgButton delete' type='primary'  > Delete</button>
-                </div>
+                {addImg ? 
+                <div className='uplodImg'>
+                  <input type='file' onChange={handleImgChange} /> <button onClick={() => {handleimgUpload()}}>Upload</button>
+                </div>  : null}
             </div>
 
 
               <div className='imgtitle'>Personal Details</div>
               <div className='personalDetails'>
 
-              <div className='pdetails' onMouseOut={() => setShowEditButton()} onMouseOver={() => setShowEditButton("fname")}>
-              {setEdit !== 'fname' ?
+              <div className='pdetails' onMouseOut={() => setShowEditButton()} onMouseOver={() => setShowEditButton("first_name")}>
+              {setEdit !== 'first_name' ?
                 <div>
                   <label>First Name</label><br/>
-                  <div className='PDdisplay'>{fname}</div>
-                  {showEditButton === 'fname' ?  <button className='profileEditButton' onClick={() => {handleupdateSetEdit({tag:"fname"})}}>Change</button>
+                  <div className='PDdisplay'>{profilData.first_name}</div>
+                  {showEditButton === 'first_name' ?  <button className='profileEditButton' onClick={() => {handleupdateSetEdit({tag:"first_name"})}}>Change</button>
                   : null}
                 </div>:
                 <div>
@@ -142,12 +201,12 @@ return(
               </div>
 
 
-              <div className='pdetails' onMouseOut={() => setShowEditButton()} onMouseOver={() => setShowEditButton("lname")}>
-              {setEdit !== 'lname' ?
+              <div className='pdetails' onMouseOut={() => setShowEditButton()} onMouseOver={() => setShowEditButton("last_name")}>
+              {setEdit !== 'last_name' ?
                 <div>
                   <label>Last Name</label><br/>
-                  <div className='PDdisplay'>{lname}</div>
-                  {showEditButton === 'lname' ?  <button className='profileEditButton' onClick={() => {handleupdateSetEdit({tag:"lname"})}}>Change</button>
+                  <div className='PDdisplay'>{profilData.last_name}</div>
+                  {showEditButton === 'last_name' ?  <button className='profileEditButton' onClick={() => {handleupdateSetEdit({tag:"last_name"})}}>Change</button>
                   : null}
                 </div>:
                 <div>
@@ -168,7 +227,7 @@ return(
               {setEdit !== 'email' ?
                 <div>
                   <label>Email</label><br/>
-                  <div className='PDdisplay'>{email}</div>
+                  <div className='PDdisplay'>{profilData.email}</div>
                   {showEditButton === 'email' ?  <button className='profileEditButton' onClick={() => {handleupdateSetEdit({tag:"email"})}}>Change</button>
                   : null}
                 </div>:
@@ -181,18 +240,7 @@ return(
               </div>
 
               <div className='pdetails' onMouseOut={() => setShowEditButton()} onMouseOver={() => setShowEditButton("contact")}>
-              {setEdit !== 'contact' ?
-                <div>
-                  <label>Contact</label><br/>
-                  <div className='PDdisplay'>{contact}</div>
-                  {showEditButton === 'contact' ?  <button className='profileEditButton' onClick={() => {handleupdateSetEdit({tag:"contact"})}}>Change</button>
-                  : null}
-                </div>:
-                <div>
-                <label>Contact</label>
-                <div className='PDdiaply'><Editform sendUpdate={handleupdateChange} type={"text"} cancleUpdate={handleCancleUpdate} /></div>
-                </div>
-                }
+              
 
               </div>
               </div>

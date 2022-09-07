@@ -5,12 +5,13 @@ import Navbar from '../../navbar/bnavbar';
 import Bprofile from './bprofile';
 
 const BusinessProfile = () => {
-    const userID = useSelector((state) => state.authDetails.userID);
-    const userType = useSelector((state) => state.authDetails.userType);
-    const status = useSelector((state) => state.authDetails.status);
-  return (
-    <>
-    {userID != null && userType != null && status ? 
+  const userID = useSelector((state) => state.authDetails.userID);
+  const token = useSelector((state) => state.authDetails.token)
+  const userType = useSelector((state) => state.authDetails.userType);
+
+return (
+  <>
+  {token.length > 1 && userID.length > 1 && userType === 'Business'   ? 
     <>
     <div className='Idashboard'>
         <Navbar children={<Bprofile />}/>

@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../influencerModule.css';
 import axios from 'axios';
-import {CgCalendarDates} from 'react-icons/cg';
+import {CgCalendarDates, CgFacebook} from 'react-icons/cg';
+import { useSelector } from 'react-redux';
 
 
 const Campaign = () => {
+  const userID = useSelector(state => state.authDetails.userID)
+  const facebook = useSelector(state => state.authDetails.userData.facebook.isactive);
+  const instagram = useSelector(state => state.authDetails.userData.instagram.isactive);
+  const twitter = useSelector(state => state.authDetails.userData.twitter.isactive);
+  const [platform, setPlatform] = useState({
+    facebook:facebook,
+    instagram:instagram,
+    twitter:twitter,
+  });
   const [campList,setCampList] = useState([]);
   const [showCampaignDetails,setShowCampaignDetails] = useState('');
   const [fname, setFname] = useState("Jitender");
-  const token= "grassIsGreener"
+  const token= "grassIsGreener";
+
   const request = {
     method:'get',
     header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-    url:'https://celebackend.herokuapp.com/users/getallCampaigns',
+    url:`https://celebackend.herokuapp.com/api/v1/influencer/${userID}/campaigns`,
   }
 
   const getDashboardData = async () => {
@@ -38,6 +49,8 @@ const Campaign = () => {
   }
 
   return (
+    <>
+   
     <div className='dashboardCampaign'>
         <div className='dashboardgreet'>
         <h1>Welcome {fname},</h1> 
@@ -65,20 +78,22 @@ const Campaign = () => {
         <div className='campaigncardConatiner'>
         <div className='campDesc'> Campaign List </div>
             {campList.map((items) =>(
-              <div className='campaignCard' key={items.id} title='Click to see complete detials' onClick={() => {handleCampaignCardclick({tag:items.id})}}>
-                <div>{items.company}</div>
+              <div className='campaignCard' key={items._id} title='Click to see complete detials' onClick={() => {handleCampaignCardclick({tag:items._id})}}>
+                <div>{items.business_id.company_name}</div>
                 <div className="campaignName">{items.name}</div>
-                <div><CgCalendarDates/>{items.start} - <CgCalendarDates />{items.end}</div>
-                {showCampaignDetails === items.id ? 
+                <div><CgCalendarDates/>{items.start_date.slice(0,10)} - <CgCalendarDates />{items.end_date.slice(0,10)}</div>
+                {showCampaignDetails === items._id ? 
                   <div>
-                    <div>Earning:{items.earning}</div>
-                    <div>Campaign Description:{items.desc}</div>
+                    <div>Earning:{items.budget}</div>
+                    <div>Campaign Description:{items.description}</div>
                   </div> : null  
                 }
               </div>
             ))}
             </div>
-    </div>
+            </div>
+  
+    </>
   )
 }
 

@@ -7,15 +7,16 @@ import DisplayCampaign from './DisplayCampaign';
 
 const Bdashboard = () => {
     const userID = useSelector((state) => state.authDetails.userID);
+    const token = useSelector((state) => state.authDetails.token)
     const userType = useSelector((state) => state.authDetails.userType);
-    const status = useSelector((state) => state.authDetails.status);
+
   return (
     <>
-    {userID != null && userType != null && status ? 
+    {token.length > 1 && userID.length > 1 && userType === 'Business'  ? 
     <>
     <div className='Idashboard'>
       
-        <Navbar children={<DisplayCampaign />}/>
+        <Navbar children={<DisplayCampaign id={userID} token={token} type={userType}/>}/>
     </div>
     </>:<>
     <Navigate to="/signup" />

@@ -268,6 +268,8 @@ input[type="text"],input[type="date"],input[type="email"]:hover{
     padding: 14px 5px 14px 5px;
     margin-left: 5%;
     border-radius: 4px;
+    position: relative;
+    bottom: 23px;
     
 }
 
@@ -314,3 +316,78 @@ input[type="text"],input[type="date"],input[type="email"]:hover{
     padding-left: 20px;
 }
 
+.activateInfluencer{
+    text-align: center;
+}
+
+.foreground{
+    position: absolute;
+    z-index: 1000;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.EnrollCampaign{
+    background-color: #2e5985;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 5px;
+        color:white;
+        opacity: 0.95;
+        animation-name: example;
+        animation-duration:50ms;   
+}
+
+@keyframes example {
+    from{ z-inex:0;opacity: 0.1;width: 0px; height: 0px; color: transparent;}
+    20%{z-inex:10;opacity: 0.25;width: 100px; height: 80px; color: transparent;}
+    25%{z-inex:10;opacity: 0.30;width: 130px; height: 100px; color: transparent;}
+    30%{opacity: 0.35;width: 160px; height: 120px; color: transparent;}
+    35%{opacity: 0.40;width: 190px; height: 140px; color: transparent;}
+    40%{opacity: 0.45;width: 210px; height: 160px; color: transparent;}
+    45%{opacity: 0.50;width: 240px; height: 180px; color: transparent;}
+    50%{opacity: 0.55;width: 270px; height: 200px; color: transparent;}
+    55%{opacity: 0.60;width: 300px; height: 220px; color: transparent;}
+    60%{opacity: 0.65;width: 330px; height: 240px; color: transparent;}
+    65%{opacity: 0.70;width: 360px; height: 260px; color: transparent;}
+    70%{opacity: 0.75;width: 390px; height: 280px; color: transparent;}
+    75%{opacity: 0.80;width: 390px; height: 280px; color: transparent;}
+    80%{opacity: 0.85;width: 390px; height: 280px; color: transparent;}
+    85%{opacity: 0.90;width: 390px; height: 280px; color: transparent;}
+    90%{opacity: 0.95;width: 390px; height: 280px; color: transparent;}
+    95%{opacity: 1;width: 390px; height: 280px; color: transparent;}
+    to{ background-color: #2e5985;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 5px;
+        color:white;
+        opacity: 1.5;
+        z-index: 1000;
+     }
+    
+}
+
+
+.EnrollCampaign > h3{
+    text-align: center;
+}
+
+.background{
+    visibility: hidden;
+}
+
+.ApplicationButton{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}

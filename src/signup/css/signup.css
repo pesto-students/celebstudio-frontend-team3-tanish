@@ -8,18 +8,15 @@
 
 .signcelebstudio{
   padding: 10px;
-  margin-top: 1vh;
-  margin-bottom: 2vh;
   font-family: 'Oswald';
-  font-size: 5em;
+  font-size: 4.5em;
   text-align: center;
 }
 
 .signupContainer{
   position: relative;
   align-self: center;
-  margin-top: 6vh;
-  width: 80%;
+  width: 60%;
   background-color: aliceblue;
   border-radius: 1vh;
   min-height: 500px;
@@ -60,18 +57,6 @@
     margin-top: 20px;
   }
   
- 
-
-  
-  
-  
- 
-  
-  
-  
- 
- 
- 
 .loginInput{
   width: 35%;
   padding: 12px;

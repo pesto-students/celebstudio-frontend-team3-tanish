@@ -1,31 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../influencerModule.css';
 import {CgCalendarDates} from 'react-icons/cg';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const EligibleCampaign = () => {
+  const name = useSelector(state => state.authDetails.userData.first_name)
+  const token = useSelector(state => state.authDetails.token)
+  const userID = useSelector(state => state.authDetails.userID)
 
   const [showCampaignEnroll,setShowCampaignEnroll] = useState('');
   const [applyNote, setApplynote] = useState('');
-  const [fname, setFname] = useState("Jitender");
-  const [submitSucess, setSubmitSuccess] = useState();
-  const [showSuccessMsg, setShowSuccessmessage] = useState(false);
-  const campList = [{id:1234,company:"Kotak",name:'Amazon Fashion Week 2022-brand Endosment ',earning:"2000",desc:"just a description",objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:1200,name:'jitasdfghjkxcvbnm,xcvbnm,',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:1235,name:'jit',objective:'just post',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:1236,name:'jit',objective:'just post',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:2236,name:'jit',objective:'just post',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:3236,name:'jit',objective:'just post',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:44236,name:'jit',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:536,name:'jit',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:236,name:'jit',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:126,name:'jit',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:1736,name:'jit',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:1036,name:'jit',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:1239,name:'jit',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:1230,name:'jit',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:1247,name:'jit',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:1257,name:'jit',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'},
-  {Icount:2,company:"kotak",earning:"2000",desc:"thisis just a demo, detials will be visible onClick",id:1267,name:'jit',objective:'acquire customer',start:'13-12-2020',end:'20-9-2022',status:'running'}]
+  const [fname, setFname] = useState(name);
+  const [eligibleCampaign, setEligibleCampaign] = useState([]);
+  
+  const getEligibleCampaign = {
+    method:'get',
+    header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+    url:`https://celebackend.herokuapp.com/api/v1/influencer/${userID}/eligible-campaigns/`,
+    //"https://celebackend.herokuapp.com/api/v1/influencer/63176dd3d97cd4001698f329/eligible-campaign/"
+  }
+
+  useEffect(() => {
+    let campaign = null;
+    console.log(getEligibleCampaign)
+    axios(getEligibleCampaign)
+    .then(res => {campaign = res.data.data.campaign[0];
+      setEligibleCampaign(campaign[0]);
+      console.log(eligibleCampaign);
+  })
+    .catch(err => console.log(err));
+    
+  },[])
+  
+  const applyrequest = {
+    method:'patch',
+    header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+    url:`https://celebackend.herokuapp.com/api/v1/campaign/${showCampaignEnroll}/apply`,
+    data:{
+      influencer_id:userID,
+      message:applyNote,
+    }
+  }
 
   const handleCampaignCardclick = ({tag}) => {
      setShowCampaignEnroll(tag);
@@ -37,13 +53,15 @@ const EligibleCampaign = () => {
    }
 
    const apply = (event) => {
-    if(submitSucess == null){
-      setSubmitSuccess()
-    }
+      console.log(applyrequest);
+      axios(applyrequest)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
    }
 
    const cancleApply = (event) => {
-      setShowCampaignEnroll("");
+      setShowCampaignEnroll(null);
+      console.log(showCampaignEnroll);
    }
  
    return (
@@ -53,30 +71,28 @@ const EligibleCampaign = () => {
          </div>
          
          <div className='line'></div>
-         <div className={showCampaignEnroll ? "forground" : "background"}>
          <div className='campDesceli'> You are eligible for these campaign. </div>
-             {campList.map((items) =>(
-               <div className='campaignCard' key={items.id} title='Click to apply' onClick={() => {handleCampaignCardclick({tag:items.id})}}>
-                 <div>{items.company}</div>
-                 <div className="campaignName">{items.name}</div>
-                 <div><CgCalendarDates/>{items.start} - <CgCalendarDates />{items.end}</div>
-                 <div>Campaign Description:{items.desc}</div>
-                 <div className='apply campaign'>
-                  <div className='lineeli'></div>
-                 {showCampaignEnroll === items.id? 
+         <div className={showCampaignEnroll ? "foreground" : "background"}>
+                 {showCampaignEnroll ? 
                   <div className='EnrollCampaign'>
-                    <div className='lineeli'>
-                      <h3>Apply for this campaign</h3>
+                      <h3>Apply Campaign</h3>
+                      <h2>{eligibleCampaign.name}</h2>
+                    <label>Message for the business</label>
+                    <textarea rows={7} cols={50} onChange={handleChange} /><br/>
+                    <div className="ApplicationButton">
+                    <button className='update' onClick={() => {apply()}}>Apply</button> 
+                    <button className='cancle' onClick={() =>{cancleApply()}}>Cancel</button>
                     </div>
-                    <label>Message for the business
-                    <textarea rows={5} cols={50} onChange={handleChange} />
-                    <button className='profileEditButton update' onClick={apply}>Apply</button> 
-                    <button className='profileEditButton cancle' onClick={cancleApply}>Cancle</button></label>
                   </div>:null}
                  </div>
+             
+               <div className='campaignCard' key={eligibleCampaign._id} title='Click to apply' onClick={() => {handleCampaignCardclick({tag:eligibleCampaign._id})}}>
+                 
+                 <div className="campaignName">{eligibleCampaign.name}</div>
+                 <div><CgCalendarDates/>{eligibleCampaign.start_date} - <CgCalendarDates />{eligibleCampaign.end_date}</div>
+                 <div>Campaign Description:{eligibleCampaign.description}</div>
                </div>
-             ))}
-             </div>
+          
              
      </div>
    )

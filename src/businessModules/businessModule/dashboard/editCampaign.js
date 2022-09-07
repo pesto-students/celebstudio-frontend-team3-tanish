@@ -7,13 +7,15 @@ import {useLocation} from 'react-router-dom';
 
 const EditCampaign= () => {
   const location = useLocation();
-  let campDetails = location.state.data.data[0];
-    const userID = useSelector((state) => state.authDetails.userID);
-    const userType = useSelector((state) => state.authDetails.userType);
-    const status = useSelector((state) => state.authDetails.status);
-  return (
-    <>
-    {userID != null && userType != null && status ? 
+  console.log(location.state.data);
+  let campDetails = location.state.data[0];
+  const userID = useSelector((state) => state.authDetails.userID);
+  const token = useSelector((state) => state.authDetails.token)
+  const userType = useSelector((state) => state.authDetails.userType);
+
+return (
+  <>
+  {token.length > 1 && userID.length > 1 && userType === 'Business'  ?
     <>
     <div className='Idashboard'>
         <Navbar children={<Edit data={campDetails}/>}/>
