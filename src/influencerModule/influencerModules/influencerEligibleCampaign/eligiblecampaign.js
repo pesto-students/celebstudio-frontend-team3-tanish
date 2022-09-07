@@ -12,26 +12,24 @@ const EligibleCampaign = () => {
   const [showCampaignEnroll,setShowCampaignEnroll] = useState('');
   const [applyNote, setApplynote] = useState('');
   const [fname, setFname] = useState(name);
-  const [eligibleCampaign, setEligibleCampaign] = useState([]);
+  const [eligibleCampaign,setEligibleCampaign] = useState([]);
   
   const getEligibleCampaign = {
     method:'get',
     header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
     url:`https://celebackend.herokuapp.com/api/v1/influencer/${userID}/eligible-campaigns/`,
-    //"https://celebackend.herokuapp.com/api/v1/influencer/63176dd3d97cd4001698f329/eligible-campaign/"
   }
 
-  useEffect(() => {
-    let campaign = null;
-    console.log(getEligibleCampaign)
-    axios(getEligibleCampaign)
-    .then(res => {campaign = res.data.data.campaign[0];
-      setEligibleCampaign(campaign[0]);
-      console.log(eligibleCampaign);
-  })
-    .catch(err => console.log(err));
-    
-  },[])
+  const getEligibleCampaignList = async () => {
+    let response2 = {};
+    await axios(getEligibleCampaign)
+    .then((res) => {response2= res.data.data.campaign})
+    .catch((err) => {console.log(err)});
+    console.log(response2);
+    setEligibleCampaign(response2);
+  }
+
+    useEffect(() =>{getEligibleCampaignList()},[])
   
   const applyrequest = {
     method:'patch',
@@ -65,7 +63,8 @@ const EligibleCampaign = () => {
    }
  
    return (
-     <div className='dashboardCampaign'>
+  
+<div className='dashboardCampaign'>
          <div className='dashboardgreet'>
          <h1>Hey {fname},</h1> 
          </div>
@@ -76,7 +75,7 @@ const EligibleCampaign = () => {
                  {showCampaignEnroll ? 
                   <div className='EnrollCampaign'>
                       <h3>Apply Campaign</h3>
-                      <h2>{eligibleCampaign.name}</h2>
+                      <h2>{eligibleCampaign.map(items => items._id === showCampaignEnroll ? items.name:null)}</h2>
                     <label>Message for the business</label>
                     <textarea rows={7} cols={50} onChange={handleChange} /><br/>
                     <div className="ApplicationButton">
@@ -85,14 +84,14 @@ const EligibleCampaign = () => {
                     </div>
                   </div>:null}
                  </div>
-             
-               <div className='campaignCard' key={eligibleCampaign._id} title='Click to apply' onClick={() => {handleCampaignCardclick({tag:eligibleCampaign._id})}}>
-                 
-                 <div className="campaignName">{eligibleCampaign.name}</div>
-                 <div><CgCalendarDates/>{eligibleCampaign.start_date} - <CgCalendarDates />{eligibleCampaign.end_date}</div>
-                 <div>Campaign Description:{eligibleCampaign.description}</div>
+             {eligibleCampaign.map((items) =>(
+               <div className='campaignCard' key={items._id} title='Click to apply' onClick={() => {handleCampaignCardclick({tag:items._id})}}>
+                 <div>{items.business_id.company_name}</div>
+                 <div className="campaignName">{items.name}</div>
+                 <div><CgCalendarDates/>{items.start_date.slice(0,10)} - <CgCalendarDates />{items.end_date.slice(0,10)}</div>
+                 <div>Campaign Description:{items.description}</div>
                </div>
-          
+             ))}
              
      </div>
    )
