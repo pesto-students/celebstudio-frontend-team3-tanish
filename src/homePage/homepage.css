@@ -17,6 +17,7 @@
         width:100%;
         background-color:white;
         height:clamp(60px,8vh,10vh);
+        z-index: 1000;
     }
 
 

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const InfluencerSignUP = () => {
+  const redirect = () => {setTimeout(() => {setDispalyStatus("");navigate('/signup');clearTimeout(redirect)},3000)};
   const navigate = useNavigate();
   const [displayStatus, setDispalyStatus] = useState("");
   const [formDetails,setFormDetails] = useState({fname:'',lname: '',cno:'', email: '', password: ''});
@@ -13,7 +14,7 @@ const InfluencerSignUP = () => {
   const request = {
     method:'post',
     header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-    url:'https://celebackend.herokuapp.com/users/signup/influencer/',
+    url:'https://celebackend.herokuapp.com/api/v1/signup/influencer/',
     data: formDetails,
   }
 
@@ -29,27 +30,28 @@ const InfluencerSignUP = () => {
     console.log("sending details to backend for processing");
     axios(request)
     .then((res) => {
-      
+      console.log(res);
       if(res.status === 201 && res.data.status === 'success'){
         setDispalyStatus("success");
-        timer();
+        redirect();
       }
       else{
         setDispalyStatus("failed")
       }
     })
-    .catch((err) => {console.log(err)})
-    clearTimeout(timer());
+    .catch((err) => {
+      setDispalyStatus("failed");
+    })
   }
   return (
     <div className='IScontainer'>
       {displayStatus === 'success' ? 
-      <div className='responseStatus'>
+      <div className='responseStatus signupsuccess'>
         Login Successfull!! Redirecting to login Page.
       </div>:null}
 
       {displayStatus === 'failed' ? 
-      <div className='responseStatus'>
+      <div className='responseStatus signupfailed'>
         Something went wrong:(. Please try again
       </div>:null}
       
@@ -104,7 +106,7 @@ const InfluencerSignUP = () => {
         </div>
 
         <div className="icol-75">
-          <input type="text" name="password" className='iforminput' placeholder="Your name.." required value={formDetails.value} onChange={setChange}/>
+          <input type="password" name="password" className='iforminput' placeholder="Your name.." required value={formDetails.value} onChange={setChange}/>
         </div>
       </div>
       <div className='buttons'><button type='submit'>Submit</button></div>

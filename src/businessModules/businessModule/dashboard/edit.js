@@ -4,18 +4,21 @@ import '../../businessModule.css';
 import info from '../../../img/info.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 
 const Edit = (props) => {
     const navigate = useNavigate();
+    const [successMsg, setsuccessMsg] = useState("");
+    const token = useSelector(state => state.authDetails.token);
     const campDetails = props.data;
-  const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTFiYTU4ODhmN2EzMjc5MGU5MjhkYyIsImlhdCI6MTY2MjEwNjU0MywiZXhwIjoxNjY5ODgyNTQzfQ.wRCoqH7TdIMH1YAQA6-xE10KWQtRcyP5tSB32ru5CIY";
-  const [campaign, setCampaing] = useState(campDetails);
+    const [campaign, setCampaing] = useState(campDetails);
+    console.log(campaign);
 
   const request = {
-    method:'post',
+    method:'patch',
     header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-    url:'https://celebackend.herokuapp.com/users/newCampaign',
+    url:`https://celebackend.herokuapp.com/api/v1/campaign/${campaign._id}`,
     data: campaign,
   }
   
@@ -27,32 +30,42 @@ const Edit = (props) => {
 
   const setEndDate = (event) => {
     const {name,value} = event.target;
-    const start = campaign.start.split("-");
+    const start = campaign.start_date.split("-");
     const end = event.target.value.split("-");
-    if(start[0] > end[0] || start[1] > end[1] || start[2] > end[2]){
-      alert("End date should be greter then start date");
-    }
-    else{
+    //if(start[0] > end[0] || start[1] > end[1] || start[2] > end[2]){
+     // alert("End date should be greter then start date");
+    //}
+    //else{
       setCampaing({...campaign, [name]:value, });
-    }
-    
+    //}
+    //
   }
 
 
   const handleSubmit = (event) => {
     axios(request)
-    .then(navigate('/bdashboard'))
-    .catch(navigate('/bdashboard'));
+    .then(res => {
+      setsuccessMsg("success");
+      navigate("/bdashboard")
+    })
+    .catch(err => {setsuccessMsg("failed")});
   }
 
   return (
     
 <div className="CreateCampaing">
+{successMsg === "success" ? 
+  <div className='responseMsg success'>
+    Campaign Creation successfull!!
+  </div >: null}
+  {successMsg === "responseMsg failed" ? <div className='failed'>
+    Something went wrong. Please try again or contact customer care
+  </div>: null}
   <div className='CCleft'>
         <div className='CCobjective'>
           <h2>What's your objective?</h2>
-            <button className={campaign.campaign_objective === "acquire" ? "campType opted" : "campType"} onClick={() => {setCampaing({...campaign, campaign_objective:'acquire'})}}>Acquiring customer</button>
-            <button className={campaign.campaign_objective === "awareness" ? "campType opted" : "campType"} onClick={() => {setCampaing({...campaign, campaign_objective:'awareness'})}}>Brand Awareness</button>
+            <button className={campaign.campaign_objective === "acquiring" ? "campType opted" : "campType"} onClick={() => {setCampaing({...campaign, campaign_objective:"acquiring"})}}>Acquiring customer</button>
+            <button className={campaign.campaign_objective === "awareness" ? "campType opted" : "campType"} onClick={() => {setCampaing({...campaign, campaign_objective:"awareness"})}}>Brand Awareness</button>
             <div className='lineCC'></div>
             </div>
         <div className='CCname'>
@@ -78,21 +91,8 @@ const Edit = (props) => {
               <h2>End Date</h2><input type="date" name='end_date' value={campaign.end_date.slice(0,10)}   onChange={setEndDate} />
               <div className='lineCC'></div>
         </div>
-        <div className='CCfcount'>
-                <h2>Please Select a platform</h2><br/><select name='platform' value={campaign.platform} onChange={setChange}>
-                  <option value='1'>Facebook   </option>
-                  <option value='2'>Instagram  </option>
-                  <option value='3'>twitter    </option>
-                </select>
-              
-                <h2> How many influnencer do you want for the campaign</h2>
-                <input type="number" name="fcount" value={campaign.fcount} onChange={setChange} />
-          
-              <h2>What is your budget per influencer?</h2>
-                <input type="text" name="budget" value={campaign.budget} onChange={setChange}/>
-              </div>
      
-        <div className='buttonS'> <button className="campType" onClick={handleSubmit}>Create Campaign</button></div>
+        <div className='buttonS'> <button className="campType" onClick={handleSubmit}>Update Campaign</button></div>
     </div>
 
 

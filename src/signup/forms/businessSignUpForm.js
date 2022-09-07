@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const BusinessSignUP = () => {
+  const redirect = () => {setTimeout(() => {setDispalyStatus("");navigate('/signup');clearTimeout(redirect)},3000)};
+  console.log(typeof(redirect));
   const [displayStatus, setDispalyStatus] = useState("");
   const navigate = useNavigate();
   const [formDetails,setFormDetails] = useState({fname:'',lname: '', cname: '', curl: '', email: '', password: ''});
@@ -14,7 +16,7 @@ const BusinessSignUP = () => {
   const request = {
     method:'post',
     header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-    url:'https://celebackend.herokuapp.com/users/signup/business/',
+    url:'https://celebackend.herokuapp.com/api/v1/signup/business/',
     data: formDetails,
   }
   
@@ -31,13 +33,15 @@ const BusinessSignUP = () => {
       console.log(res);
       if(res.status === 201 && res.data.status === 'success'){
         setDispalyStatus("success");
-        setTimeout(() => {setDispalyStatus("");navigate('/signup')},1000);
+        redirect();
       }
       else{
         setDispalyStatus("failed")
       }
     })
-    .catch((err) => {console.log(err)})
+    .catch((err) => {
+      setDispalyStatus("failed");
+    })
     
   }
 
@@ -46,15 +50,15 @@ const BusinessSignUP = () => {
   
     <div className='businessSignUp'>
       {displayStatus === 'success' ? 
-      <div className='responseStatus'>
+      <div className='responseStatus signupsuccess'>
         Login Successfull!! Redirecting to login Page.
       </div>:null}
 
       {displayStatus === 'failed' ? 
-      <div className='responseStatus'>
+      <div className='responseStatus signupfailed'>
         Something went wrong:(. Please try again
       </div>:null}
-    <form onSubmit={handleSubmit}>
+    <form className='bfrom' onSubmit={handleSubmit}>
   
     <div className='cS'>celebStudio</div>
       <div className="row">

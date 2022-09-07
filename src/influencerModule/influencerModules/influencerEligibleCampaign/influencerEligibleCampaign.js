@@ -5,12 +5,12 @@ import Navbar from '../../navbar/navbar';
 import Eligiblecampaign from './eligiblecampaign';
 
 const Iprofile = () => {
-    const userID = useSelector((state) => state.authDetails.userID);
-    const userType = useSelector((state) => state.authDetails.userType);
-    const status = useSelector((state) => state.authDetails.status);
-  return (
-    <>
-    {userID != null && userType != null && status ? 
+  const userID = useSelector((state) => state.authDetails.userID);
+  const userType = useSelector((state) => state.authDetails.userType);
+  const status = useSelector((state) => state.authDetails.status);
+return (
+  <>
+  {userID.length > 1 && userType === 'Influencer' ? 
     <>
     <div className='Idashboard'>
         <Navbar children={<Eligiblecampaign/>}/>

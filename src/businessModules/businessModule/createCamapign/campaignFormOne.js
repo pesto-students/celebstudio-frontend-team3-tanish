@@ -3,74 +3,101 @@ import React, { useState } from 'react';
 import '../../businessModule.css';
 import info from '../../../img/info.png';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const CampaignFormOne = () => {
-  const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTFiYTU4ODhmN2EzMjc5MGU5MjhkYyIsImlhdCI6MTY2MjEwNjU0MywiZXhwIjoxNjY5ODgyNTQzfQ.wRCoqH7TdIMH1YAQA6-xE10KWQtRcyP5tSB32ru5CIY";
+const CampaignFormOne = (props) => {
+  const navigate = useNavigate();
+  const userID = useSelector((state) => state.authDetails.userID);
+  const token = useSelector((state) => state.authDetails.token)
+  const userType = useSelector((state) => state.authDetails.userType);
+
+  const [successMsg, setsuccessMsg] = useState("");
   const [campaign, setCampaing] = useState({
-    objective:String,
-    nameCamp:String,
-    campDesc:String,
-    start:String,
-    end:String,
-    prodCatagoryPri:String,
-    platform:String,
+    name:String,
+    start_date:String,
+    end_date:String,
     budget:String,
-    fcount:String,
+    product_category:String,
+    description:String,
+    campaign_objective:String,
+    platform:String,
+    followers_count:String,
+    business_id:userID,
   });
 
   const request = {
     method:'post',
     header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-    url:'https://celebackend.herokuapp.com/users/newCampaign',
+    url:'https://celebackend.herokuapp.com/api/v1/newcampaign',
     data: campaign,
   }
   
   const setChange = (event) => {
     const {name,value} = event.target;
     setCampaing({...campaign, [name]:value, });
-    console.log(name,value, typeof(value));
+
   }
 
   const setEndDate = (event) => {
     const {name,value} = event.target;
-    const start = campaign.start.split("-");
+    const start = campaign.start_date.split("-");
     const end = event.target.value.split("-");
-    if(start[0] > end[0] || start[1] > end[1] || start[2] > end[2]){
-      alert("End date should be greter then start date");
+    console.log(start,end);
+    if( (start[0] > end[0]) || (start[1] > end[1] )){
+      // 2022         2022        09        12       
+      alert("End date cannot be greater then start date");
     }
     else{
       setCampaing({...campaign, [name]:value, });
     }
-    
   }
 
 
   const handleSubmit = (event) => {
-    console.log(campaign)
-    axios(request)
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
-  }
+    event.preventDefault();
+    let flag = [];
+    for(const items in campaign) {
+      if(typeof(campaign[items]) === 'function' ){
+        alert(`You have not set the ${items} correctly`);
+        flag.push(true);
+      }
+      else{
+        flag.push(false);
+      }
+    }
 
-  return (
-    
+    console.log(campaign);
+
+    axios(request)
+    .then(res => {
+      setsuccessMsg("success");
+      navigate("/bdashboard")
+    })
+    .catch(err => {setsuccessMsg("failed")});
+  }
+ 
+return (
+ 
 <div className="CreateCampaing">
   <div className='CCleft'>
+    <form>
         <div className='CCobjective'>
           <h2>What's your objective?</h2>
-            <button className={campaign.objective === "acquire" ? "campType opted" : "campType"} onClick={() => {setCampaing({...campaign, objective:'acquire'})}}>Acquiring customer</button>
-            <button className={campaign.objective === "aware" ? "campType opted" : "campType"} onClick={() => {setCampaing({...campaign, objective:'aware'})}}>Brand Awareness</button>
+            <button className={campaign.campaign_objective === "acquiring" ? "campType opted" : "campType"} onClick={() => {setCampaing({...campaign, campaign_objective:'acquiring'})}}>Acquiring customer</button>
+            <button className={campaign.campaign_objective === "awareness" ? "campType opted" : "campType"} onClick={() => {setCampaing({...campaign, campaign_objective:'awareness'})}}>Brand Awareness</button>
             <div className='lineCC'></div>
             </div>
         <div className='CCname'>
               <h2> Campaign Name</h2><br/>
-              <input type="text" name='nameCamp' value={campaign.value} onChange={setChange} placeholder="campaignName" />
+              <input type="text" name='name' value={campaign.value} required onChange={setChange} placeholder="campaignName" />
 
-                <h2>Campaign Description</h2><br/><textarea name='campDesc' rows={6} cols={50} value={campaign.value} onChange={setChange} placeholder="Campaign Desc" />
+                <h2>Campaign Description</h2><br/><textarea name='description' required rows={6} cols={50} value={campaign.value} onChange={setChange} placeholder="Campaign Desc" />
                 <div className='lineCC'></div>
         </div>
         <div className='CCprodCat'>
-           <h2>Product Catagory(Primary)</h2><br/><select name='prodCatagoryPri' value={campaign.value} onChange={setChange}>
+           <h2>Product Catagory</h2><br/><select name='product_category' defaultValue={"default"}  value={campaign.value} onChange={setChange}>
+                <option value="default"> Please select a Product catagory</option>
                 <option value='1'>Fashion & Apparel     </option>
                 <option value='2'>Food & Beverages     </option>
                 <option value='3'>Health & Wellness       </option>
@@ -81,32 +108,43 @@ const CampaignFormOne = () => {
               <div className='lineCC'></div>
         </div>
         <div className='CCdata'>
-              <h2>Start Date</h2><input type="date" name='start' value={campaign.value} onChange={setChange}/>
-              <h2>End Date</h2><input type="date" name='end' value={campaign.value}   onChange={setEndDate} />
+              <h2>Start Date</h2><input type="date" name='start_date' required value={campaign.value} onChange={setChange}/>
+              <h2>End Date</h2><input type="date" name='end_date' required value={campaign.value}   onChange={setEndDate} />
               <div className='lineCC'></div>
         </div>
         <div className='CCfcount'>
-                <h2>Please Select a platform</h2><br/><select name='platform' value={campaign.value} onChange={setChange}>
-                  <option value='1'>Facebook   </option>
-                  <option value='2'>Instagram  </option>
-                  <option value='3'>twitter    </option>
+                <h2>Please Select a platform</h2><br/><select name='platform' defaultValue={"default"}  value={campaign.value} onChange={setChange}>
+                  <option value='default'>Please select a platform</option>
+                  <option value='facebook' >Facebook   </option>
+                  <option value='instagram'>Instagram  </option>
+                  <option value='twitter'>twitter    </option>
                 </select>
-              
-                <h2> How many influnencer do you want for the campaign</h2>
-                <input type="number" name="fcount" value={campaign.value} onChange={setChange} />
-          
-              <h2>What is your budget per influencer?</h2>
-                <input type="text" name="budget" value={campaign.value} onChange={setChange}/>
-              </div>
-     
-        <div className='buttonS'> <button className="campType" onClick={handleSubmit}>Create Campaign</button></div>
-    </div>
 
+                <h2>How many followers will the influencer have?</h2>
+                <input type="number" name="followers_count"  required value={campaign.value} onChange={setChange} />
+              
+                <h2>What is your budget per influencer?</h2>
+                <input type="number" name="budget" required value={campaign.value} onChange={setChange} />
+           </div>
+     
+        <div className='buttonS'> <button type='submit' className="campType" onClick={handleSubmit}>Create Campaign</button></div>
+        </form>
+    </div>
+    <div className='responseMsg'>
+  {successMsg === "success" ? 
+  <div className='success'>
+    Campaign Creation successfull!!
+  </div >: null}
+  {successMsg === "failed" ? <div className='failed'>
+    Something went wrong. Please try again or contact customer care
+  </div>: null}
+  </div>
+  
 
     <div className='CCright'>
       <div className='CCrightContainer'>
         <img src={info} alt="information" /> 
-    {campaign.objective.length === 1 ?
+    {campaign.campaign_objective.length === 1 ?
               <div>
                 
                 <p><b>Acquire Customer</b><br/>These campaigns are best suited for brands which has developed customers,
@@ -116,18 +154,18 @@ const CampaignFormOne = () => {
 
                 </p>
               </div>:<div>
-                {campaign.objective === "acquire" ? 
+                {campaign.campaign_objective === "acquire" ? 
                   <div><b>Acquire Customer</b>Best for brands with developed audiance
                   
                   </div>:null}
-                {campaign.objective === "aware" ? 
+                {campaign.campaign_objective === "aware" ? 
                   <div><b>Brand Awareness</b>Best for brands new to market.
                    
                   </div>:null}
-                {campaign.nameCamp.length < 10 ?
+                {campaign.name.length < 10 ?
                 <p><b>Camapign Name</b>Please enter a name for your camapaig</p> : 
                 <p><b>Camapign Name</b>Great name for your campaign</p>}
-                {campaign.campDesc.length < 100 ?
+                {campaign.description.length < 100 ?
                 <p><b>Camapign Description</b>Write a short description for your campaign.
                   This will help influncers understand the objective clearly. you can shre your product link along with hashtag that you 
                   want for the camapign</p>:
@@ -135,14 +173,13 @@ const CampaignFormOne = () => {
                     Amazing!! Your influencers will be delighted to see your product.
                   </p>
                 }
-                {campaign.prodCatagoryPri === 1 ? 
+                {campaign.product_category === 1 ? 
                 <p><b>Primary Catagory</b>Select your product catagory</p>:<p><b>Primary Catagory</b>Celebstudio will match influencer who have primary product catagory set to the one you have selected.</p>}
-                {campaign.prodCatagorySec === 1 ? 
-                <p><b>Secondary Catagory</b>Select your product catagory</p>:<p><b>Secondary Catagory</b>Celebstudio will match influencer who have Secondary product catagory set to the one you have selected.</p>}
-                {campaign.start === 1 ?
-                <p><b>Start date</b> start date of your campaign</p>:<p><b>Start date</b>Your campaign will start from {campaign.start}.</p>}
-                {campaign.end === 1 ?
-                <p><b>End date</b>End date for your campaign</p>:<p><b>End date</b>Your campaign will start from {campaign.end}.</p>}
+                {campaign.start_date === 1 ?
+                <p><b>Start date</b> start date of your campaign</p>:<p><b>Start date</b>Your campaign will start from {campaign.start_date}.</p>}
+                {campaign.end_date === 1 ?
+                <p><b>End date</b>End date for your campaign</p>:<p><b>End date</b>Your campaign will start from {campaign.end_date}.</p>}
+                <b>***Platform,Follower Count,Budget </b>cannot be changed after creating the campaing.
               
               </div>}
     </div>
