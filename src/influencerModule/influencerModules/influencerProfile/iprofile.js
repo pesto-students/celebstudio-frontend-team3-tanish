@@ -169,21 +169,28 @@ const Iprofile = () => {
       setverifyPassword(event.target.value);
     }
 
+
+
     const handlePasswordSubmit = (event) => {
       event.preventDefault();
-      if(oldpassword == password){
-        if(newpassword === verifypassword){
-          setPasswrod(verifypassword);
-          alert("paswword change successfull")
-          setshowPasswordEdit(!showPasswordEdit);
-        }
-        else{
-          alert("password mismatch");
-        }
+
+      const passwordChange = {
+        method:'patch',
+        header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+        url:` https://celebackend.herokuapp.com/api/v1/influencer/${userID}/change-password`,
       }
-      else{
-        alert("Wrong Password. Please enter the current password");
+
+      let password = {
+        passwordCurrent:oldpassword,
+        password:newpassword,
+        passwordConfirm:verifypassword,
       }
+
+      let passwordChangeRequest = {...passwordChange, data:password}
+
+      axios(passwordChangeRequest)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
 
     }
 

@@ -98,7 +98,7 @@ const BusinessSignUP = () => {
     </div>
 
     <div className="col-75">
-      <input type="url" name="curl" className='bforminput' placeholder="company url.." required value={formDetails.value} onChange={setChange} />
+      <input type="text" name="curl" className='bforminput' placeholder="company url.." required value={formDetails.value} onChange={setChange} />
     </div>
   </div>
 

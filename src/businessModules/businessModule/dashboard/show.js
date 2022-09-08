@@ -20,6 +20,7 @@ const Show = (props) => {
     const [campaign, setCampaign] = useState(camp);
     const [appliedInfluencer, setAppliedInfluencer] = useState([]);
 
+
     const getInfluencerList = {
       method:'get',
       header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
@@ -27,23 +28,24 @@ const Show = (props) => {
     }
 
 
+  
     const getInfluencerData = async () => {
       let response = null;
       await axios(getInfluencerList)
       .then((res) => {
-        console.log(res.data.data.influencers);
-        response = res.data.data.influencers;
-       
+        response = res.data.data.influencers;    
+        console.log(response);
       })
       .catch((err) => {console.log(err)});
-      console.log(response);
-      setAppliedInfluencer(response)
-      console.log(appliedInfluencer);
+      setAppliedInfluencer(response); 
+              // its an arrray
     }
+
+    
 
  
 
-    useEffect(() => {getInfluencerData()},[])
+    useEffect(() => {getInfluencerData();},[])
     
 
     const deleteRequest = {
@@ -71,7 +73,7 @@ const Show = (props) => {
       url:` https://celebackend.herokuapp.com/api/v1/campaign/${camp._id}/select-influencer`,
     }
 
-    const handleInfluencerAccept = (data) => {
+    const handleInfluencerAccept = (data,event) => {
       let acceptData = {
         influencer_id:data,
         status:"accept",
@@ -79,18 +81,18 @@ const Show = (props) => {
       const responseToApplication = {...acceptInfluencer, data:acceptData}
       console.log(responseToApplication)
       axios(responseToApplication)
-      .then(res => console.log(res))
+      .then(getInfluencerData())
       .catch(err => console.log(err))
     }
 
-    const handleInfluencerReject = (data) => {
+    const handleInfluencerReject = (data,event) => {
       let rejectData = {
         influencer_id:data,
         status:"reject",
       }
       const responseToApplication = {...acceptInfluencer, data:rejectData}
       axios(responseToApplication)
-      .then(res => console.log(res))
+      .then(getInfluencerData())
       .catch(err => console.log(err))
 
     }
@@ -128,20 +130,42 @@ const Show = (props) => {
                  <div className='showName'>{item.influencer.first_name}</div>   
                  <div className='lineeli'></div>
                  <span className='showPlatform'>
-                   {item.facebook ? <SiFacebook />  : null}
-                   {item.instagram  ? <SiInstagram />  : null}
-                   {item.twitter ? <SiTwitter />  : null}</span> 
+                   {item.influencer.facebook ? <SiFacebook />  : null}
+                   {item.influencer.instagram  ? <SiInstagram />  : null}
+                   {item.influencer.twitter ? <SiTwitter />  : null}
+                   </span> 
                  
-                    <span><img src={follower} alt="followers" /> 
-                    {item.facebook ? item.facebook.follower_count : null}
-                    {item.instagram ? item.instagram.follower_count : null}
-                    {item.twitter ? item.twitter.follower_count : null}
-                     <FaRupeeSign /> {item.facebook ? item.facebook.cost : null}
-                     <FaRupeeSign /> {item.instagram ? item.instagram.cost : null}
-                     <FaRupeeSign />  {item.twitter ? item.twitter.cost : null}
-                     </span>   
-                 <div className='infMsg'>{item.message}</div>
-                <span><button className='editButton update' onClick={() => {handleInfluencerAccept(item.influencer._id)}}>Accept</button><button className='editButton cancle' onClick={() => {handleInfluencerReject(item.influencer._id)}}>Reject</button></span>
+                    <div><img src={follower} alt="followers" /> 
+                    <span>
+                    {item.influencer.instagram ? <>{item.influencer.instagram.follower_count}</> : null}
+                    {item.influencer.facebook ?   <> {item.influencer.facebook.follower_count}</> : null}
+                    {item.influencer.twitter ?   <> {item.influencer.twitter.follower_count}</> : null}
+                    </span>
+                    <span>
+                    {item.influencer.instagram ? <> <FaRupeeSign />  {item.influencer.instagram.cost}</> : null}
+                    {item.influencer.facebook ? <> <FaRupeeSign />  {item.influencer.facebook.cost}</> : null}
+                    {item.influencer.twitter ? <> <FaRupeeSign />  {item.influencer.twitter.cost}</> : null}
+                    </span>
+                    </div>
+                  {item.post_link.length > 1 ? 
+                  <p><b> PostLink </b> {item.post_link}</p> :  
+                  <div className='descandButton'>
+                    <div className='infMsg'>
+                      {item.message} 
+                    </div>
+                    <div>
+                        {item.status === "accept" || item.status === 'reject'  ?
+                          <div>
+                            You have {item.status === 'accept' ? "accepted" : "rejected"} this profile.
+                          </div> :
+                        <div>
+                          <button className='editButton update' onClick={() => {handleInfluencerAccept(item.influencer._id)}}>Accept</button>
+                          <button className='editButton cancle' onClick={() => {handleInfluencerReject(item.influencer._id)}}>Reject</button>
+                        </div>
+                        }
+                  </div>
+                  </div>}
+
                 </div>)}
             </div>
 

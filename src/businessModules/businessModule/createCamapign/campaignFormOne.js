@@ -96,8 +96,8 @@ return (
                 <div className='lineCC'></div>
         </div>
         <div className='CCprodCat'>
-           <h2>Product Catagory</h2><br/><select name='product_category' defaultValue={"default"}  value={campaign.value} onChange={setChange}>
-                <option value="default"> Please select a Product catagory</option>
+           <h2>Product category</h2><br/><select name='product_category' defaultValue={"default"}  value={campaign.value} onChange={setChange}>
+                <option value="default"> Please select a Product category</option>
                 <option value='1'>Fashion & Apparel     </option>
                 <option value='2'>Food & Beverages     </option>
                 <option value='3'>Health & Wellness       </option>
@@ -147,7 +147,7 @@ return (
     {campaign.campaign_objective.length === 1 ?
               <div>
                 
-                <p><b>Acquire Customer</b><br/>These campaigns are best suited for brands which has developed customers,
+                <p><b>Acquire Customer</b><br/> These campaigns are best suited for brands which has developed customers,
                 And those who wish to increase there sales. Influnencer can be considered as affiliate who will help you increse your sales.
                 <br/><br/><b>Brand Awareness</b><br/> These campaigns are best suited for brand who wish to develop customers. Create product awarenesss amongst 
                 the targeted auidence of the user.
@@ -155,18 +155,18 @@ return (
                 </p>
               </div>:<div>
                 {campaign.campaign_objective === "acquire" ? 
-                  <div><b>Acquire Customer</b>Best for brands with developed audiance
+                  <div><b>Acquire Customer</b> Best for brands with developed audiance
                   
                   </div>:null}
                 {campaign.campaign_objective === "aware" ? 
-                  <div><b>Brand Awareness</b>Best for brands new to market.
+                  <div><b>Brand Awareness</b> Best for brands new to market.
                    
                   </div>:null}
                 {campaign.name.length < 10 ?
-                <p><b>Camapign Name</b>Please enter a name for your camapaig</p> : 
-                <p><b>Camapign Name</b>Great name for your campaign</p>}
+                <p><b>Camapign Name</b> Please enter a name for your camapaig</p> : 
+                <p><b>Camapign Name</b> Great name for your campaign</p>}
                 {campaign.description.length < 100 ?
-                <p><b>Camapign Description</b>Write a short description for your campaign.
+                <p><b>Camapign Description</b> Write a short description for your campaign.
                   This will help influncers understand the objective clearly. you can shre your product link along with hashtag that you 
                   want for the camapign</p>:
                   <p><b>Camapign Description</b>
@@ -174,12 +174,12 @@ return (
                   </p>
                 }
                 {campaign.product_category === 1 ? 
-                <p><b>Primary Catagory</b>Select your product catagory</p>:<p><b>Primary Catagory</b>Celebstudio will match influencer who have primary product catagory set to the one you have selected.</p>}
+                <p><b>Primary category</b> Select your product category</p>:<p><b>Primary category</b> Celebstudio will match influencer who have primary product category set to the one you have selected.</p>}
                 {campaign.start_date === 1 ?
                 <p><b>Start date</b> start date of your campaign</p>:<p><b>Start date</b>Your campaign will start from {campaign.start_date}.</p>}
                 {campaign.end_date === 1 ?
-                <p><b>End date</b>End date for your campaign</p>:<p><b>End date</b>Your campaign will start from {campaign.end_date}.</p>}
-                <b>***Platform,Follower Count,Budget </b>cannot be changed after creating the campaing.
+                <p><b>End date</b> End date for your campaign</p>:<p><b>End date</b>Your campaign will start from {campaign.end_date}.</p>}
+                <b>***Product Category, Platform,Follower Count,Budget </b> cannot be changed after creating the campaing.
               
               </div>}
     </div>
