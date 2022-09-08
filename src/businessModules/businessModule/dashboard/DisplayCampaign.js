@@ -15,14 +15,16 @@ const DisplayCampaign = (props) => {
   const [campList,setCampList] = useState([]);
   let response = {};
   const [fname, setFname] = useState(userName);
-  const request = {
-    method:'get',
-    header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-    url:`https://celebackend.herokuapp.com/api/v1/business/${userID}/campaigns`,
-  }
+
 
   const getDashboardData = async () => {
-   
+
+    const request = {
+      method:'get',
+      header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+      url:`https://celebackend.herokuapp.com/api/v1/business/${userID}/campaigns`,
+    }
+  
     await axios(request)
     .then((res) => {
       console.log(res)

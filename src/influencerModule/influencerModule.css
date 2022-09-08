@@ -344,6 +344,7 @@ input[type="text"],input[type="date"],input[type="email"]:hover{
         opacity: 0.95;
         animation-name: example;
         animation-duration:50ms;   
+        text-align: center;
 }
 
 @keyframes example {

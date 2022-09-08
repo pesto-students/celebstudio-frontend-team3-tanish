@@ -13,15 +13,17 @@ const EligibleCampaign = () => {
   const [applyNote, setApplynote] = useState('');
   const [fname, setFname] = useState(name);
   const [eligibleCampaign,setEligibleCampaign] = useState([]);
+  //apply status not working // have to use map but there is a mis match
   const [appliedStatus, setAppliedStatus] = useState(false);
   
-  const getEligibleCampaign = {
-    method:'get',
-    header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-    url:`https://celebackend.herokuapp.com/api/v1/influencer/${userID}/eligible-campaigns/`,
-  }
+  
 
   const getEligibleCampaignList = async () => {
+    const getEligibleCampaign = {
+      method:'get',
+      header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+      url:`https://celebackend.herokuapp.com/api/v1/influencer/${userID}/eligible-campaigns/`,
+    }
     let response2 = {};
     await axios(getEligibleCampaign)
     .then((res) => {response2 = res.data.data.campaign})
@@ -43,22 +45,22 @@ const EligibleCampaign = () => {
     setApplynote(event.target.value);
    }
 
-   const applyrequest = {
-    method:'patch',
-    header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-    url:`https://celebackend.herokuapp.com/api/v1/campaign/${showCampaignEnroll}/apply`,
-    data:{
-      influencer_id:userID,
-      message:applyNote,
-    }
-  }
-
+   
    const apply = (event) => {
+
+    const applyrequest = {
+      method:'patch',
+      header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+      url:`https://celebackend.herokuapp.com/api/v1/campaign/${showCampaignEnroll}/apply`,
+      data:{
+        influencer_id:userID,
+        message:applyNote,
+      }
+    }
+  
       axios(applyrequest)
       .then(res => {
-        let applied = (res.data.data[0].influencers[0].applied);
-       setAppliedStatus(applied);
-        console.log(applied);
+        setAppliedStatus(!appliedStatus);
       })
       .catch(err => console.log(err));
    }
@@ -81,25 +83,20 @@ const EligibleCampaign = () => {
                   <div className='EnrollCampaign'>
                       <h3>Apply Campaign</h3>
                       <h2>{eligibleCampaign.map(items => items._id === showCampaignEnroll ? items.name:null)}</h2>
-                  
-                  {appliedStatus ? 
-
-                  <div>
-                        <b>You have applied for the campaing!!</b>
-                      <div className='ApplyCloseButton'>
-                        <button className='cancle' onClick={() =>{cancleApply()}}>Close</button>
-                      </div>
-                      </div>:
-                    
-                    <div>
+                    {appliedStatus ?
+                    <div > 
+                    <div>You have applied for this campaign</div>
+                    <div className='ApplicationButton'><button className='cancle' onClick={() =>{cancleApply()}}>Close</button></div>
+                    </div>
+                    :<div>
                       <label>Message for the business</label><br/>
-                      <textarea rows={10} cols={30} onChange={handleChange} />
+                      <textarea rows={10} cols={70} onChange={handleChange} />
                       <div className="ApplicationButton">
                       <button className='update' onClick={() => {apply()}}>Apply</button> 
                       <button className='cancle' onClick={() =>{cancleApply()}}>Cancel</button>
                       </div>
-                    </div>
-                  }
+                    </div>}
+                
                     
                  </div> : null }
                  </div>

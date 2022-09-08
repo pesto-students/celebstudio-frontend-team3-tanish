@@ -31,7 +31,7 @@ const Navbar = ({children})  => {
     }
 
     const handleINotification = (event) => {
-      navigate('/Inotification')
+      navigate('/appliedCampaign')
     }
 
     const handleLogout = () => {
@@ -54,9 +54,9 @@ const Navbar = ({children})  => {
             {showNav?
               <div className="navbaritems">
                 <div className='navlist' name="hello"  onClick={handleDasboardClick}><AiFillHome/><div>Dashboard</div></div>
-                <div className='navlist' name="hello" onClick={handleCampaignClick}><SiCampaignmonitor/><div>Campaign</div></div>
+                <div className='navlist' name="hello" onClick={handleCampaignClick}><SiCampaignmonitor/><div>Eligible</div></div>
+                <div className='navlist' name="hello" onClick={handleINotification}><IoIosNotifications/><div>Applied</div></div>
                 <div className='navlist' name="hello" onClick={handleSettingClick}><FaUserAlt/><div>Profile</div></div>
-                <div className='navlist' name="hello" onClick={handleINotification}><IoIosNotifications/><div>Notificaion</div></div>
                 <div className='navlist' name="hello"onClick={handleLogout} ><IoIosLogOut/><div>Logout</div></div>
               </div>:null
             }
