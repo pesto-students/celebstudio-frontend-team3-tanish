@@ -123,19 +123,31 @@ const Bprofile = () => {
 
     const handlePasswordSubmit = (event) => {
       event.preventDefault();
-      if(oldpassword == password){
-        if(newpassword === verifypassword){
-          setPasswrod(verifypassword);
-          alert("paswword change successfull")
-          setshowPasswordEdit(!showPasswordEdit);
-        }
-        else{
-          alert("password mismatch");
-        }
+
+
+      if(!oldpassword || !newpassword || !verifypassword ){
+        alert("Please fill in the details");
+        updateSetEdit("");
+        return;
       }
-      else{
-        alert("Wrong Password. Please enter the current password");
+
+      const passwordChange = {
+        method:'patch',
+        header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+        url:` https://celebackend.herokuapp.com/api/v1/influencer/${userID}/change-password`,
       }
+
+      let password = {
+        passwordCurrent:oldpassword,
+        password:newpassword,
+        passwordConfirm:verifypassword,
+      }
+
+      let passwordChangeRequest = {...passwordChange, data:password}
+
+      axios(passwordChangeRequest)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
 
     }
 

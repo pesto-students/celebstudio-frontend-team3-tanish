@@ -46,6 +46,16 @@ import {setData} from '../../../signup/authSlice';
     //checking facebook status from redux. if active, then setShowFecbookedit is set to true which
     const handleFacebookUpdate = (event) => {
         event.preventDefault();
+
+        if(!URL || !FCOUNT || !COST){
+          alert("you left a field empty")
+          setURL("");
+          setFCOUNT("");
+          setCOST("");
+          return;
+        }
+
+
         setFacebook({...facebookdata, isactive: true, url:URL, follower_count:FCOUNT, cost:COST})
         
         const facebookrequest = {...requestProfile,data:{facebook:{isactive: true, url:URL, follower_count:FCOUNT, cost:COST}}};

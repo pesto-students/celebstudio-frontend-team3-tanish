@@ -46,6 +46,15 @@ import {setData} from '../../../signup/authSlice';
     //checking twitter status from redux. if active, then setShowFecbookedit is set to true which
     const handleFacebookUpdate = (event) => {
         event.preventDefault();
+
+        if(!URL || !FCOUNT || !COST){
+          alert("you left a field empty")
+          setURL("");
+          setFCOUNT("");
+          setCOST("");
+          return;
+        }
+
         setTwitter({...twitter, isactive: true, url:URL, follower_count:FCOUNT, cost:COST})
         
         const twitterRequest = {...requestProfile,data:{twitter:{isactive: true, url:URL, follower_count:FCOUNT, cost:COST}}};

@@ -47,6 +47,16 @@ import {setData} from '../../../signup/authSlice';
     //checking instagram status from redux. if active, then setShowFecbookedit is set to true which
     const handleFacebookUpdate = (event) => {
         event.preventDefault();
+
+        if(!URL || !FCOUNT || !COST){
+          alert("you left a field empty")
+          setURL("");
+          setFCOUNT("");
+          setCOST("");
+          return;
+        }
+
+        
         setInstagram({...instagram, isactive: true, url:URL, follower_count:FCOUNT, cost:COST})
         
         const instagramRequest = {...requestProfile,data:{instagram:{isactive: true, url:URL, follower_count:FCOUNT, cost:COST}}};
