@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import {setData} from '../../../signup/authSlice';
 
     const  PlatformFacebook = ()  => {
+      const dispatch = useDispatch();
     const token = useSelector(state => state.authDetails.token);
     const userID = useSelector(state => state.authDetails.userID);
     const userData = useSelector(state => state.authDetails.userData.facebook);
@@ -11,6 +13,7 @@ import { useSelector } from 'react-redux';
     const [FCOUNT , setFCOUNT] = useState("");
     const [COST , setCOST] = useState("");
     const [showEditForm, handleShowEditForm] = useState();
+    let user = useSelector(state => state.authDetails.userData);
 
     const requestProfile = {
         method:'patch',
@@ -48,7 +51,10 @@ import { useSelector } from 'react-redux';
         const facebookrequest = {...requestProfile,data:{facebook:{isactive: true, url:URL, follower_count:FCOUNT, cost:COST}}};
         console.log(facebookrequest);
         axios(facebookrequest)
-        .then(res => console.log(res))
+        .then(res => {console.log(res.data.data)
+          let data = res.data.data.profile;
+          dispatch(setData(data));
+          console.log(user)})
         .catch(err => console.log(err));
         setURL("");
         setFCOUNT("");

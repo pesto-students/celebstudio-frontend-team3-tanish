@@ -2,15 +2,18 @@
 import useSelection from 'antd/lib/table/hooks/useSelection';
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import pIMG from '../../../img/profileimg.PNG';
 import Editform from './inputfield';
+import {setData} from '../../../signup/authSlice';
 
 const Bprofile = () => {
+  const dispatch = useDispatch();
 
   const token = useSelector(state => state.authDetails.token);
   const userID = useSelector(state => state.authDetails.userID);
   const userData = useSelector(state => state.authDetails.userData);
+  let user = useSelector(state => state.authDetails.userData);
 
 
     const [showEditButton, setShowEditButton] = useState();
@@ -20,6 +23,7 @@ const Bprofile = () => {
     const [addImg, setAddImage] = useState(false);
     const [sendImg, setSendImg] = useState([]);
     const [userImg,setuserImg]= useState();
+
     //personal details
     const [profilData, setProfileData] = useState({
       first_name:userData.first_name,
@@ -41,14 +45,18 @@ const Bprofile = () => {
       updateSetEdit(tag);
     }
 
-    const request = {
-      method:'patch',
-      header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-      url:`https://celebackend.herokuapp.com/api/v1/business/${userID}`,
-      data:profilData,
-    }
+
 
     const handleupdateChange = (data) => {
+
+      const request = {
+        method:'patch',
+        header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+        url:`https://celebackend.herokuapp.com/api/v1/business/${userID}`,
+        data:profilData,
+      }
+
+
       console.log(data);
       if(!data || /^\s*$/.test(data )){
         updateSetEdit("");
@@ -59,7 +67,10 @@ const Bprofile = () => {
         case "first_name":{
           setProfileData({...profilData, first_name:data});
           axios(request)
-          .then(res => console.log(res))
+          .then(res => {console.log(res.data.data)
+            let data = res.data.data.profile;
+            dispatch(setData(data));
+            console.log(user)})
           .catch(err => console.log(err));
           updateSetEdit("");
           break;
@@ -68,7 +79,10 @@ const Bprofile = () => {
         case "last_name":{
           setProfileData({...profilData, last_name:data});
           axios(request)
-          .then(res => console.log(res))
+          .then(res => {console.log(res.data.data)
+            let data = res.data.data.profile;
+            dispatch(setData(data));
+            console.log(user)})
           .catch(err => console.log(err));
           updateSetEdit("");
           break;
@@ -77,7 +91,10 @@ const Bprofile = () => {
         case "email":{
           setProfileData({...profilData, email:data});
           axios(request)
-          .then(res => console.log(res))
+          .then(res => {console.log(res.data.data)
+            let data = res.data.data.profile;
+            dispatch(setData(data));
+            console.log(user)})
           .catch(err => console.log(err));
           updateSetEdit("");
           break;

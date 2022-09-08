@@ -7,13 +7,18 @@ import Editform from './inputfield';
 import PlatformFacebook from './PlatformFacebook';
 import PlatformInstagrm from './PlatformInstagram';
 import PlatformTwitter from './PlatformTwitter';
-import {userData} from '../../../signup/authSlice';
+import {setData} from '../../../signup/authSlice';
 
 const Iprofile = () => {
   const dispath = useDispatch();
   const token = useSelector(state => state.authDetails.token);
   const userID = useSelector(state => state.authDetails.userID);
-  const userData = useSelector(state => state.authDetails.userData);
+  let user = useSelector(state => state.authDetails.userData);
+  let update = null;
+ 
+
+
+
 
     const [showEditButton, setShowEditButton] = useState();
     const [setEdit, updateSetEdit] = useState("");
@@ -22,19 +27,20 @@ const Iprofile = () => {
     //image
     const [userImg,setuserImg]= useState();
     //personal details
-    const [fname,setFname]= useState(userData.first_name)
-    const [lname,setLname]= useState(userData.last_name)
-    const [DOB, setDOB]= useState(userData.Date_of_Birth.slice(0,10))
+    const [fname,setFname]= useState(user.first_name)
+    const [lname,setLname]= useState(user.last_name)
+    const [DOB, setDOB]= useState(user.Date_of_Birth.slice(0,10))
     console.log(DOB);
 
     //contact details
-    const [Email, setEmail]= useState(userData.email)
-    const [contact, setContact]= useState(userData.phone)
+    const [Email, setEmail]= useState(user.email)
+    const [contact, setContact]= useState(user.phone)
 
     //socialMedia details
   
 
-    const [primaryCatagory, setPrimaryCategory]= useState(userData.product_category);
+    const [primaryCatagory, setPrimaryCategory]= useState(user.product_category);
+    console.log(primaryCatagory);
     const productCategory = [
       {id:'1',category:"Fashion & Apparel"      }    , 
       {id:'2',category:"Food & Beverages"       }  ,
@@ -46,18 +52,14 @@ const Iprofile = () => {
 
   
     //security
-    const [password, setPasswrod]= useState(["1234vbnmkl"]);
+
     const [oldpassword, setoldPasswrod]= useState([]);
     const [newpassword, setNewPassword] = useState([])
     const [verifypassword, setverifyPassword] = useState([]);
     
 
 
-    const requestProfile = {
-      method:'patch',
-      header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-      url:` https://celebackend.herokuapp.com/api/v1/influencer/${userID}`,
-    }
+    
 
     const handleupdateSetEdit = ({tag}) => {
       updateSetEdit(tag);
@@ -68,6 +70,12 @@ const Iprofile = () => {
     }
 
     const handleupdateChange = (data) => {
+      const requestProfile = {
+        method:'patch',
+        header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+        url:` https://celebackend.herokuapp.com/api/v1/influencer/${userID}`,
+      }
+
       console.log(data);
       if(!data || /^\s*$/.test(data )){
         updateSetEdit("");
@@ -82,7 +90,10 @@ const Iprofile = () => {
           let request = {...requestProfile,data:first_name}
           console.log(request);
           axios(request)
-          .then(res => console.log(res))
+          .then(res => {console.log(res.data.data)
+            let data = res.data.data.profile;
+            dispath(setData(data));
+            console.log(user)})
           .catch(err => console.log(err));
           updateSetEdit("");
           break;
@@ -94,7 +105,10 @@ const Iprofile = () => {
           let request = {...requestProfile,data:last_name}
           console.log(request);
           axios(request)
-          .then(res => console.log(res))
+          .then(res => {console.log(res.data.data)
+            let data = res.data.data.profile;
+            dispath(setData(data));
+            console.log(user)})
           .catch(err => console.log(err));
           updateSetEdit("");
           break;
@@ -107,7 +121,10 @@ const Iprofile = () => {
           let request = {...requestProfile,data:date_of_birth}
           console.log(request);
           axios(request)
-          .then(res => console.log(res))
+          .then(res => {console.log(res.data.data)
+            let data = res.data.data.profile;
+            dispath(setData(data));
+            console.log(user)})
           .catch(err => console.log(err));
           updateSetEdit("");
           break;
@@ -119,7 +136,10 @@ const Iprofile = () => {
           let request = {...requestProfile,data:email}
           console.log(request);
           axios(request)
-          .then(res => console.log(res))
+          .then(res => {console.log(res.data.data)
+            let data = res.data.data.profile;
+            dispath(setData(data));
+            console.log(user)})
           .catch(err => console.log(err));
           updateSetEdit("");
           break;
@@ -131,7 +151,10 @@ const Iprofile = () => {
           let request = {...requestProfile,data:phone}
           console.log(request);
           axios(request)
-          .then(res => console.log(res))
+          .then(res => {console.log(res.data.data)
+            let data = res.data.data.profile;
+            dispath(setData(data));
+            console.log(user)})
           .catch(err => console.log(err));
           updateSetEdit("");
           break;
@@ -142,7 +165,10 @@ const Iprofile = () => {
           let request = {...requestProfile,data:product_category}
           console.log(request);
           axios(request)
-          .then(res => console.log(res))
+          .then(res => {console.log(res.data.data)
+            let data = res.data.data.profile;
+            dispath(setData(data));
+            console.log(user)})
           .catch(err => console.log(err));
           updateSetEdit("");
           break;
@@ -150,7 +176,6 @@ const Iprofile = () => {
         }
         default: console.log("something went wrong in handle update change");
       }
-
     }
 
     const handleCancleUpdate = () => {
@@ -194,6 +219,9 @@ const Iprofile = () => {
 
     }
 
+    const handleShowPasswordEdit = (event) => {
+      setshowPasswordEdit(!showPasswordEdit)
+    }
   
 
 
@@ -318,7 +346,9 @@ return(
               <div className='pdetails' onMouseOut={() => setShowEditButton()} onMouseOver={() => setShowEditButton("PC")}>
               {setEdit !== 'PC' ?
                 <div>
-                  <div className='PDdisplay'>{productCategory.map(item => item.id == primaryCatagory ? item.category : null)}</div>
+                  <div className='PDdisplay'>
+                    { primaryCatagory == 0 ? " Please update product category" : productCategory.map(item => item.id == primaryCatagory ? item.category : null )}
+                  </div>
                   {showEditButton === 'PC' ?  <button className='profileEditButton' onClick={() => {handleupdateSetEdit({tag:"PC"})}}>Change</button>
                   : null}
                 </div>:
@@ -346,27 +376,13 @@ return(
               </div>
               </div>
 
-
-
-
-
-
-
-
-
-
-
-
               <div className='imgtitle'>Platform Details</div>
               <PlatformFacebook />
               <PlatformInstagrm />
               <PlatformTwitter />
 
-      
-
-
               <div className='imgtitle'>Security</div>
-                <div className="ChangePassword" onClick={() => {setshowPasswordEdit(!showPasswordEdit)}}>Change Password</div>
+                <div className="ChangePassword" onClick={() => {handleShowPasswordEdit()}}>Change Password</div>
                 {showPasswordEdit ? 
                 <div className='pdetails'>
                   <form onSubmit={handlePasswordSubmit}>
