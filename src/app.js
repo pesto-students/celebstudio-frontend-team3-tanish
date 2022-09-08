@@ -14,6 +14,7 @@ import Inotification from './influencerModule/influencerModules/inotification';
 import InfluencerProfile from './influencerModule/influencerModules/influencerProfile/influencerProfile';
 import EditCampaign from './businessModules/businessModule/dashboard/editCampaign';
 import ShowCampaign from './businessModules/businessModule/dashboard/showCampaign';
+import ShowAppliedCampaign from './influencerModule/influencerModules/apppliedCampaign/appliedCampaign';
 
 
 const App = () => {
@@ -33,7 +34,7 @@ const App = () => {
         <Route exact path="/Idashboard" element={<Idashboard />} />
         <Route exact path="/Iprofile" element={<InfluencerProfile />} />
         <Route exact path="/eligibleCampaign" element={<EligibleCampaign />} />
-        <Route exact path="/Inotification" element={<Inotification />} />
+        <Route exact path="/appliedCampaign" element={<ShowAppliedCampaign />} />
 
 
       </Routes>
