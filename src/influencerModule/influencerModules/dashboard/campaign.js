@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 
 const Campaign = () => {
   const userID = useSelector(state => state.authDetails.userID)
+  const name = useSelector(state => state.authDetails.userData.first_name)
   const facebook = useSelector(state => state.authDetails.userData.facebook.isactive);
   const instagram = useSelector(state => state.authDetails.userData.instagram.isactive);
   const twitter = useSelector(state => state.authDetails.userData.twitter.isactive);
@@ -17,8 +18,9 @@ const Campaign = () => {
     twitter:twitter,
   });
   const [campList,setCampList] = useState([]);
+  const [url,setUrl] = useState("");
   const [showCampaignDetails,setShowCampaignDetails] = useState('');
-  const [fname, setFname] = useState("Jitender");
+  const [fname, setFname] = useState(name);
   const token= "grassIsGreener";
 
   const request = {
@@ -46,6 +48,14 @@ const Campaign = () => {
     setShowCampaignDetails("")
    }
 
+  }
+
+  const handleUrlChange = (event) => {
+    setUrl(event.target.value)
+  }
+
+  const submitUrl = (event) => {
+    console.log(url);
   }
 
   return (

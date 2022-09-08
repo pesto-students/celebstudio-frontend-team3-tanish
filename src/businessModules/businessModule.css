@@ -390,15 +390,15 @@ input[type="text"],input[type="number"],input[type="date"],input[type="email"]:h
 }
 
 .CCrightContainer{   
-    width: 70%;
-    height: fit-content;
+    width: 80%;
+    height: 80%;
     background-color: rgba(50, 195, 176, 0.336);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 25px;
 }
 
 .CCrightContainer > img{
@@ -508,10 +508,10 @@ input[type="text"],input[type="number"],input[type="date"],input[type="email"]:h
 .showCampaignCard{
     width: 96%;
     height: fit-content;
-    background-color:rgba(28, 79, 130, 0.714);
+    background-color: #062e56df;
     margin: 10px;
     border-radius: 5px;
-    color: black;
+   
     padding: 15px; 
     padding-left: 40px;
     color: white;
@@ -534,7 +534,8 @@ input[type="text"],input[type="number"],input[type="date"],input[type="email"]:h
 
 .influencerEntry{
     width: 30%;
-    background-color:#5c8dc5d8;
+    background-color: #2f436f;
+    color:whitesmoke;
     margin-top: 5px;
     margin-bottom: 5px;
     margin-left: 10px;
@@ -564,9 +565,17 @@ input[type="text"],input[type="number"],input[type="date"],input[type="email"]:h
     border-top: 1px solid black;
 }
 
+.desAndButton{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: solid red;
+}
+
 .infMsg{
-    height: 250px;
-    width: 85%;
+    width: 90% !important;
+    height: 100px;
     background-color: #dfdadc;
     border: 0.8px solid black;
     border-radius: 5px;
@@ -574,7 +583,12 @@ input[type="text"],input[type="number"],input[type="date"],input[type="email"]:h
     margin-top: 10px;
     margin-bottom: 15px;
     overflow-y: scroll;
+    overflow-x: hidden;
     
+}
+
+.infMsg > *{
+    width: 150px;
 }
 
 
@@ -633,4 +647,12 @@ input[type="text"],input[type="number"],input[type="date"],input[type="email"]:h
     .influencerEntry{
       width: 45%;
     }
+}
+
+.ApplyCloseButton{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:center ;
+    margin-top: 20px;
 }

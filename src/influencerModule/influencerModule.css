@@ -391,3 +391,12 @@ input[type="text"],input[type="date"],input[type="email"]:hover{
     display: flex;
     justify-content: center;
 }
+
+@media screen and (max-width:1000px) {
+    input[type="text"],input[type="date"],input[type="email"],input[type="password"]{
+        width: 50%;
+    }
+    input[type="text"],input[type="date"],input[type="email"]:hover{
+        width: 50%;
+    }
+}

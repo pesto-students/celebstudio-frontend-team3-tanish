@@ -75,17 +75,7 @@ const Edit = (props) => {
                 <h2>Campaign Description</h2><br/><textarea name='description' rows={6} cols={50} value={campaign.description} onChange={setChange} placeholder="Campaign Desc" />
                 <div className='lineCC'></div>
         </div>
-        <div className='CCprodCat'>
-           <h2>Product Catagory(Primary)</h2><br/><select name='product_category' value={campaign.product_category} onChange={setChange}>
-                <option value='1'>Fashion & Apparel     </option>
-                <option value='2'>Food & Beverages     </option>
-                <option value='3'>Health & Wellness       </option>
-                <option value='4'> Pets         </option>
-                <option value='5'>Beauty                  </option>
-                <option value='6'>Jewellery & Accessories</option>
-              </select>
-              <div className='lineCC'></div>
-        </div>
+    
         <div className='CCdata'>
               <h2>Start Date</h2><input type="date" name='start_date' value={campaign.start_date.slice(0,10)} onChange={setChange}/>
               <h2>End Date</h2><input type="date" name='end_date' value={campaign.end_date.slice(0,10)}   onChange={setEndDate} />
