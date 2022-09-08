@@ -1,7 +1,6 @@
 
-import useSelection from 'antd/lib/table/hooks/useSelection';
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import pIMG from '../../../img/profileimg.PNG';
 import Editform from './inputfield';
@@ -34,7 +33,6 @@ const Bprofile = () => {
     })
 
     //security
-    const [password, setPasswrod]= useState(["1234vbnmkl"]);
     const [oldpassword, setoldPasswrod]= useState();
     const [newpassword, setNewPassword] = useState([])
     const [verifypassword, setverifyPassword] = useState([]);
