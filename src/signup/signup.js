@@ -69,7 +69,7 @@ const Signup = (props) => {
           console.log("something went wrong");
         }
       })
-      .catch((err) => {console.log(err);})
+      .catch((err) => {console.log(err.data.response)})
     }
    
   

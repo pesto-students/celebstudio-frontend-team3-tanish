@@ -40,7 +40,6 @@ const Iprofile = () => {
   
 
     const [primaryCatagory, setPrimaryCategory]= useState(user.product_category);
-    console.log(primaryCatagory);
     const productCategory = [
       {id:'1',category:"Fashion & Apparel"      }    , 
       {id:'2',category:"Food & Beverages"       }  ,

@@ -15,6 +15,9 @@ const Campaign = () => {
   const twitter = useSelector(state => state.authDetails.userData.twitter.isactive);
   const [showCampaignEnroll,setShowCampaignEnroll] = useState('');
   const [appliedStatus, setAppliedStatus] = useState();
+  const [post_share, setPost_share] = useState("");
+  const [collabs, setCollabs] = useState("");
+  const [platformM, setPlatformM] = useState("");
   const [applyRes, setApplyRes] = useState(false)
   const [platform, setPlatform] = useState({
     facebook:facebook,
@@ -35,11 +38,19 @@ const Campaign = () => {
       url:`https://celebackend.herokuapp.com/api/v1/influencer/${userID}/campaigns`,
     }
     let response2 = {};
+    let collabs = "";
+    let post_share = "";
+    let platform = "";
+
     await axios(request)
-    .then((res) => {response2 = res.data.data.campaigns;
+    .then((res) => {console.log(res);
+      setCollabs(res.data.data.collabs);
+      setPost_share(res.data.data.post_share);
+      setPlatformM(res.data.data.platform);
+      response2 = res.data.data.campaigns;
     let postlink = response2.map(item => ({id:item._id, status:item.influencers.map(item => item.post_link)}))
     setAppliedStatus(postlink);
-    console.log(postlink);
+    console.log(postlink,collabs,post_share,platform);
     })
     .catch((err) => {console.log(err)});
     setCampList(response2);
@@ -131,15 +142,15 @@ const Campaign = () => {
               You earned
             </div>
             <div>
-            <div className='score'>120</div>
+            <div className='score'>{post_share}</div>
               Post Share
               </div>
             <div >
-            <div className='score'>20</div>
+            <div className='score'>{collabs}</div>
             Collaboration
             </div>
             <div >
-            <div className='score'>3</div>
+            <div className='score'>{platformM}</div>
             Platform 
             </div>
         </div>
