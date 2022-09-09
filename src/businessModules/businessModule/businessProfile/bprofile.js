@@ -134,7 +134,7 @@ const Bprofile = () => {
       const passwordChange = {
         method:'patch',
         header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-        url:` https://celebackend.herokuapp.com/api/v1/influencer/${userID}/change-password`,
+        url:`https://celebackend.herokuapp.com/api/v1/business/${userID}/change-password`,
       }
 
       let password = {

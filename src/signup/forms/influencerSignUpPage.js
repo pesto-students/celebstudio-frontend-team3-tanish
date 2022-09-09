@@ -47,7 +47,7 @@ const InfluencerSignUP = () => {
     <div className='IScontainer'>
       {displayStatus === 'success' ? 
       <div className='responseStatus signupsuccess'>
-        Login Successfull!! Redirecting to login Page.
+        Signup Successfull!! Redirecting to login Page.
       </div>:null}
 
       {displayStatus === 'failed' ? 

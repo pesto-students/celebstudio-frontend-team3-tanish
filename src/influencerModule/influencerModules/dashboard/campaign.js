@@ -138,7 +138,7 @@ const Campaign = () => {
         
         <div className='performance' >
             <div>
-              <div className='score'>12000</div>
+              <div className='score'>0</div>
               You earned
             </div>
             <div>

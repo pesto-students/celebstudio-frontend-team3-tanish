@@ -103,7 +103,7 @@ label {
 
 @media screen and (min-width: 500px) {
   .businessSignUp{
-    background-color: rgba(137, 239, 231, 0.388);
+    background-color:  #E9EDEA;
     display: flex;
     flex-direction: row;
     justify-content:center;
@@ -223,10 +223,10 @@ label {
 
   @media screen and (max-width:1000px) {
     input[type="text"],input[type="date"],input[type="email"],input[type="password"]{
-        width: 50%;
+        width: 60%;
     }
 
     input[type="text"],input[type="date"],input[type="email"]:hover{
-        width: 50%;
+        width: 60%;
     }
 }
