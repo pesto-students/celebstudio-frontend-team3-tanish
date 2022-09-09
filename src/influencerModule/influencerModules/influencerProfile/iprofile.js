@@ -15,6 +15,7 @@ const Iprofile = () => {
   const userID = useSelector(state => state.authDetails.userID);
   let user = useSelector(state => state.authDetails.userData);
   let update = null;
+  console.log(token);
  
 
 
@@ -76,6 +77,7 @@ const Iprofile = () => {
         header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
         url:` https://celebackend.herokuapp.com/api/v1/influencer/${userID}`,
       }
+     
 
       console.log(data);
       if(!data || /^\s*$/.test(data )){

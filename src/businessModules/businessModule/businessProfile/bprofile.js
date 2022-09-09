@@ -13,6 +13,7 @@ const Bprofile = () => {
   const userID = useSelector(state => state.authDetails.userID);
   const userData = useSelector(state => state.authDetails.userData);
   let user = useSelector(state => state.authDetails.userData);
+  console.log(token);
 
 
     const [showEditButton, setShowEditButton] = useState();

@@ -39,7 +39,7 @@
     align-self: center;
     justify-self: flex-end;
     border: soild red;
-    width:470px;
+    width:500px;
     padding-top:clamp(8px,1.5vh,2vh);
     padding-bottom:clamp(8px,2vh,2vh);
 }
@@ -57,11 +57,11 @@
 }
 
 .headerList > :nth-child(1) {
-    padding-right: 12px;
+   
 }
 
 .headerList > :nth-last-child(1){
-    padding-right: 38px;
+   
 }
 
 
