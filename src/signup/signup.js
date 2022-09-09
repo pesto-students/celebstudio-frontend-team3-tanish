@@ -12,7 +12,8 @@ const Signup = (props) => {
   const dispatch = useDispatch();
  
   const user = useSelector(state => state.authDetails.userData)
-  const token = useSelector(state => state.authDetails.token)
+  const token = useSelector(state => state.authDetails.token);
+  const [displayStatus, setDispalyStatus] = useState("");
   const [userType,handleUserType] = useState("");
   const [useLogin,setuseLogin] = useState({
     password:'',
@@ -20,12 +21,7 @@ const Signup = (props) => {
   })
 
 
-  const request = {
-    method:'post',
-    header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-    url:'https://celebackend.herokuapp.com/api/v1/login',
-    data: useLogin,
-  }
+ 
   const handleChange = (event) => {
    const utype = event.target.value;
    handleUserType(utype);
@@ -39,6 +35,13 @@ const Signup = (props) => {
     const handleLogin = async (event) => {
       event.preventDefault();
       //console.log(request.data);
+
+      const request = {
+        method:'post',
+        header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+        url:'https://celebackend.herokuapp.com/api/v1/login',
+        data: useLogin,
+      }
       await axios(request)
       .then((res) => {
         //console.log(res);
@@ -69,7 +72,7 @@ const Signup = (props) => {
           console.log("something went wrong");
         }
       })
-      .catch((err) => {console.log(err);})
+      .catch((err) => {console.log(err.data.response)})
     }
    
   
@@ -78,6 +81,10 @@ const Signup = (props) => {
       <div className='signcelebstudio'>Celebstudio</div>
         <div className='signupContainer'>
           <h1>Sign into your Account</h1>
+          {displayStatus === 'success' ? 
+          <div className='responseStatus signupsuccess'>
+            Signup Successfull!! Redirecting to login Page.
+          </div>:null}
           <div className='signupDesc'>If you do not have an account, sign up to create a fresh new account</div>
             <h2 className='continueAs'>Continue as</h2>
             <div className='buttonSet'>

@@ -1,7 +1,6 @@
 
-import useSelection from 'antd/lib/table/hooks/useSelection';
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import pIMG from '../../../img/profileimg.PNG';
 import Editform from './inputfield';
@@ -14,6 +13,7 @@ const Bprofile = () => {
   const userID = useSelector(state => state.authDetails.userID);
   const userData = useSelector(state => state.authDetails.userData);
   let user = useSelector(state => state.authDetails.userData);
+  console.log(token);
 
 
     const [showEditButton, setShowEditButton] = useState();
@@ -34,7 +34,6 @@ const Bprofile = () => {
     })
 
     //security
-    const [password, setPasswrod]= useState(["1234vbnmkl"]);
     const [oldpassword, setoldPasswrod]= useState();
     const [newpassword, setNewPassword] = useState([])
     const [verifypassword, setverifyPassword] = useState([]);
@@ -125,19 +124,31 @@ const Bprofile = () => {
 
     const handlePasswordSubmit = (event) => {
       event.preventDefault();
-      if(oldpassword == password){
-        if(newpassword === verifypassword){
-          setPasswrod(verifypassword);
-          alert("paswword change successfull")
-          setshowPasswordEdit(!showPasswordEdit);
-        }
-        else{
-          alert("password mismatch");
-        }
+
+
+      if(!oldpassword || !newpassword || !verifypassword ){
+        alert("Please fill in the details");
+        updateSetEdit("");
+        return;
       }
-      else{
-        alert("Wrong Password. Please enter the current password");
+
+      const passwordChange = {
+        method:'patch',
+        header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+        url:`https://celebackend.herokuapp.com/api/v1/business/${userID}/change-password`,
       }
+
+      let password = {
+        passwordCurrent:oldpassword,
+        password:newpassword,
+        passwordConfirm:verifypassword,
+      }
+
+      let passwordChangeRequest = {...passwordChange, data:password}
+
+      axios(passwordChangeRequest)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
 
     }
 

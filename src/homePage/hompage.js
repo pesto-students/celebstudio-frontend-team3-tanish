@@ -3,14 +3,109 @@ import './homepage.css';
 import {BsArrowRight} from 'react-icons/bs';
 import {AiFillCheckCircle} from 'react-icons/ai';
 import { useNavigate,Link} from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { getTOKEN,setData,setUserID,setUserType } from '../signup/authSlice';
+
 
 
 const Hompage = () => {
-    const navigate = useNavigate();
+    
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
    
 
     const handleSignup = (event) => {
         navigate('/signUp');
+    }
+
+    const handleBusiness = async(event) => {
+            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWFkMzA5ZmRkOWFjMDAxNmQ4NmIxYSIsImlhdCI6MTY2MjcwMjQwMiwiZXhwIjoxNjcwNDc4NDAyfQ.g9EKICrUn81y_2BrENP5jsiSPG5A0EWHoyHLew4eKXg";
+            const request = {
+            method:'post',
+            header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+            url:'https://celebackend.herokuapp.com/api/v1/login',
+            data: {
+                password:'jitender',
+                email:'himashish.sharma@babaye.com',
+              },
+          }
+          await axios(request)
+          .then((res) => {
+            //console.log(res);
+            let userData = res.data.user;
+            let token = res.data.token;
+            let userId = res.data.user._id;
+            let userType = res.data.user_type;
+           // console.log(userData, token, userId, userType);
+           
+            if(res.data.status === 'success' && res.data.user_type === 'Influencer'){
+            //  console.log(res.data);
+              dispatch(getTOKEN(token))
+              dispatch(setData(userData));
+              dispatch(setUserID(userId));
+              dispatch(setUserType(userType));
+              
+             
+              navigate('/idashboard');
+            }
+            else if(res.data.status === 'success' && res.data.user_type === 'Business'){
+              dispatch(getTOKEN(token))
+              dispatch(setData(userData));
+              dispatch(setUserID(userId));
+              dispatch(setUserType(userType));
+              navigate('/bdashboard');
+            }
+            else{
+              console.log("something went wrong");
+            }
+          })
+          .catch((err) => {console.log(err.data.response)})
+
+    }
+
+    const handleInfluencer = async (event) => {
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWFkMGRkZmRkOWFjMDAxNmQ4NmIwYyIsImlhdCI6MTY2MjcwMjE1OSwiZXhwIjoxNjcwNDc4MTU5fQ.4B00ZpzO5B8W2oePbtbbDyf81y4jV3lt32bvDBREhQw";
+        const request = {
+            method:'post',
+            header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+            url:'https://celebackend.herokuapp.com/api/v1/login',
+            data: {
+                password:'jitender',
+                email:'viraj.singal@gmail.com',
+              },
+          }
+          await axios(request)
+          .then((res) => {
+            //console.log(res);
+            let userData = res.data.user;
+            let token = res.data.token;
+            let userId = res.data.user._id;
+            let userType = res.data.user_type;
+           // console.log(userData, token, userId, userType);
+           
+            if(res.data.status === 'success' && res.data.user_type === 'Influencer'){
+            //  console.log(res.data);
+              dispatch(getTOKEN(token))
+              dispatch(setData(userData));
+              dispatch(setUserID(userId));
+              dispatch(setUserType(userType));
+              
+             
+              navigate('/idashboard');
+            }
+            else if(res.data.status === 'success' && res.data.user_type === 'Business'){
+              dispatch(getTOKEN(token))
+              dispatch(setData(userData));
+              dispatch(setUserID(userId));
+              dispatch(setUserType(userType));
+              navigate('/bdashboard');
+            }
+            else{
+              console.log("something went wrong");
+            }
+          })
+          .catch((err) => {console.log(err.data.response)})
     }
 
  
@@ -21,10 +116,10 @@ const Hompage = () => {
                 
                 <div className='getStarted'>
             
-                    <ul className='headerList'>
-                       <li> <Link to='/about'>How it works</Link></li>
-                        <li>Become a creator</li>
-                    </ul>
+                    
+                       <button className='startedButton' onClick={() => handleBusiness()}>BusinessDummy</button>
+                    <button className='startedButton' onClick={() => handleInfluencer()}>InfluencerDummy</button>
+                    
         
                     <button className='startedButton' onClick={handleSignup}>Get Started <span className='arrowIcon'><BsArrowRight/></span></button>
                 </div>

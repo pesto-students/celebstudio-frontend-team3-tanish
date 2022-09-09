@@ -15,6 +15,7 @@ const Iprofile = () => {
   const userID = useSelector(state => state.authDetails.userID);
   let user = useSelector(state => state.authDetails.userData);
   let update = null;
+  console.log(token);
  
 
 
@@ -26,6 +27,8 @@ const Iprofile = () => {
 
     //image
     const [userImg,setuserImg]= useState();
+    const [addImg, setAddImage] = useState(false);
+    const [sendImg, setSendImg] = useState([]);
     //personal details
     const [fname,setFname]= useState(user.first_name)
     const [lname,setLname]= useState(user.last_name)
@@ -40,7 +43,6 @@ const Iprofile = () => {
   
 
     const [primaryCatagory, setPrimaryCategory]= useState(user.product_category);
-    console.log(primaryCatagory);
     const productCategory = [
       {id:'1',category:"Fashion & Apparel"      }    , 
       {id:'2',category:"Food & Beverages"       }  ,
@@ -75,6 +77,7 @@ const Iprofile = () => {
         header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
         url:` https://celebackend.herokuapp.com/api/v1/influencer/${userID}`,
       }
+     
 
       console.log(data);
       if(!data || /^\s*$/.test(data )){
@@ -178,6 +181,33 @@ const Iprofile = () => {
       }
     }
 
+    const handleAddImage = (event) => {
+      setAddImage(true);
+    }
+
+    
+    const handleImgChange = (event) => {
+      setSendImg({...sendImg,selectedFile:event.target.files[0]});
+      console.log(event.target.files[0]);
+    }
+
+    const handleimgUpload = (event) =>{
+      const formData = new FormData();
+    
+      console.log(sendImg);
+
+      // formData.append(
+      //   "myFile",
+      //   addImg.selectedFile,
+      //   addImg.selectedFile.name
+      // );
+      // const requestPack = {...request, data:formData};
+      // console.log(requestPack);
+
+    
+    
+    }
+
     const handleCancleUpdate = () => {
       updateSetEdit("");
     }
@@ -234,16 +264,22 @@ return(
           
             <div className='imgtitle'>Profile Picture</div>
             <div className='imgContainer'>
-            
-                <div className='imgDiv'>
-                  {
-                    userImg ? userImg : <img src={pIMG} alt="profile"/>
-                  }
+                <div className='imgSubcontainer'>
+                  <div className='imgDiv'>
+                    {
+                      userImg ? userImg : <img src={pIMG} alt="profile"/>
+                    }
+                  </div>
+                  
+                  <div className='editbutton'>
+                    <button className='imgButton change' type='primary'  onClick={() => {handleAddImage()}}> Change</button>
+                    <button className='imgButton delete' type='primary'  > Delete</button>
+                  </div>
                 </div>
-                <div className='editbutton'>
-                  <button className='imgButton change' type='primary'  > Change</button>
-                  <button className='imgButton delete' type='primary'  > Delete</button>
-                </div>
+                {addImg ? 
+                <div className='uplodImg'>
+                  <input type='file' onChange={handleImgChange} /> <button onClick={() => {handleimgUpload()}}>Upload</button>
+                </div>  : null}
             </div>
 
 
