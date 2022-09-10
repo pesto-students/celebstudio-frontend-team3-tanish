@@ -15,8 +15,8 @@
         justify-items:flex-end;
         justify-content: space-between;
         width:100%;
-        background-color:white;
-        height:clamp(60px,8vh,10vh);
+        background-color:rgba(255, 255, 255, 0.44);
+        background-repeat: no-repeat, repeat;
         z-index: 1000;
     }
 
@@ -29,7 +29,7 @@
     padding-left: 20px;
     padding-top:clamp(8px,0.3vh,0.3vh);
     padding-bottom:clamp(8px,1.5vh,2vh);
-    color:black
+    color:black;
 }
 
 /*media query required for ipad vertical*/
@@ -37,11 +37,7 @@
 .getStarted{
     position: relative;
     align-self: center;
-    justify-self: flex-end;
-    border: soild red;
-    width:500px;
-    padding-top:clamp(8px,1.5vh,2vh);
-    padding-bottom:clamp(8px,2vh,2vh);
+    margin-top: 10px;
 }
 
 .getStarted > button{
@@ -56,13 +52,6 @@
     text-align: center;
 }
 
-.headerList > :nth-child(1) {
-   
-}
-
-.headerList > :nth-last-child(1){
-   
-}
 
 
 
@@ -77,6 +66,7 @@
     padding: 5px;
     padding-right:8px;    
 }
+
 .startedButton:hover{
     border:2px solid #0fb7f4;
     color:#0fb7f4;
@@ -94,8 +84,14 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    background-image: url("https://www.freepik.com/free-vector/white-gold-hexagon-pattern-background_16330847.htm#query=simple%20background&position=24&from_view=keyword");
-/*    margin-top:clamp(60px,8vh,10vh);*/
+    background-image:url(../img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-backdrop-filter: blur(40px);
+    backdrop-filter: blurr(40px);
+    backdrop-filter:brightness(0%);
+    backdrop-filter:opacity(8%);
+    margin-top:clamp(60px,8vh,8vh);
     height:fit-content;
     width: 100%;
     overflow-y: show;
@@ -105,7 +101,10 @@
     position: relative;
     width:fit-content;
     padding: 20px 20px 30px 30px;
-    background-color: #ffffff49;
+    background-color: #ffffff85;
+    backdrop-filter: blurr(2px);
+    backdrop-filter:brightness(0%);
+    backdrop-filter:opacity(8%);
     border-radius: 10px;
     margin:35px;
     margin-right: 60px;
@@ -250,13 +249,20 @@
 }
 
 .footer{
+        width: 99%;
         height:fit-content;
-        padding: 20px;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
-    
+        justify-content: space-around;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
 }
+
+.footerDiv{
+    width: 40%;
+}
+
 
 div > hr {
     color:black;
@@ -318,17 +324,40 @@ div > hr {
 
 @media screen and (max-width:600px) {
 
-    .celebstudio{
-        clear: both;
+    .header{
         display: flex;
-        justify-content: center;
-        width: 100%;
-        position: relative;   
+        flex-direction: row;
+        height: 50px !important;
+        width:100%;
+        margin-right: 0px !important;
+    }
+
+    .container{
+        margin-top: 13% !important;
+        padding-top: 30%;
+    }
+
+    .celebstudio{
+        width: 40%;
+        height: fit-content;
+        margin: 0px !important;
     }
 
     .getStarted{
+        width: 45%;
+        margin: 0px !important;
+        height:40px;
+        padding: 0px !important;
+    }
+    .startedButton{
         visibility: hidden;
-        width: 0px;
+    }
+
+    .Main{
+        visibility: visible;
+        position: relative;
+        top: 0px !important;
+        left:16% !important;
     }
 
     .container{

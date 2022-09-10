@@ -1,192 +1,116 @@
-@media screen and (min-width: 501px) {
-  .IScontainer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
-
-  .influencerSignUp{
-    border-radius: 5px;
-    padding: 20px;
-    height:60%;
-    width:50%;
-    min-width: 500px;
-}
-.ISimg{
-  width: 45%;
-  min-width: 500px;
-  border: soild red;
+.IScontainer{
+  width: 100%;
+  height: 100%;
+  font-family: 'Oswald';
 }
 
-.iforminput {
-    width: 60%;
-    padding: 12px;
-    border: 1px solid #73a2e9;
-    border-radius: 4px;
-    resize: vertical;
-  }
-  
-    
-  .icol-25 {
-    float: left;
-    width: 100%;
-    margin-top: 6px;
-  }
-  
-  .icol-75 {
-    float: left;
-    width: 100%;
-    margin-top: 6px;
-  }
-  
-  /* Clear floats after the columns */
-  .irow:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-
-  .buttons{
-    width: 100vw;
-    
-  }
-
-  .buttons > button{
-    width: 31.5%;
-    height:30px;
-    margin-top: 20px;
-  }
-
-  .buttons > button:hover{
-    color:#0fb7f4;
-    border-radius:5px ;
-    border:2.5px solid #0fb7f4;
-    height:32px;
-    background-color: black;
-  
-  }
-  
-  .responseStatus{
+.responseStatus{
+  position: absolute;
+    z-index: 1000;
+    height: fit-content;
+    padding: 10px;
     position: absolute;
-      z-index: 1000;
-      height: fit-content;
-      padding: 10px;
-      position: absolute;
-      margin-left: auto;
-      margin-right: auto;
-      left: 0;
-      right: 0;
-      text-align: center;
-  }
-  
-  .signupsuccess{
-    background-color: green;
-    color: white;
-  }
-  
-  .signupfailed{
-    background-color: red;
-    color: white;
-  }
-
-
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
-
-@media screen and (max-width: 500px) {
-
-  .ISimg{
-    visibility: hidden;
-  }
-
-  
-.IFimage{
-  width: 50vw;
-  border: solid red;
+.signupsuccess{
+  background-color: green;
+  color: white;
+}
+.signupfailed{
+  background-color: red;
+  color: white;
 }
 
 .influencerSignUp{
-    border-radius: 5px;
-    padding: 20px;
-    height:60%;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.irow{
+  margin-top: 15px;
+}
+
+.iform{
+  margin-top: 50px;
+}
+
+.ISimg{
+  width: 49%;
+  margin-top: 50px;
+}
+.ISimg > img{
+  width: 100%;
+  height: 100%;
+}
+
+
+
+@media screen and (max-width:900px) {
+
+  .influencerSignUp{
+    height: 100%;
+    flex-wrap: wrap-reverse;
+    overflow-y: scroll;
+  }
+
+  .irow{
+    width: 100%;
+  }
+
+  .iform{
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    margin-top: 10px;
+    width:80%;
+    align-items: center;
+  }
+  .iform > div{
+    width: 60%;
+  }
+  .iforminput{
+    width: 100% !important;
+  }
+}
+
+
+@media screen and (max-width:500px) {
+  .influencerSignUp{
+    height: 100%;
+    width: 98%;
+    flex-wrap: wrap;
+  }
+
+  .irow{
+    width: 100%;
+  }
+
+  .iform{
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    margin-top: 10px;
     width:100%;
-    margin-top: 5vh;
-}
+    align-items: center;
+    padding-bottom: 20px;
+  }
+  .iform > div{
+    width: 90%;
+  }
+  .iforminput{
+    width: 100% !important;
+  }
 
-.iforminput {
-    width: 20rem;
-    padding: 12px;
-    border: 1px solid #73a2e9;
-    border-radius: 4px;
-    resize: vertical;
-  }
-  
-  label {
-    padding: 12px 12px 12px 0;
-    display: inline-block;
-  }
-    
-  .icol-25 {
-    float: left;
+  .ISimg{
     width: 100%;
-    margin-top: 6px;
   }
   
-  .icol-75 {
-    float: left;
-    width: 100%;
-    margin-top: 6px;
-  }
-  
-  /* Clear floats after the columns */
-  .irow:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-
-  .buttons{
-    width: 100vw;
-    padding-left: 80px;
-  }
-
-  .buttons > button{
-    width: 50%;
-    height:30px;
-    margin-top: 5px;
-  }
-
-  .responseStatus{
-    position: absolute;
-      z-index: 1000;
-      height: fit-content;
-      padding: 10px;
-      position: absolute;
-      margin-left: auto;
-      margin-right: auto;
-      left: 0;
-      right: 0;
-      text-align: center;
-  }
-  
-  .signupsuccess{
-    background-color: green;
-    color: white;
-  }
-  
-  .signupfailed{
-    background-color: red;
-    color: white;
-  }
-
-  
-}
-  
-  /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-  @media screen and (max-width:1000px) {
-    input[type="text"],input[type="date"],input[type="email"],input[type="password"]{
-        width: 50%;
-    }
-    input[type="text"],input[type="date"],input[type="email"]:hover{
-        width: 50%;
-    }
 }

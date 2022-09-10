@@ -56,7 +56,6 @@ const Navbar = ({children})  => {
                 <div className='navlist' name="hello"  onClick={handleDasboardClick}><AiFillHome/><div>Dashboard</div></div>
                 <div className='navlist' name="hello" onClick={handleCampaignClick}><SiCampaignmonitor/><div>Campaign</div></div>
                 <div className='navlist' name="hello" onClick={handleSettingClick}><FaUserAlt/><div>Profile</div></div>
-                <div className='navlist' name="hello" onClick={handleINotification}><IoIosNotifications/><div>Notificaion</div></div>
                 <div className='navlist' name="hello"onClick={handleLogout} ><IoIosLogOut/><div>Logout</div></div>
               </div>:null
             }

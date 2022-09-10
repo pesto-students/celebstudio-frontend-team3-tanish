@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import '../css/influencerSignup.css';
-import influencer from '../influencer.PNG';
+import influencer from '../../img/influencer.jpg';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {BsArrowRight} from 'react-icons/bs'
 
 
 const InfluencerSignUP = () => {
@@ -56,64 +57,39 @@ const InfluencerSignUP = () => {
       </div>:null}
       
     <div className='influencerSignUp'>
-      <h1>Signup with celebStudio</h1>
       
-    <form onSubmit={handleSubmit}>
-
+    <form className="iform" onSubmit={handleSubmit}>
+      <h1>Signup with celebStudio</h1>
       <div className="irow">
-        <div className="icol-25">
           <label>First Name</label>
-        </div>
-
-        <div className="icol-75">
-          <input type="text" name="fname" className='iforminput' placeholder="Your name.." required value={formDetails.value} onChange={setChange}/>
-        </div>
+          <div><input type="text" name="fname" className='iforminput' placeholder="Your name.." required value={formDetails.value} onChange={setChange}/></div>
       </div>
 
       <div className="irow">
-        <div className="icol-25">
-          <label>Last Name</label>
-        </div>
-
-        <div className="icol-75">
+          <label>Last Name</label><br/>
           <input type="text" name="lname" className='iforminput' placeholder="Your name.." required value={formDetails.value} onChange={setChange}/>
-        </div>
       </div>
 
       <div className="irow">
-        <div className="icol-25">
-          <label>Contact Number</label>
-        </div>
-
-        <div className="icol-75">
+          <label>Contact Number</label><br/>
           <input type="text" name="cno" className='iforminput' placeholder="Your name.." required value={formDetails.value} onChange={setChange}/>
-        </div>
       </div>
 
       <div className="irow">
-        <div className="icol-25">
-          <label>Email</label>
-        </div>
-
-        <div className="icol-75">
+          <label>Email</label><br/>
           <input type="email" name="email" className='iforminput' placeholder="Your name.." required value={formDetails.value} onChange={setChange}/>
-        </div>
       </div>
 
       <div className="irow">
-        <div className="icol-25">
-          <label>Password</label>
-        </div>
-
-        <div className="icol-75">
+          <label>Password</label><br/>
           <input type="password" name="password" className='iforminput' placeholder="Your name.." required value={formDetails.value} onChange={setChange}/>
-        </div>
       </div>
-      <div className='buttons'><button type='submit'>Submit</button></div>
+
+      <div className='buttonb'><button type='submit' className='businessSubmit'>Continue <span className='arrowIcon'><BsArrowRight/></span></button></div>
     </form>
-  </div>
   <div className='ISimg'>
     <img src={influencer} alt='influencer'></img>
+  </div>
   </div>
   </div>
   )

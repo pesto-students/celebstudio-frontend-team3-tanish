@@ -59,73 +59,34 @@ const BusinessSignUP = () => {
         Something went wrong:(. Please try again
       </div>:null}
     <form className='bfrom' onSubmit={handleSubmit}>
-  
-    <div className='cS'>celebStudio</div>
-      <div className="row">
-    <div className="col-25">
-      <label>First Name</label>
-    </div>
-
-    <div className="col-75">
-      <input type="text" name="fname" className='bforminput' placeholder="Your name.." required value={formDetails.value} onChange={setChange}/>
-    </div>
+        <div className='cS'>CelebStudio</div> 
+        <div className='businessInput'> 
+        <label>First Name</label><br/>
+        <input type="text" name="fname" className='bforminput' placeholder="Your name.." required value={formDetails.value} onChange={setChange}/>
+        </div>
+        <div className='businessInput'>
+        <label >Last Name</label><br/>
+        <input type="text" name="lname" className='bforminput' placeholder="Your last name.." required value={formDetails.value} onChange={setChange}/>
+        </div>  
+        <div className='businessInput'>
+        <label >Company Name</label><br/>
+        <input type="text" name="cname" className='bforminput' placeholder="Company.." required value={formDetails.value} onChange={setChange}/>
+        </div>
+        <div className='businessInput'>
+        <label >Company Url</label><br/>
+        <input type="text" name="curl" className='bforminput' placeholder="company url.." required value={formDetails.value} onChange={setChange}/>
+        </div>
+        <div className='businessInput'>
+        <label > E-mail</label><br/>
+        <input type="email" name="email" className='bforminput' placeholder="email.." required value={formDetails.value} onChange={setChange} />
+        </div>
+        <div className='businessInput'>
+        <label >Password</label><br/>
+        <input type="password" name="password" className='bforminput' placeholder="Your password.." required value={formDetails.value} onChange={setChange} />
+        </div>
+      <div className='buttonb'><button type='submit' className='businessSubmit'>Continue <span className='arrowIcon'><BsArrowRight/></span></button></div>
+    </form>
   </div>
-
-  <div className="row">
-    <div className="col-25">
-      <label >Last Name</label>
-    </div>
-
-    <div className="col-75">
-      <input type="text" name="lname" className='bforminput' placeholder="Your last name.." required value={formDetails.value} onChange={setChange}/>
-    </div>
-  </div>
-
-
-  <div className="row">
-    <div className="col-25">
-      <label >Company Name</label>
-    </div>
-
-    <div className="col-75">
-      <input type="text" name="cname" className='bforminput' placeholder="Company.." required value={formDetails.value} onChange={setChange}/>
-    </div>
-  </div>
-
-  <div className="row">
-    <div className="col-25">
-      <label >Company Url</label>
-    </div>
-
-    <div className="col-75">
-      <input type="text" name="curl" className='bforminput' placeholder="company url.." required value={formDetails.value} onChange={setChange} />
-    </div>
-  </div>
-
-  <div className="row">
-    <div className="col-25">
-      <label > E-mail</label>
-    </div>
-
-    <div className="col-75">
-      <input type="email" name="email" className='bforminput' placeholder="email.." required value={formDetails.value} onChange={setChange} />
-    </div>
-  </div>
-
-  <div className="row">
-    <div className="col-25">
-      <label >Password</label>
-    </div>
-
-    <div className="col-75">
-      <input type="password" name="password" className='bforminput' placeholder="Your password.." required value={formDetails.value} onChange={setChange} />
-    </div>
-  </div>
-
-  
-  <div className='buttonb'><button type='submit'>Continue <span className='arrowIcon'><BsArrowRight/></span></button></div>
-  </form>
-    </div>
   )
 }
 

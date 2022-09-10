@@ -115,13 +115,9 @@ const Hompage = () => {
                 <div className='celebstudio'>Celebstudio</div>
                 
                 <div className='getStarted'>
-            
-                    
-                       <button className='startedButton' onClick={() => handleBusiness()}>BusinessDummy</button>
+                    <button className='startedButton Main' onClick={handleSignup}>Get Started <span className='arrowIcon'><BsArrowRight/></span></button>
+                    <button className='startedButton' onClick={() => handleBusiness()}>BusinessDummy</button>
                     <button className='startedButton' onClick={() => handleInfluencer()}>InfluencerDummy</button>
-                    
-        
-                    <button className='startedButton' onClick={handleSignup}>Get Started <span className='arrowIcon'><BsArrowRight/></span></button>
                 </div>
             </header>
             <div className='container'>
@@ -184,9 +180,9 @@ const Hompage = () => {
                 
 
                 <footer className='footer'>
-                    <div className='footerDiv'><Link to='Idashboard'>Idashbaord</Link></div>
-                    <div className='footerDiv'><Link to='Bdashboard'>bdashbaord</Link></div>
-                    <div className='footerDiv'>third list</div>
+                    <div className='footerDiv'>About Us</div>
+                    <div className='footerDiv'>Contact Us</div>
+                    <div className='footerDiv'>Address</div>
                 </footer>
 
             </div>

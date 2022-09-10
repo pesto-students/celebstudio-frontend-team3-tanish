@@ -69,6 +69,7 @@ const Bprofile = () => {
           .then(res => {console.log(res.data.data)
             let data = res.data.data.profile;
             dispatch(setData(data));
+            dispatch(setData(data));
             console.log(user)})
           .catch(err => console.log(err));
           updateSetEdit("");
@@ -81,6 +82,7 @@ const Bprofile = () => {
           .then(res => {console.log(res.data.data)
             let data = res.data.data.profile;
             dispatch(setData(data));
+            dispatch(setData(data));
             console.log(user)})
           .catch(err => console.log(err));
           updateSetEdit("");
@@ -92,6 +94,7 @@ const Bprofile = () => {
           axios(request)
           .then(res => {console.log(res.data.data)
             let data = res.data.data.profile;
+            dispatch(setData(data));
             dispatch(setData(data));
             console.log(user)})
           .catch(err => console.log(err));
@@ -167,16 +170,22 @@ const Bprofile = () => {
     
       console.log(sendImg);
 
-      // formData.append(
-      //   "myFile",
-      //   addImg.selectedFile,
-      //   addImg.selectedFile.name
-      // );
-      // const requestPack = {...request, data:formData};
-      // console.log(requestPack);
+      const imageChange = {
+        method:'patch',
+        header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+        url:` https://celebackend.herokuapp.com/api/v1/business/${userID}`,
+      }
 
-    
-    
+       formData.append(
+         "profileImage",
+         sendImg.selectedFile,
+         sendImg.selectedFile.name
+       );
+      const requestPack = {...imageChange, data:formData};
+      axios(requestPack)
+      .then(res => console.log(res))
+      .catch(err => console.oldpassword(err));
+      console.log(requestPack);
     }
 
  

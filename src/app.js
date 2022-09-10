@@ -35,8 +35,7 @@ const App = () => {
         <Route exact path="/Iprofile" element={<InfluencerProfile />} />
         <Route exact path="/eligibleCampaign" element={<EligibleCampaign />} />
         <Route exact path="/appliedCampaign" element={<ShowAppliedCampaign />} />
-
-
+        
       </Routes>
     </BrowserRouter>    
   )
