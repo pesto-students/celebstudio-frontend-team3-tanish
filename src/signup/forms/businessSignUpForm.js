@@ -51,8 +51,13 @@ const BusinessSignUP = () => {
     <div className='businessSignUp'>
       {displayStatus === 'success' ? 
       <div className='responseStatus signupsuccess'>
-        Login Successfull!! Redirecting to login Page.
+        SignUp Successfull!! Redirecting to login Page.
       </div>:null}
+      {displayStatus === 'failed' ? 
+      <div className='responseStatus signupfailed'>
+        Oops!! something went wrong.
+      </div>:null}
+
 
       {displayStatus === 'failed' ? 
       <div className='responseStatus signupfailed'>
