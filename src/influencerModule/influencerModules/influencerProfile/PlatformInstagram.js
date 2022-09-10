@@ -113,7 +113,7 @@ import {setData} from '../../../signup/authSlice';
       <label>Post COST</label>    <br/>
       <input type="text" onChange={handleCostchange}/> 
       <button type="submit" className='profileEditButton update'>Submit</button><br/>
-      <button className='profileEdit cancle' onClick={() => {handleCancel()}}>Cancel</button>
+      <button className='profileEditButton cancle' onClick={() => {handleCancel()}}>Cancel</button>
       </form>
       </div>:
       null

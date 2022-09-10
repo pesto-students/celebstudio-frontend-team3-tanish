@@ -27,7 +27,6 @@ const Iprofile = () => {
     const [fname,setFname]= useState(user.first_name)
     const [lname,setLname]= useState(user.last_name)
     const [DOB, setDOB]= useState(user.Date_of_Birth.slice(0,10))
-    console.log(DOB);
 
     //contact details
     const [Email, setEmail]= useState(user.email)
@@ -62,7 +61,9 @@ const Iprofile = () => {
     }
 
     const handlePCchange = (event) => {
-      setPrimaryCategory(event.target.value);
+      let data = event.target.value;
+      console.log(data);
+      setPrimaryCategory(data);
     }
 
     const handleupdateChange = (data) => {
@@ -115,7 +116,7 @@ const Iprofile = () => {
         }
         case "DOB":{
           setDOB(data);
-          console.log(DOB);
+          console.log(DOB,data);
           let date_of_birth = {"Date_of_Birth":data};
           let request = {...requestProfile,data:date_of_birth}
           console.log(request);
@@ -133,7 +134,7 @@ const Iprofile = () => {
           setEmail(data);
           console.log(Email);
           let email = {"email":data};
-          let request = {...requestProfile,data:data}
+          let request = {...requestProfile,data:email}
           console.log(request);
           axios(request)
           .then(res => {console.log(res.data.data)
@@ -163,13 +164,15 @@ const Iprofile = () => {
         }
         case "PC":{
           console.log(primaryCatagory);
-          let product_category = {"product_category":data};
+          let product_category = {"product_category":primaryCatagory};
           let request = {...requestProfile,data:product_category}
           console.log(request);
           axios(request)
           .then(res => {console.log(res.data.data)
             let data = res.data.data.profile;
-            dispath(setData(data));
+            try{dispath(setData(data))}
+            catch(err){console.log(err)};
+            console.log(user);
             dispath(setData(data));
             console.log(user)})
           .catch(err => console.log(err));
@@ -197,9 +200,9 @@ const Iprofile = () => {
       console.log(sendImg);
 
       const imageChange = {
-        method:'patch',
+        method:'post',
         header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-        url:` https://celebackend.herokuapp.com/api/v1/influencer/${userID}`,
+        url:` https://celebackend.herokuapp.com/api/v1/influencer/${userID}/upload-image`,
       }
 
        formData.append(
@@ -210,7 +213,7 @@ const Iprofile = () => {
       const requestPack = {...imageChange, data:formData};
       axios(requestPack)
       .then(res => console.log(res))
-      .catch(err => console.oldpassword(err));
+      .catch(err => console.log(err));
       console.log(requestPack);
     
     }
@@ -251,7 +254,7 @@ const Iprofile = () => {
       let passwordChangeRequest = {...passwordChange, data:password}
 
       axios(passwordChangeRequest)
-      .then(res => console.log(res))
+      .then(res => {setshowPasswordEdit(!showPasswordEdit)})
       .catch(err => console.log(err))
 
     }
@@ -397,7 +400,7 @@ return(
                 </div>:
                 <div>
                 <div className='PDdiaply'>
-                <select name='product_category' defaultValue={"default"}  value={primaryCatagory} onChange={handlePCchange}>
+                <select name='product_category' defaultValue={"default"}   onChange={handlePCchange}>
                 <option value="default"> Please select a Product catagory</option>
                 <option value='1'>Fashion & Apparel     </option>
                 <option value='2'>Food & Beverages     </option>
@@ -409,7 +412,7 @@ return(
               <button className='profileEditButton update' onClick={handleupdateChange}>
             Update
           </button>
-          <button className='profileEditButton cancle' onClick={() => setEdit("")}>
+          <button className='profileEditButton cancle' onClick={() => {updateSetEdit("")}}>
             Cancle
           </button>
                 </div>
