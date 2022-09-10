@@ -1,0 +1,403 @@
+/********************************************************dashboard module*******/
+.Idashboard{
+    width: 100vw;
+    height: 100vh;
+    font-family: Roboto;
+}
+/*influencer dashboard*/
+
+/********************************************************campaing module*******/
+.campaign{
+    width: 100%;
+    height: 100%;
+}
+
+.dashboardCampaign{
+    display: flex;
+    flex-direction: column;
+    width:90%;
+    height: 90vh;
+    overflow-y: scroll;
+    padding-left: 10%;
+    background-color: #E9EDEA;
+    font-family: Roboto;
+}
+
+.performance{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    height: fit-content;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 30px;
+    padding-left: 23px;
+}
+
+
+.performance > * {
+    width: 22%;
+    min-width: fit-content;
+    height:120px;
+    border-radius: 5px;
+    padding: 10px;
+    background-color:#4abdac;
+    color: white;
+}
+
+.dashboardgreet > h1{
+    font-family:Roboto;
+    font-size: 3em;
+}
+
+.campDesc{
+    width: 80%;
+    text-align: center;
+    font-size: 1.7em;
+    font-size: Roboto;
+    padding: 20px;
+}
+
+.campDesceli{ width: 80%;
+font-size: 1.7em;
+font-size: Roboto;
+padding: 20px;
+}
+
+
+.score{
+    font-size: 3em;
+}
+
+.line{
+    margin-top: 20px;
+    width: 85%;
+    border-top: 1px solid black;
+}
+
+.campaignCard{
+    width: 80%;
+    height: fit-content;
+    background-color: #dfdadc;
+    margin: 10px;
+    border-radius: 5px;
+    color: black;
+    padding: 15px;
+}
+
+.campaignCard > * {
+    width: 85%;
+    padding:10px;
+    padding-left: 40px;
+    font-size: 1.2em;
+    text-decoration: double;
+}
+
+.campaigncardConatiner{
+    width: 90%;
+    padding-left: 45px;
+}
+
+.campaignCard:hover{
+    background-color: #1c4e80;
+    color: white;
+}
+
+.campaignName{
+    font-size: 1.8em;
+}
+
+@media screen and (max-width:1400px) {
+    .campaignCard > *{
+        min-width: 200px;
+    }
+
+    .performance > *{
+        width: 18%;
+        font-size: 1em;
+    }
+
+    .score{
+        font-size: 1.8rem;
+        padding-top: 30px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .campaignCard > *{
+        width: 100%;
+    }
+}
+
+/*campaing module*/
+
+/*Eligible campaign */
+
+.lineeli{
+    width: 80%;
+    border-top: 1px solid black;
+}
+
+
+
+/********************************************************profile*******/
+
+.profileContainer{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 89vh;
+    padding-left:20%;
+    background-color:aliceblue;
+    overflow-y: scroll;
+    padding-bottom: 10px;
+}
+
+.profileContainer > h2{
+    font-size: 2em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.imgtitle{
+    margin-top: 80px;
+    padding-left: 10px;
+    font-size: 1.5em;
+}
+
+.imgContainer{
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    height: 150px;
+   margin-top: 20px;
+}
+
+.imgDiv{
+    width: 140px;
+    height: 150px;
+    font-size: xx-large;   
+}
+
+.imgDiv > img{
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
+}
+
+.personalDetails{
+    height: fit-content;
+    margin-top: 20px;
+}
+
+.editbutton{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 130px;
+    margin-left: 10px;
+}
+
+.imgButton{
+    margin-bottom: 10px;
+    height: 35px;
+}
+
+.change:hover{
+    background-color: blue;
+    color: white;
+    border: 0.1 solid lightgrey;
+    border-radius: 3px;
+}
+
+.delete:hover{
+    background-color: red;
+    color: white;
+    border: 0.1 solid lightgrey;
+    border-radius: 3px;
+}
+
+
+.pdetails{
+    width: 95%;
+    height: fit-content;
+    margin-left: 8px;
+}
+
+.PDdisplay{
+    display: inline-block;
+    width: 500px;
+    border: 0.4px solid black;
+    background-color: azure;
+    padding: 10px 5px 14px 12px;
+    border-radius: 4px;
+    color:grey;
+    
+}
+
+input[type="text"],input[type="date"],input[type="email"],input[type="password"]{
+    display: inline-block;
+    width: 500px;
+    border: 0.4px solid black;
+    background-color: azure;
+    padding: 12px 5px 16px 12px;
+    border-radius: 4px;
+    color:black;
+}
+
+input[type="text"],input[type="date"],input[type="email"]:hover{
+    background-color: white;
+    display: inline-block;
+    width: 500px;
+    border: 0.4px solid black;
+    background-color: azure;
+    padding: 12px 5px 16px 12px;
+    border-radius: 4px;
+    color: black;
+}
+
+
+
+
+.profileEditButton{
+    width:150px;
+    background-color: 0.4px solid black;
+    border: 0.4px solid black;
+    padding: 14px 5px 14px 5px;
+    margin-left: 5%;
+    border-radius: 4px;
+    position: relative;
+    bottom: 23px;
+    
+}
+
+.update{
+    width: 80px;
+}
+
+.update:hover{
+    background-color: blue;
+    color: white;
+}
+
+.cancle{
+    margin-left: 1px;
+    width: 80px;
+}
+.cancle:hover{
+    background-color: red;
+    color: white;
+    margin-left: 1px;
+}
+
+.ChangePassword{
+    width: 500px;
+    border: 0.4px solid black;
+    background-color: azure;
+    padding: 10px 5px 14px 12px;
+    border-radius: 4px;
+    margin-left: 8px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.ChangePassword:hover{
+    background-color: blue;
+    color: white;
+}
+
+.selected{
+    background-color: blue;
+}
+
+.platform{
+    padding-left: 20px;
+}
+
+.activateInfluencer{
+    text-align: center;
+}
+
+.foreground{
+    position: absolute;
+    z-index: 1000;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.EnrollCampaign{
+    background-color: #2e5985;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 5px;
+        color:white;
+        opacity: 0.95;
+        animation-name: example;
+        animation-duration:50ms;   
+        text-align: center;
+}
+
+@keyframes example {
+    from{ z-inex:0;opacity: 0.1;width: 0px; height: 0px; color: transparent;}
+    20%{z-inex:10;opacity: 0.25;width: 100px; height: 80px; color: transparent;}
+    25%{z-inex:10;opacity: 0.30;width: 130px; height: 100px; color: transparent;}
+    30%{opacity: 0.35;width: 160px; height: 120px; color: transparent;}
+    35%{opacity: 0.40;width: 190px; height: 140px; color: transparent;}
+    40%{opacity: 0.45;width: 210px; height: 160px; color: transparent;}
+    45%{opacity: 0.50;width: 240px; height: 180px; color: transparent;}
+    50%{opacity: 0.55;width: 270px; height: 200px; color: transparent;}
+    55%{opacity: 0.60;width: 300px; height: 220px; color: transparent;}
+    60%{opacity: 0.65;width: 330px; height: 240px; color: transparent;}
+    65%{opacity: 0.70;width: 360px; height: 260px; color: transparent;}
+    70%{opacity: 0.75;width: 390px; height: 280px; color: transparent;}
+    75%{opacity: 0.80;width: 390px; height: 280px; color: transparent;}
+    80%{opacity: 0.85;width: 390px; height: 280px; color: transparent;}
+    85%{opacity: 0.90;width: 390px; height: 280px; color: transparent;}
+    90%{opacity: 0.95;width: 390px; height: 280px; color: transparent;}
+    95%{opacity: 1;width: 390px; height: 280px; color: transparent;}
+    to{ background-color: #2e5985;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 5px;
+        color:white;
+        opacity: 1.5;
+        z-index: 1000;
+     }
+    
+}
+
+
+.EnrollCampaign > h3{
+    text-align: center;
+}
+
+.background{
+    visibility: hidden;
+}
+
+.ApplicationButton{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width:1000px) {
+    input[type="text"],input[type="date"],input[type="email"],input[type="password"]{
+        width: 50%;
+    }
+    input[type="text"],input[type="date"],input[type="email"]:hover{
+        width: 50%;
+    }
+}

@@ -1,0 +1,76 @@
+.businessSignUp{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Oswald;
+}
+
+.cS{
+  font-size: 3em;
+  text-align: center;
+  margin-top: 20px;
+
+}
+
+.businessInput{
+  margin-top: 15px;
+}
+
+.buttonb{
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.businessSubmit{
+  width: 22%;
+  height: 25px;
+}
+
+.businessSubmit:hover{
+  background-color: navy;
+  color: white;
+  border-radius: 5px;
+  border: black;
+  height: 25px;
+}
+.responseStatus{
+  position: absolute;
+    z-index: 1000;
+    height: fit-content;
+    padding: 10px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+.signupsuccess{
+  background-color: green;
+  color: white;
+}
+.signupfailed{
+  background-color: red;
+  color: white;
+}
+
+
+@media screen and (max-width:1000px) {
+
+  .bfrom{
+    width: 88%;
+  }
+  
+  .bforminput{
+    width: 100% !important;
+  }
+
+  .businessSubmit{
+    width: fit-content;
+  }
+}

@@ -1,0 +1,116 @@
+.IScontainer{
+  width: 100%;
+  height: 100%;
+  font-family: 'Oswald';
+}
+
+.responseStatus{
+  position: absolute;
+    z-index: 1000;
+    height: fit-content;
+    padding: 10px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+.signupsuccess{
+  background-color: green;
+  color: white;
+}
+.signupfailed{
+  background-color: red;
+  color: white;
+}
+
+.influencerSignUp{
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.irow{
+  margin-top: 15px;
+}
+
+.iform{
+  margin-top: 50px;
+}
+
+.ISimg{
+  width: 49%;
+  margin-top: 50px;
+}
+.ISimg > img{
+  width: 100%;
+  height: 100%;
+}
+
+
+
+@media screen and (max-width:900px) {
+
+  .influencerSignUp{
+    height: 100%;
+    flex-wrap: wrap-reverse;
+    overflow-y: scroll;
+  }
+
+  .irow{
+    width: 100%;
+  }
+
+  .iform{
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    margin-top: 10px;
+    width:80%;
+    align-items: center;
+  }
+  .iform > div{
+    width: 60%;
+  }
+  .iforminput{
+    width: 100% !important;
+  }
+}
+
+
+@media screen and (max-width:500px) {
+  .influencerSignUp{
+    height: 100%;
+    width: 98%;
+    flex-wrap: wrap;
+  }
+
+  .irow{
+    width: 100%;
+  }
+
+  .iform{
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    margin-top: 10px;
+    width:100%;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+  .iform > div{
+    width: 90%;
+  }
+  .iforminput{
+    width: 100% !important;
+  }
+
+  .ISimg{
+    width: 100%;
+  }
+  
+}
