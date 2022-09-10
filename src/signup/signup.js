@@ -10,10 +10,12 @@ const Signup = (props) => {
   
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [error, errorMessage] = useState("");
  
   const user = useSelector(state => state.authDetails.userData)
   const token = useSelector(state => state.authDetails.token);
-  const [displayStatus, setDispalyStatus] = useState("");
+  const [displayStatus, setDispalyStatus] = useState();
+  const [errMsg, setErrmsg] = useState("");
   const [userType,handleUserType] = useState("");
   const [useLogin,setuseLogin] = useState({
     password:'',
@@ -45,6 +47,7 @@ const Signup = (props) => {
       await axios(request)
       .then((res) => {
         //console.log(res);
+        setDispalyStatus("success");
         let userData = res.data.user;
         let token = res.data.token;
         let userId = res.data.user._id;
@@ -72,7 +75,10 @@ const Signup = (props) => {
           console.log("something went wrong");
         }
       })
-      .catch((err) => {console.log(err.data.response)})
+      .catch((err) => {
+        setDispalyStatus('failed');
+        setErrmsg( err.response.data.message);
+        console.log(errorMessage)})
     }
    
   
@@ -83,8 +89,16 @@ const Signup = (props) => {
           <h1>Sign into your Account</h1>
           {displayStatus === 'success' ? 
           <div className='responseStatus signupsuccess'>
-            Signup Successfull!! Redirecting to login Page.
+            Login Successfulll!! Redirecting to login Page.
           </div>:null}
+          {displayStatus === 'failed' ? 
+          <div className='responseStatus signupfailed'>
+            {errMsg}
+          </div>:null}
+          
+          
+
+
         <div className='signupContainer'>
           <div className='signupBody'>
           <div className='signupDesc'>If you do not have an account<br/>create a new account</div>

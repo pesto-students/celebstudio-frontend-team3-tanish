@@ -5,6 +5,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import pIMG from '../../../img/profileimg.PNG';
 import Editform from './inputfield';
 import {setData} from '../../../signup/authSlice';
+import '../../businessModule.css'
 
 const Bprofile = () => {
   const dispatch = useDispatch();
@@ -290,7 +291,7 @@ return(
                   <form onSubmit={handlePasswordSubmit}>
                   <label>Old password</label>   <div><input  type="text"  onChange={handlePasswordChange1} required /></div>
                   <label>New Password</label>   <div><input  type="text" onChange={handlePasswordChange2} required/></div>
-                  <label>Verify Password</label><div><input  type="text" onChange={handlePasswordChange3} required/><button type='submit' className='profileEditButton update' >Update</button><button className='profileEditButton cancle' onClick={() => {setshowPasswordEdit(!showPasswordEdit)}}>Cancle</button></div>
+                  <label>Verify Password</label><div><input  type="text" onChange={handlePasswordChange3} required/><button type='submit' className='profileEditButton update' >Update</button><button className='bproFileEditButton cancle' onClick={() => {setshowPasswordEdit(!showPasswordEdit)}}>Cancle</button></div>
                   </form>
                 </div>: null}
               

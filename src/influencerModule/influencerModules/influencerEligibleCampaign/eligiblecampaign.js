@@ -3,11 +3,20 @@ import '../../influencerModule.css';
 import {CgCalendarDates} from 'react-icons/cg';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const EligibleCampaign = () => {
   const name = useSelector(state => state.authDetails.userData.first_name)
   const token = useSelector(state => state.authDetails.token)
   const userID = useSelector(state => state.authDetails.userID)
+  const facebook = useSelector(state => state.authDetails.userData.facebook.isactive);
+  const instagram = useSelector(state => state.authDetails.userData.instagram.isactive);
+  const twitter = useSelector(state => state.authDetails.userData.twitter.isactive);
+  const [platform, setPlatform] = useState({
+    facebook:facebook,
+    instagram:instagram,
+    twitter:twitter,
+  });
 
   const [showCampaignEnroll,setShowCampaignEnroll] = useState('');
   const [applyNote, setApplynote] = useState('');
@@ -70,6 +79,8 @@ const EligibleCampaign = () => {
    }
  
    return (
+    <>
+    {platform.facebook || platform.instagram || platform.twitter ?
   
 <div className='dashboardCampaign'>
          <div className='dashboardgreet'>
@@ -108,9 +119,13 @@ const EligibleCampaign = () => {
                  <div>Campaign Description:{items.description}</div>
                </div>
              ))}
-             
-     
      </div>
+     : 
+     <div className='activateInfluencer'>
+     <p>Your profile is not active yet.<br/>
+       Please <Link to='/Iprofile'>Click</Link> here to set your social media platform.</p>
+   </div>}
+</>
    )
 }
 

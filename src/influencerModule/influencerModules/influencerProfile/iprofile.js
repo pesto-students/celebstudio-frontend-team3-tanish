@@ -14,12 +14,6 @@ const Iprofile = () => {
   const token = useSelector(state => state.authDetails.token);
   const userID = useSelector(state => state.authDetails.userID);
   let user = useSelector(state => state.authDetails.userData);
-  let update = null;
-  console.log(token);
- 
-
-
-
 
     const [showEditButton, setShowEditButton] = useState();
     const [setEdit, updateSetEdit] = useState("");
@@ -89,12 +83,13 @@ const Iprofile = () => {
         case "fname":{
           setFname(data);
           console.log(fname);
-          let first_name = {"first_name":fname};
+          let first_name = {"first_name":data};
           let request = {...requestProfile,data:first_name}
           console.log(request);
           axios(request)
           .then(res => {console.log(res.data.data)
             let data = res.data.data.profile;
+            dispath(setData(data));
             dispath(setData(data));
             console.log(user)})
           .catch(err => console.log(err));
@@ -104,12 +99,13 @@ const Iprofile = () => {
         case "lname":{
           setLname(data);
           console.log(fname);
-          let last_name = {"last_name":lname};
+          let last_name = {"last_name":data};
           let request = {...requestProfile,data:last_name}
           console.log(request);
           axios(request)
           .then(res => {console.log(res.data.data)
             let data = res.data.data.profile;
+            dispath(setData(data));
             dispath(setData(data));
             console.log(user)})
           .catch(err => console.log(err));
@@ -127,6 +123,7 @@ const Iprofile = () => {
           .then(res => {console.log(res.data.data)
             let data = res.data.data.profile;
             dispath(setData(data));
+            dispath(setData(data));
             console.log(user)})
           .catch(err => console.log(err));
           updateSetEdit("");
@@ -136,11 +133,12 @@ const Iprofile = () => {
           setEmail(data);
           console.log(Email);
           let email = {"email":data};
-          let request = {...requestProfile,data:email}
+          let request = {...requestProfile,data:data}
           console.log(request);
           axios(request)
           .then(res => {console.log(res.data.data)
             let data = res.data.data.profile;
+            dispath(setData(data));
             dispath(setData(data));
             console.log(user)})
           .catch(err => console.log(err));
@@ -150,12 +148,13 @@ const Iprofile = () => {
         case "contact":{
           setContact(data);
           console.log(contact);
-          let phone = {"phone":contact};
+          let phone = {"phone":data};
           let request = {...requestProfile,data:phone}
           console.log(request);
           axios(request)
           .then(res => {console.log(res.data.data)
             let data = res.data.data.profile;
+            dispath(setData(data));
             dispath(setData(data));
             console.log(user)})
           .catch(err => console.log(err));
@@ -164,12 +163,13 @@ const Iprofile = () => {
         }
         case "PC":{
           console.log(primaryCatagory);
-          let product_category = {"product_category":primaryCatagory};
+          let product_category = {"product_category":data};
           let request = {...requestProfile,data:product_category}
           console.log(request);
           axios(request)
           .then(res => {console.log(res.data.data)
             let data = res.data.data.profile;
+            dispath(setData(data));
             dispath(setData(data));
             console.log(user)})
           .catch(err => console.log(err));
@@ -196,15 +196,22 @@ const Iprofile = () => {
     
       console.log(sendImg);
 
-      // formData.append(
-      //   "myFile",
-      //   addImg.selectedFile,
-      //   addImg.selectedFile.name
-      // );
-      // const requestPack = {...request, data:formData};
-      // console.log(requestPack);
+      const imageChange = {
+        method:'patch',
+        header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+        url:` https://celebackend.herokuapp.com/api/v1/influencer/${userID}`,
+      }
 
-    
+       formData.append(
+         "profileImage",
+         sendImg.selectedFile,
+         sendImg.selectedFile.name
+       );
+      const requestPack = {...imageChange, data:formData};
+      axios(requestPack)
+      .then(res => console.log(res))
+      .catch(err => console.oldpassword(err));
+      console.log(requestPack);
     
     }
 

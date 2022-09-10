@@ -12,7 +12,14 @@ const AppliedCampaign = () => {
   const token = useSelector(state => state.authDetails.userData.token)
   const [campList,setCampList] = useState([]);
   const [fname, setFname] = useState(name);
-  
+  const facebook = useSelector(state => state.authDetails.userData.facebook.isactive);
+  const instagram = useSelector(state => state.authDetails.userData.instagram.isactive);
+  const twitter = useSelector(state => state.authDetails.userData.twitter.isactive);
+  const [platform, setPlatform] = useState({
+    facebook:facebook,
+    instagram:instagram,
+    twitter:twitter,
+  });
 
 
 
@@ -36,6 +43,7 @@ const AppliedCampaign = () => {
 
   return (
     <>
+    {platform.facebook || platform.instagram || platform.twitter ?
    
     <div className='dashboardCampaign'>
         <div className='dashboardgreet'>
@@ -54,7 +62,12 @@ const AppliedCampaign = () => {
             ))}
             </div>
             </div>
-    </>
+            : 
+     <div className='activateInfluencer'>
+     <p>Your profile is not active yet.<br/>
+       Please <Link to='/Iprofile'>Click</Link> here to set your social media platform.</p>
+   </div>}
+</>
   )
 }
 
