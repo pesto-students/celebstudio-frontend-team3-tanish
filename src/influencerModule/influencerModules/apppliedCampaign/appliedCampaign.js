@@ -19,7 +19,7 @@ const   ShowAppliedCampaign = () => {
         <Navbar children={<AppliedCampaign />}/>
     </div>
     </>:<>
-    <Navigate to="/signup" />
+    <Navigate to="/" />
     </>}
     </>
   )

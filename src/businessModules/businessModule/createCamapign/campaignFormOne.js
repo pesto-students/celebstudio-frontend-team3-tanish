@@ -11,6 +11,7 @@ const CampaignFormOne = (props) => {
   const userID = useSelector((state) => state.authDetails.userID);
   const token = useSelector((state) => state.authDetails.token)
   const userType = useSelector((state) => state.authDetails.userType);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [successMsg, setsuccessMsg] = useState("");
   const [campaign, setCampaing] = useState({
@@ -56,6 +57,7 @@ const CampaignFormOne = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsLoading(true)
     let flag = [];
     for(const items in campaign) {
       if(typeof(campaign[items]) === 'function' ){
@@ -72,9 +74,11 @@ const CampaignFormOne = (props) => {
     axios(request)
     .then(res => {
       setsuccessMsg("success");
-      navigate("/bdashboard")
+      setIsLoading(false);
+      navigate("/bdashboard");
     })
-    .catch(err => {setsuccessMsg("failed")});
+    .catch(err => {setsuccessMsg("failed");
+  setIsLoading(false)});
   }
  
 return (

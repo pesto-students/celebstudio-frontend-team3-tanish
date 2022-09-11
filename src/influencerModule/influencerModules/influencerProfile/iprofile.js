@@ -8,12 +8,14 @@ import PlatformFacebook from './PlatformFacebook';
 import PlatformInstagrm from './PlatformInstagram';
 import PlatformTwitter from './PlatformTwitter';
 import {setData} from '../../../signup/authSlice';
+import LoadingSpinner from '../../../loader/loader';
 
 const Iprofile = () => {
   const dispath = useDispatch();
   const token = useSelector(state => state.authDetails.token);
   const userID = useSelector(state => state.authDetails.userID);
   let user = useSelector(state => state.authDetails.userData);
+  const [isLoading, setIsLoading] = useState(false);
 
     const [showEditButton, setShowEditButton] = useState();
     const [setEdit, updateSetEdit] = useState("");
@@ -51,6 +53,7 @@ const Iprofile = () => {
     const [oldpassword, setoldPasswrod]= useState([]);
     const [newpassword, setNewPassword] = useState([])
     const [verifypassword, setverifyPassword] = useState([]);
+    const [selectedFile, setSelectedFile] = useState();
     
 
 
@@ -67,10 +70,11 @@ const Iprofile = () => {
     }
 
     const handleupdateChange = (data) => {
+      setIsLoading(true);
       const requestProfile = {
         method:'patch',
         header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-        url:` https://celebackend.herokuapp.com/api/v1/influencer/${userID}`,
+        url:`https://celebackend.herokuapp.com/api/v1/influencer/${userID}`,
       }
      
 
@@ -88,12 +92,14 @@ const Iprofile = () => {
           let request = {...requestProfile,data:first_name}
           console.log(request);
           axios(request)
-          .then(res => {console.log(res.data.data)
+          .then(res => {console.log(res.data.data);
+            setIsLoading(false);
             let data = res.data.data.profile;
             dispath(setData(data));
             dispath(setData(data));
             console.log(user)})
-          .catch(err => console.log(err));
+          .catch(err => {console.log(err);
+            setIsLoading(false)});
           updateSetEdit("");
           break;
         }
@@ -104,12 +110,13 @@ const Iprofile = () => {
           let request = {...requestProfile,data:last_name}
           console.log(request);
           axios(request)
-          .then(res => {console.log(res.data.data)
+          .then(res => {console.log(res.data.data);
+            setIsLoading(false)
             let data = res.data.data.profile;
             dispath(setData(data));
             dispath(setData(data));
             console.log(user)})
-          .catch(err => console.log(err));
+          .catch(err => {setIsLoading(false);console.log(err)});
           updateSetEdit("");
           break;
           
@@ -121,12 +128,14 @@ const Iprofile = () => {
           let request = {...requestProfile,data:date_of_birth}
           console.log(request);
           axios(request)
-          .then(res => {console.log(res.data.data)
+          .then(res => {console.log(res.data.data);
+            setIsLoading(false);
             let data = res.data.data.profile;
             dispath(setData(data));
             dispath(setData(data));
             console.log(user)})
-          .catch(err => console.log(err));
+          .catch(err => {setIsLoading(false);
+            console.log(err)});
           updateSetEdit("");
           break;
         }
@@ -137,12 +146,14 @@ const Iprofile = () => {
           let request = {...requestProfile,data:email}
           console.log(request);
           axios(request)
-          .then(res => {console.log(res.data.data)
+          .then(res => {console.log(res.data.data);
+            setIsLoading(false);
             let data = res.data.data.profile;
             dispath(setData(data));
             dispath(setData(data));
             console.log(user)})
-          .catch(err => console.log(err));
+          .catch(err => {console.log(err);
+          setIsLoading(false)});
           updateSetEdit("");
           break;
         }
@@ -153,12 +164,14 @@ const Iprofile = () => {
           let request = {...requestProfile,data:phone}
           console.log(request);
           axios(request)
-          .then(res => {console.log(res.data.data)
+          .then(res => {console.log(res.data.data);
+            setIsLoading(false)
             let data = res.data.data.profile;
             dispath(setData(data));
             dispath(setData(data));
             console.log(user)})
-          .catch(err => console.log(err));
+          .catch(err => {console.log(err);
+            setIsLoading(false)});
           updateSetEdit("");
           break;
         }
@@ -168,14 +181,15 @@ const Iprofile = () => {
           let request = {...requestProfile,data:product_category}
           console.log(request);
           axios(request)
-          .then(res => {console.log(res.data.data)
+          .then(res => {console.log(res.data.data);
+            setIsLoading(false);
             let data = res.data.data.profile;
-            try{dispath(setData(data))}
-            catch(err){console.log(err)};
+            dispath(setData(data));
             console.log(user);
             dispath(setData(data));
             console.log(user)})
-          .catch(err => console.log(err));
+          .catch(err => {setIsLoading(false);
+            console.log(err)});
           updateSetEdit("");
           break;
 
@@ -190,33 +204,35 @@ const Iprofile = () => {
 
     
     const handleImgChange = (event) => {
-      setSendImg({...sendImg,selectedFile:event.target.files[0]});
-      console.log(event.target.files[0]);
+      const file = event.target.files[0];
+      setSelectedFile(file);
     }
 
     const handleimgUpload = (event) =>{
-      const formData = new FormData();
-    
-      console.log(sendImg);
-
-      const imageChange = {
-        method:'post',
-        header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-        url:` https://celebackend.herokuapp.com/api/v1/influencer/${userID}/upload-image`,
-      }
-
-       formData.append(
-         "profileImage",
-         sendImg.selectedFile,
-         sendImg.selectedFile.name
-       );
-      const requestPack = {...imageChange, data:formData};
-      axios(requestPack)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-      console.log(requestPack);
+      if (!selectedFile) return;
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile);
+      reader.onloadend = () => {
+          uploadImage(reader.result);
+      };
+      reader.onerror = () => {
+          console.error('AHHHHHHHH!!');
+      };
     
     }
+
+    const uploadImage = async (base64EncodedImage) => {
+      const request = {
+        method: 'POST',
+        url:`https://celebackend.herokuapp.com/api/v1/influencer/${userID}/upload-image`, 
+        data: JSON.stringify({ data: base64EncodedImage }),
+        headers: { 'Content-Type': 'application/json' },}
+        axios(request)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+        console.log(base64EncodedImage);
+  };
+
 
     const handleCancleUpdate = () => {
       updateSetEdit("");
@@ -238,7 +254,7 @@ const Iprofile = () => {
 
     const handlePasswordSubmit = (event) => {
       event.preventDefault();
-
+      setIsLoading(true);
       const passwordChange = {
         method:'patch',
         header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
@@ -254,9 +270,10 @@ const Iprofile = () => {
       let passwordChangeRequest = {...passwordChange, data:password}
 
       axios(passwordChangeRequest)
-      .then(res => {setshowPasswordEdit(!showPasswordEdit)})
-      .catch(err => console.log(err))
-
+      .then(res => {setshowPasswordEdit(!showPasswordEdit);
+        setIsLoading(false)})
+      .catch(err => {console.log(err);
+        setIsLoading(false)})
     }
 
     const handleShowPasswordEdit = (event) => {
@@ -268,6 +285,8 @@ const Iprofile = () => {
 
   
 return(
+  <>
+    {isLoading ? <LoadingSpinner /> : null}
   <div className='profileContainer' >
       <h2>My Profile</h2>
       
@@ -432,13 +451,14 @@ return(
                 {showPasswordEdit ? 
                 <div className='pdetails'>
                   <form onSubmit={handlePasswordSubmit}>
-                  <label>Old password</label>   <div><input  type="text"  onChange={handlePasswordChange1} required /></div>
-                  <label>New Password</label>   <div><input  type="text" onChange={handlePasswordChange2} required/></div>
-                  <label>Verify Password</label><div><input  type="text" onChange={handlePasswordChange3} required/><button type='submit' className='profileEditButton update' >Update</button><button className='profileEditButton cancle' onClick={() => {setshowPasswordEdit(!showPasswordEdit)}}>Cancle</button></div>
+                  <label>Old password</label>   <div><input  type="password"  onChange={handlePasswordChange1} required /></div>
+                  <label>New Password</label>   <div><input  type="password" onChange={handlePasswordChange2} required/></div>
+                  <label>Verify Password</label><div><input  type="password" onChange={handlePasswordChange3} required/><button type='submit' className='profileEditButton update' >Update</button><button className='profileEditButton cancle' onClick={() => {setshowPasswordEdit(!showPasswordEdit)}}>Cancle</button></div>
                   </form>
                 </div>: null}
               
     </div>
+         </>       
 )
 
 }

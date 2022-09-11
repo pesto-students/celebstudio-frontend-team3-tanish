@@ -20,7 +20,7 @@ const Idashboard = () => {
         <Navbar children={<Campaign/>}/>
     </div>
     </>:<>
-    <Navigate to="/signup" />
+    <Navigate to="/" />
     </>}
     </>
   )

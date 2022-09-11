@@ -16,7 +16,7 @@ return (
         <Navbar children={<Eligiblecampaign/>}/>
     </div>
     </>:<>
-    <Navigate to="/signup" />
+    <Navigate to="/" />
     </>}
     </>
   )

@@ -4,8 +4,10 @@ import {CgCalendarDates} from 'react-icons/cg';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from '../../../loader/loader';
 
 const EligibleCampaign = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const name = useSelector(state => state.authDetails.userData.first_name)
   const token = useSelector(state => state.authDetails.token)
   const userID = useSelector(state => state.authDetails.userID)
@@ -18,6 +20,9 @@ const EligibleCampaign = () => {
     twitter:twitter,
   });
 
+ 
+
+
   const [showCampaignEnroll,setShowCampaignEnroll] = useState('');
   const [applyNote, setApplynote] = useState('');
   const [fname, setFname] = useState(name);
@@ -26,8 +31,10 @@ const EligibleCampaign = () => {
   const [appliedStatus, setAppliedStatus] = useState(false);
   
   
+  
 
   const getEligibleCampaignList = async () => {
+    setIsLoading(true);
     const getEligibleCampaign = {
       method:'get',
       header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
@@ -35,19 +42,25 @@ const EligibleCampaign = () => {
     }
     let response2 = {};
     await axios(getEligibleCampaign)
-    .then((res) => {response2 = res.data.data.campaign})
-    .catch((err) => {console.log(err)});
+    .then((res) => {response2 = res.data.data.campaign;
+    setIsLoading(false)})
+    .catch((err) => {console.log(err);
+    setIsLoading(false)});
     console.log(response2);
-    setEligibleCampaign(response2);       //arry .map ; obj.item
+    setEligibleCampaign(response2);     
+    let applied = (response2.map(item => item._id), response2.map(item => item.influencers.map(item => item._id == `${userID}` ? item.applied : "")))
+    console.log(applied);
   }
 
-    useEffect(() =>{getEligibleCampaignList()},[])
+   
   
-
+  useEffect(() =>{getEligibleCampaignList()
+    if(appliedStatus){
+      getEligibleCampaignList()
+    }},[appliedStatus]);
 
   const handleCampaignCardclick = ({tag}) => {
-     setShowCampaignEnroll(tag);
-   
+     setShowCampaignEnroll(tag);   
    }
 
    const handleChange = (event) => {
@@ -56,7 +69,7 @@ const EligibleCampaign = () => {
 
    
    const apply = (event) => {
-
+    setIsLoading(true);
     const applyrequest = {
       method:'patch',
       header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
@@ -70,16 +83,22 @@ const EligibleCampaign = () => {
       axios(applyrequest)
       .then(res => {
         setAppliedStatus(!appliedStatus);
+        setAppliedStatus(true);
+        getEligibleCampaignList();
+        setIsLoading(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {console.log(err);
+      setIsLoading(false)});
    }
 
    const cancleApply = (event) => {
       setShowCampaignEnroll(null);
+      setAppliedStatus(false);
    }
  
    return (
     <>
+    {isLoading ? <LoadingSpinner /> : null}
     {platform.facebook || platform.instagram || platform.twitter ?
   
 <div className='dashboardCampaign'>
@@ -101,7 +120,7 @@ const EligibleCampaign = () => {
                     </div>
                     :<div>
                       <label>Message for the business</label><br/>
-                      <textarea rows={10} cols={70} onChange={handleChange} />
+                      <textarea className='ApplyText' rows={10} cols={70} onChange={handleChange} />
                       <div className="ApplicationButton">
                       <button className='update' onClick={() => {apply()}}>Apply</button> 
                       <button className='cancle' onClick={() =>{cancleApply()}}>Cancel</button>

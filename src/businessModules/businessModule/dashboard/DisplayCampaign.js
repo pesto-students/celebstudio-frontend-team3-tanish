@@ -5,6 +5,7 @@ import axios from 'axios';
 import {CgCalendarDates} from 'react-icons/cg';
 import {FaRupeeSign} from 'react-icons/fa';
 import { useSelector } from 'react-redux';
+import LoadingSpinner from '../../../loader/loader';
 
 
 const DisplayCampaign = (props) => {
@@ -13,12 +14,13 @@ const DisplayCampaign = (props) => {
   const userName = useSelector(state => state.authDetails.userData.first_name)
   const navigate = useNavigate();
   const [campList,setCampList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   let response = {};
   const [fname, setFname] = useState(userName);
 
 
   const getDashboardData = async () => {
-
+    setIsLoading(true);
     const request = {
       method:'get',
       header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
@@ -27,12 +29,15 @@ const DisplayCampaign = (props) => {
   
     await axios(request)
     .then((res) => {
-      console.log(res)
      response = res.data.data.campaign_info;
+      setIsLoading(false)
     })
-    .catch((err) => {console.log(err)});
-    console.log(response);
+    .catch((err) => {console.log(err)
+      setIsLoading(false);
+    });
+    //console.log(response);
     setCampList(response);
+   
   }
 
    useEffect(() =>{getDashboardData();},[])
@@ -44,6 +49,8 @@ const DisplayCampaign = (props) => {
   }
 
   return (
+    <>
+    {isLoading ? <LoadingSpinner /> :
     <div className='dashboardCampaign'>
         <div className='dashboardgreet'>
         <h1>Welcome {fname},</h1>
@@ -53,7 +60,7 @@ const DisplayCampaign = (props) => {
         <div className='campaigncardConatiner'>
         <div className='campDesc'> Campaign List </div>
         {campList.length === 0 ?
-        <div className='emptyCamplist'>
+        <div className='emptyCamplistD'>
           <p>You haven't created any campaigns yet.
             <Link to='/newcampaign'>Click</Link> here to get started</p>
         </div>: null}
@@ -66,7 +73,8 @@ const DisplayCampaign = (props) => {
               </div>
             ))}
             </div>
-    </div>
+    </div>}
+    </>
   )
 }
 

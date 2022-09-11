@@ -12,6 +12,7 @@ import follower from '../../../img/followerIcon.jpg';
 import '../../businessModule.css';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import LoadingSpinner from '../../../loader/loader';
 
 const Show = (props) => {
     const camp=props.data;
@@ -19,6 +20,8 @@ const Show = (props) => {
     const navigate = useNavigate();
     const [campaign, setCampaign] = useState(camp);
     const [appliedInfluencer, setAppliedInfluencer] = useState([]);
+    const [reload, setReload] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
 
     const getInfluencerList = {
@@ -30,37 +33,44 @@ const Show = (props) => {
 
   
     const getInfluencerData = async () => {
+      console.log("entered getinfluencer request")
+      setIsLoading(true)
       let response = null;
       await axios(getInfluencerList)
       .then((res) => {
         response = res.data.data.influencers;    
         console.log(response);
+        setIsLoading(false);
       })
-      .catch((err) => {console.log(err)});
+      .catch((err) => {console.log(err);
+        setIsLoading(false)});
+
       setAppliedInfluencer(response); 
-              // its an arrray
     }
 
-    
-
- 
-
-    useEffect(() => {getInfluencerData();},[])
-    
-
-    const deleteRequest = {
-      method:'delete',
-      header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-      url:`https://celebackend.herokuapp.com/api/v1/campaign/${campaign._id}`,
+    useEffect(() => {getInfluencerData();
+    if(reload){
+      setIsLoading(false)
+      getInfluencerData();
+      setReload(false);
     }
-
+    },[])
+    
 
     const handleDelete = (event) => {
+      const deleteRequest = {
+        method:'delete',
+        header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
+        url:`https://celebackend.herokuapp.com/api/v1/campaign/${campaign._id}`,
+      }
+      setIsLoading(true);
       axios(deleteRequest)
-      .then(res => {console.log(res);
-        navigate('/bdashboard') })
-      .catch(err => console.log(err));
-
+      .then(res => {setIsLoading(false);
+        console.log(res);
+        navigate('/bdashboard') 
+      })
+      .catch(err => {console.log(err)
+      setIsLoading(false)});
     }
 
     const handleCampaignCardclick = () => {
@@ -73,7 +83,8 @@ const Show = (props) => {
       url:` https://celebackend.herokuapp.com/api/v1/campaign/${camp._id}/select-influencer`,
     }
 
-    const handleInfluencerAccept = (data,event) => {
+    const handleInfluencerAccept = (data) => {
+      setIsLoading(true);
       let acceptData = {
         influencer_id:data,
         status:"accept",
@@ -81,19 +92,25 @@ const Show = (props) => {
       const responseToApplication = {...acceptInfluencer, data:acceptData}
       console.log(responseToApplication)
       axios(responseToApplication)
-      .then(getInfluencerData())
-      .catch(err => console.log(err))
+      .then((res) => {setIsLoading(false);
+        setReload(!reload);
+      })
+      .catch(err => {setIsLoading(false);console.log(err);
+        })
     }
 
     const handleInfluencerReject = (data,event) => {
+      setIsLoading(true)
       let rejectData = {
         influencer_id:data,
         status:"reject",
       }
       const responseToApplication = {...acceptInfluencer, data:rejectData}
       axios(responseToApplication)
-      .then(getInfluencerData())
-      .catch(err => console.log(err))
+      .then((res) => {getInfluencerData();
+        setIsLoading(false)})
+      .catch(err => {console.log(err);
+      setIsLoading(false)})
 
     }
 
@@ -101,6 +118,8 @@ const Show = (props) => {
   
 
   return (
+    <>
+    {isLoading ? <LoadingSpinner /> : null}
     <div className='showCampaign'>
      
              <div className='showCampaignCard'>
@@ -121,6 +140,7 @@ const Show = (props) => {
               <p>We will notify you when influencers request to be a part of your campaign.</p>
             </div>:null}
             {appliedInfluencer.map(item =>
+          
                 <div className='influencerEntry' key={item.influencer._id}>
                  <div className='showIMG'>
                   {
@@ -158,20 +178,18 @@ const Show = (props) => {
                           <div>
                             You have {item.status === 'accept' ? "accepted" : "rejected"} this profile.
                           </div> :
-                        <div>
+                        <div className='acceptButton'>
                           <button className='editButton update' onClick={() => {handleInfluencerAccept(item.influencer._id)}}>Accept</button>
                           <button className='editButton cancle' onClick={() => {handleInfluencerReject(item.influencer._id)}}>Reject</button>
                         </div>
                         }
                   </div>
                   </div>}
-
+             
                 </div>)}
-            </div>
-
-
-            
+            </div>    
     </div>
+    </>
   )
 }
 

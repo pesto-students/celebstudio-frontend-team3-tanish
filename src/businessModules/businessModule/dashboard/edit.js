@@ -5,6 +5,7 @@ import info from '../../../img/info.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
+import LoadingSpinner from '../../../loader/loader';
 
 
 const Edit = (props) => {
@@ -13,6 +14,7 @@ const Edit = (props) => {
     const token = useSelector(state => state.authDetails.token);
     const campDetails = props.data;
     const [campaign, setCampaing] = useState(campDetails);
+    const [isLoading, setIsLoading] = useState(false);
     console.log(campaign);
 
   const request = {
@@ -43,16 +45,20 @@ const Edit = (props) => {
 
 
   const handleSubmit = (event) => {
+    setIsLoading(true);
     axios(request)
     .then(res => {
       setsuccessMsg("success");
+      setIsLoading(false);
       navigate("/bdashboard")
     })
-    .catch(err => {setsuccessMsg("failed")});
+    .catch(err => {setsuccessMsg("failed");
+    setIsLoading(false)});
   }
 
   return (
-    
+    <>
+    {isLoading ? <LoadingSpinner /> : 
 <div className="CreateCampaing">
 {successMsg === "success" ? 
   <div className='responseMsg success'>
@@ -96,7 +102,8 @@ const Edit = (props) => {
 
 
     </div>
-
+}
+</>
   )
 }
 

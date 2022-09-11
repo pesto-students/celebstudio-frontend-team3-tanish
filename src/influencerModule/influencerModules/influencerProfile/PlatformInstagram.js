@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
+import LoadingSpinner from '../../../loader/loader';
 import {setData} from '../../../signup/authSlice';
 
 
@@ -15,6 +16,7 @@ import {setData} from '../../../signup/authSlice';
     const [COST , setCOST] = useState("");
     const [showEditForm, handleShowEditForm] = useState();
     let user = useSelector(state => state.authDetails.userData);
+    const [isLoading, setIsLoading] = useState(false);
 
     const requestProfile = {
         method:'patch',
@@ -47,7 +49,7 @@ import {setData} from '../../../signup/authSlice';
     //checking instagram status from redux. if active, then setShowFecbookedit is set to true which
     const handleFacebookUpdate = (event) => {
         event.preventDefault();
-
+        setIsLoading(true);
         if(!URL || !FCOUNT || !COST){
           alert("you left a field empty")
           setURL("");
@@ -62,11 +64,12 @@ import {setData} from '../../../signup/authSlice';
         const instagramRequest = {...requestProfile,data:{instagram:{isactive: true, url:URL, follower_count:FCOUNT, cost:COST}}};
         console.log(instagramRequest);
         axios(instagramRequest)
-        .then(res => {console.log(res.data.data)
+        .then(res => {console.log(res.data.data);
+          setIsLoading(false)
           let data = res.data.data.profile;
           dispath(setData(data));
           console.log(user)})
-        .catch(err => console.log(err));
+        .catch(err => {console.log(err);setIsLoading(false)});
         setURL("");
         setFCOUNT("");
         setCOST("");
@@ -74,6 +77,8 @@ import {setData} from '../../../signup/authSlice';
       }
 
   return (
+    <>
+    {isLoading ? <LoadingSpinner /> : 
     <div className='personalDetails'>
     {instagram.isactive ? 
     <div className='pdetails platformContainer'><div className="ChangePassword"  onClick={() => {handleShowEditForm(!showEditForm)}}>Change instagram details</div>
@@ -120,6 +125,7 @@ import {setData} from '../../../signup/authSlice';
       }
     </div>}
     </div>
+    }</>
   )
 }
 
