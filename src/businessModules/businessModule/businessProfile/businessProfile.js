@@ -17,7 +17,7 @@ return (
         <Navbar children={<Bprofile />}/>
     </div>
     </>:<>
-    <Navigate to="/signup" />
+    <Navigate to="/" />
     </>}
     </>
   )

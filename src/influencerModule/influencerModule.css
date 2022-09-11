@@ -333,17 +333,21 @@ input[type="text"],input[type="date"],input[type="email"]:hover{
 
 
 .EnrollCampaign{
-    background-color: #2e5985;
+        background-color: rgba(9, 82, 160, 0.551);
+        backdrop-filter: blur(2px);
         padding: 20px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         border-radius: 5px;
-        color:white;
         opacity: 0.95;
         animation-name: example;
         animation-duration:50ms;   
         text-align: center;
+}
+
+.ApplyText{
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 @keyframes example {

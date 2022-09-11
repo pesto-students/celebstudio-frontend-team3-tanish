@@ -17,7 +17,7 @@ return (
         <Navbar children={<CampaignFormOne id={userID} token={token}/>}/>
     </div>
     </>:<>
-    <Navigate to="/signup" />
+    <Navigate to="/" />
     </>}
     </>
   )

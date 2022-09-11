@@ -37,6 +37,7 @@ const Signup = (props) => {
     const handleLogin = async (event) => {
       event.preventDefault();
       //console.log(request.data);
+      setDispalyStatus();
 
       const request = {
         method:'post',
@@ -108,7 +109,7 @@ const Signup = (props) => {
                 <input type="radio" value="business" name="user-type" onChange={handleChange}/> Business {'\u00A0'}{'\u00A0'}
                 <input type="radio" value="influencer" name="user-type" onChange={handleChange}/> Influencer
               </div>
-              <button className='signupbutton' onClick={() => {navigate(`/signup/${userType}`)}}>Click here to proceed!</button>
+              <button className='signupbutton' onClick={() => {navigate(`/signup/${userType}`)}}>Click here to proceed</button>
 
           </div>
           <div className='lineSignup'></div>

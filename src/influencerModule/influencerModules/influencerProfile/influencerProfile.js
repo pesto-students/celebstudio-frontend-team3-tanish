@@ -16,7 +16,7 @@ return (
         <Navbar children={<Iprofile />}/>
     </div>
     </>:<>
-    <Navigate to="/signup" />
+    <Navigate to="/" />
     </>}
     </>
   )

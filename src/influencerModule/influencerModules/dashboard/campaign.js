@@ -4,6 +4,7 @@ import '../../influencerModule.css';
 import axios from 'axios';
 import {CgCalendarDates} from 'react-icons/cg';
 import { useSelector } from 'react-redux';
+import LoadingSpinner from '../../../loader/loader';
 
 
 const Campaign = () => {
@@ -27,11 +28,13 @@ const Campaign = () => {
   const [campList,setCampList] = useState([]);
   const [url,setUrl] = useState("");
   const [fname, setFname] = useState(name);
+  const [isLoading, setIsLoading] = useState(false);
   
 
 
 
   const getDashboardData = async () => {
+    setIsLoading(true);
     const request = {
       method:'get',
       header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
@@ -44,15 +47,18 @@ const Campaign = () => {
 
     await axios(request)
     .then((res) => {console.log(res);
+      setIsLoading(false);
       setCollabs(res.data.data.collabs);
       setPost_share(res.data.data.post_share);
       setPlatformM(res.data.data.platform);
       response2 = res.data.data.campaigns;
     let postlink = response2.map(item => ({id:item._id, status:item.influencers.map(item => item.post_link)}))
+    console.log(postlink);
     setAppliedStatus(postlink);
     console.log(postlink,collabs,post_share,platform);
+    
     })
-    .catch((err) => {console.log(err)});
+    .catch((err) => {console.log(err); setIsLoading(false);});
     setCampList(response2);
     console.log(response2)
   }
@@ -69,6 +75,7 @@ const Campaign = () => {
 
  
   const apply = (event) => {
+    setIsLoading(true);
     const applyrequest = {
       method:'post',
       header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
@@ -80,17 +87,17 @@ const Campaign = () => {
     }
 
     console.log(applyrequest);
-    try{
+  
     axios(applyrequest)
     .then(res => {
+      console.log(res);
+      getDashboardData();
       setApplyRes(!applyRes);
-  
+      setIsLoading(false);
     })
-    .catch(err => console.log(err));
-  }
-  catch(err){
-    console.log(err);
-  }
+    .catch(err => {console.log(err);
+    setIsLoading(false)});
+ 
  }
 
   const cancleApply = (event) => {
@@ -99,8 +106,8 @@ const Campaign = () => {
 
   return (
     <>
+    {isLoading ? <LoadingSpinner /> : null}
     {platform.facebook || platform.instagram || platform.twitter ?
-   
     <div className='dashboardCampaign'>
         <div className='dashboardgreet'>
         <h1>Welcome {fname},</h1> 
@@ -175,9 +182,12 @@ const Campaign = () => {
             <div className='activateInfluencer'>
             <p>Your profile is not active yet.<br/>
               Please <Link to='/Iprofile'>Click</Link> here to set your social media platform.</p>
-          </div>}
+          </div>
+           }
       
   
+   
+   
     </>
   )
 }

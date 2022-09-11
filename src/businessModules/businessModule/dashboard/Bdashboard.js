@@ -19,7 +19,7 @@ const Bdashboard = () => {
         <Navbar children={<DisplayCampaign id={userID} token={token} type={userType}/>}/>
     </div>
     </>:<>
-    <Navigate to="/signup" />
+    <Navigate to="/" />
     </>}
     </>
   )

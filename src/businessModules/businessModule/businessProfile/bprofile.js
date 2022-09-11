@@ -6,6 +6,7 @@ import pIMG from '../../../img/profileimg.PNG';
 import Editform from './inputfield';
 import {setData} from '../../../signup/authSlice';
 import '../../businessModule.css'
+import LoadingSpinner from '../../../loader/loader';
 
 const Bprofile = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,9 @@ const Bprofile = () => {
   const userID = useSelector(state => state.authDetails.userID);
   const userData = useSelector(state => state.authDetails.userData);
   let user = useSelector(state => state.authDetails.userData);
+  const [fileInputState, setFileInputState] = useState('');
+  const [selectedFile, setSelectedFile] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   console.log(token);
 
 
@@ -48,6 +52,7 @@ const Bprofile = () => {
 
 
     const handleupdateChange = (data) => {
+      setIsLoading(true);
 
       const request = {
         method:'patch',
@@ -71,8 +76,10 @@ const Bprofile = () => {
             let data = res.data.data.profile;
             dispatch(setData(data));
             dispatch(setData(data));
-            console.log(user)})
-          .catch(err => console.log(err));
+            console.log(user)
+          setIsLoading(false);})
+          .catch(err => {console.log(err);
+            setIsLoading(false);});
           updateSetEdit("");
           break;
         }
@@ -84,8 +91,10 @@ const Bprofile = () => {
             let data = res.data.data.profile;
             dispatch(setData(data));
             dispatch(setData(data));
-            console.log(user)})
-          .catch(err => console.log(err));
+            console.log(user);
+            setIsLoading(false);})
+          .catch(err => {console.log(err);
+          setIsLoading(false);});
           updateSetEdit("");
           break;
         }
@@ -97,8 +106,10 @@ const Bprofile = () => {
             let data = res.data.data.profile;
             dispatch(setData(data));
             dispatch(setData(data));
-            console.log(user)})
-          .catch(err => console.log(err));
+            console.log(user);
+            setIsLoading(false);})
+          .catch(err => {console.log(err);
+            setIsLoading(false);});
           updateSetEdit("");
           break;
         }
@@ -128,7 +139,7 @@ const Bprofile = () => {
 
     const handlePasswordSubmit = (event) => {
       event.preventDefault();
-
+      setIsLoading(true);
 
       if(!oldpassword || !newpassword || !verifypassword ){
         alert("Please fill in the details");
@@ -151,8 +162,11 @@ const Bprofile = () => {
       let passwordChangeRequest = {...passwordChange, data:password}
 
       axios(passwordChangeRequest)
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err))
+      .then(res => {//console.log(res.data);
+        setIsLoading(false);
+      setshowPasswordEdit(false)})
+      .catch(err => {console.log(err);
+        setIsLoading(false);})
 
     }
 
@@ -160,11 +174,12 @@ const Bprofile = () => {
       setAddImage(true);
     }
 
-    const handleImgChange = (event) => {
-      setSendImg({...sendImg,selectedFile:event.target.files[0]});
-      console.log(event.target.files[0]);
-    }
+   const handleImgChange = (event) => {
+     setSendImg({...sendImg,selectedFile:event.target.files[0]});
+     console.log(event.target.files[0]);
+   }
 
+  
 
     const handleimgUpload = (event) =>{
       const formData = new FormData();
@@ -189,11 +204,10 @@ const Bprofile = () => {
       console.log(requestPack);
     }
 
- 
-
-
   
 return(
+  <>
+  {isLoading ? <LoadingSpinner /> : null}
   <div className='profileContainer' >
       <h2>My Profile</h2>
       
@@ -289,13 +303,14 @@ return(
                 {showPasswordEdit ? 
                 <div className='pdetails'>
                   <form onSubmit={handlePasswordSubmit}>
-                  <label>Old password</label>   <div><input  type="text"  onChange={handlePasswordChange1} required /></div>
-                  <label>New Password</label>   <div><input  type="text" onChange={handlePasswordChange2} required/></div>
-                  <label>Verify Password</label><div><input  type="text" onChange={handlePasswordChange3} required/><button type='submit' className='profileEditButton update' >Update</button><button className='profileEditButton cancle' onClick={() => {setshowPasswordEdit(!showPasswordEdit)}}>Cancle</button></div>
+                  <label>Old password</label>   <div><input  type="password"  onChange={handlePasswordChange1} required /></div>
+                  <label>New Password</label>   <div><input  type="password" onChange={handlePasswordChange2} required/></div>
+                  <label>Verify Password</label><div><input  type="password" onChange={handlePasswordChange3} required/><button type='submit' className='profileEditButton update' >Update</button><button className='profileEditButton cancle' onClick={() => {setshowPasswordEdit(!showPasswordEdit)}}>Cancle</button></div>
                   </form>
                 </div>: null}
               
     </div>
+</>
   )
 
 }
