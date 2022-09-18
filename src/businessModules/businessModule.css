@@ -1,4 +1,3 @@
-
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -6,459 +5,449 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(128, 128, 128, 0.788); 
+  background: rgba(128, 128, 128, 0.788);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: grey; 
+  background: grey;
 }
-   
-
-
 
 /********************************************************dashboard module*******/
-.Idashboard{
-    width: 100vw;
-    height: 100vh;
-    font-family: Roboto;
+.Idashboard {
+  width: 100vw;
+  height: 100vh;
+  font-family: Roboto;
 }
 /*influencer dashboard*/
 
 /********************************************************campaing module*******/
 
-.dashboardCampaign{
-    display: flex;
-    flex-direction: column;
-    width:90%;
-    height: 90vh;
-    overflow-y: scroll;
-    padding-left: 10%;
-    background-color: #E9EDEA;
-    font-family: Roboto;
+.dashboardCampaign {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 90vh;
+  overflow-y: scroll;
+  padding-left: 10%;
+  background-color: #e9edea;
+  font-family: Roboto;
 }
 
-
-.dashboardgreet > h1{
-    font-family:Roboto;
-    font-size: 3em;
+.dashboardgreet > h1 {
+  font-family: Roboto;
+  font-size: 3em;
 }
 
-.campDesc{
-    width: 80%;
-    text-align: center;
-    font-size: 1.7em;
-    font-size: Roboto;
-    padding: 20px;
+.campDesc {
+  width: 80%;
+  text-align: center;
+  font-size: 1.7em;
+  font-size: Roboto;
+  padding: 20px;
 }
 
-.campDesceli{ width: 80%;
-font-size: 1.7em;
-font-size: Roboto;
-padding: 20px;
+.campDesceli {
+  width: 80%;
+  font-size: 1.7em;
+  font-size: Roboto;
+  padding: 20px;
 }
 
-
-.score{
-    font-size: 3em;
+.score {
+  font-size: 3em;
 }
 
-.line{
-    margin-top: 20px;
-    width: 85%;
-    border-top: 1px solid black;
+.line {
+  margin-top: 20px;
+  width: 85%;
+  border-top: 1px solid black;
 }
 
-.campaignCard{
-    width: 80%;
-    height: fit-content;
-    background-color: #dfdadc;
-    margin: 10px;
-    border-radius: 5px;
-    color: black;
-    padding: 15px;
+.campaignCard {
+  width: 80%;
+  height: fit-content;
+  background-color: #dfdadc;
+  margin: 10px;
+  border-radius: 5px;
+  color: black;
+  padding: 15px;
 }
 
 .campaignCard > * {
-    width: 85%;
-    padding:10px;
-    padding-left: 40px;
-    font-size: 1.2em;
-    text-decoration: double;
+  width: 85%;
+  padding: 10px;
+  padding-left: 40px;
+  font-size: 1.2em;
+  text-decoration: double;
 }
 
-.campaigncardConatiner{
-    width: 90%;
-    padding-left: 45px;
+.campaigncardConatiner {
+  width: 90%;
+  padding-left: 45px;
 }
 
-.campaignCard:hover{
-    background-color: #1c4e80;
-    color: white;
+.campaignCard:hover {
+  background-color: #1c4e80;
+  color: white;
+  cursor: pointer;
 }
 
-.campaignName{
-    display: inline-block;
+.campaignName {
+  display: inline-block;
 }
 
-@media screen and (max-width:1400px) {
-    .campaignCard > *{
-        min-width: 200px;
-    }
+@media screen and (max-width: 1400px) {
+  .campaignCard > * {
+    min-width: 200px;
+  }
 
-    .performance > *{
-        width: 18%;
-        font-size: 1em;
-    }
+  .performance > * {
+    width: 18%;
+    font-size: 1em;
+  }
 
-    .score{
-        font-size: 1.8rem;
-        padding-top: 30px;
-    }
+  .score {
+    font-size: 1.8rem;
+    padding-top: 30px;
+  }
 }
 
-@media screen and (max-width:500px) {
-    .campaignCard > *{
-        width: 100%;
-    }
+@media screen and (max-width: 500px) {
+  .campaignCard > * {
+    width: 100%;
+  }
 }
 
 /*campaing module*/
 
 /*Eligible campaign */
 
-.lineeli{
-    width: 80%;
-    border-top: 1px solid black;
+.lineeli {
+  width: 80%;
+  border-top: 1px solid black;
 }
-
-
 
 /********************************************************profile*******/
 
-.profileContainer{
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    height: 89vh;
-    padding-left:20%;
-    background-color:aliceblue;
-    overflow-y: scroll;
-    padding-bottom: 10px;
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 89vh;
+  padding-left: 20%;
+  background-color: aliceblue;
+  overflow-y: scroll;
+  padding-bottom: 10px;
 }
 
-.profileContainer > h2{
-    font-size: 2em;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+.profileContainer > h2 {
+  font-size: 2em;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
-.imgtitle{
-    margin-top: 80px;
-    padding-left: 10px;
-    font-size: 1.5em;
+.imgtitle {
+  margin-top: 80px;
+  padding-left: 10px;
+  font-size: 1.5em;
 }
 
-.uplodImg{
-    display: block !important;
+.uplodImg {
+  display: block !important;
 }
 
-
-
-.imgContainer{
-    display: flex !important;
-    flex-direction: column !important;
-    height: 300px;
+.imgContainer {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 300px;
 }
 
-
-.imgSubcontainer{
-    display: flex;
-    flex-direction: row;
-    width: 300px;
-    height: 150px;
-   margin-top: 20px;
+.imgSubcontainer {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+  height: 150px;
+  margin-top: 20px;
 }
 
-.imgDiv{
-    width: 140px;
-    height: 150px;
-    font-size: xx-large;   
+.imgDiv {
+  width: 140px;
+  height: 150px;
+  font-size: xx-large;
 }
 
-.imgDiv > img{
-    width: 130px;
-    height: 130px;
-    border-radius: 100px;
+.imgDiv > img {
+  width: 130px;
+  height: 130px;
+  border-radius: 100px;
 }
 
-.personalDetails{
-    height: fit-content;
-    margin-top: 20px;
+.personalDetails {
+  height: fit-content;
+  margin-top: 20px;
 }
 
-.editbutton{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    height: 130px;
-    margin-left: 10px;
+.editbutton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 130px;
+  margin-left: 10px;
 }
 
-.imgButton{
-    margin-bottom: 10px;
-    height: 35px;
+.imgButton {
+  margin-bottom: 10px;
+  height: 35px;
 }
 
-.change:hover{
-    background-color: blue;
-    color: white;
-    border: 0.1 solid lightgrey;
-    border-radius: 3px;
+.change:hover {
+  background-color: blue;
+  color: white;
+  border: 0.1 solid lightgrey;
+  border-radius: 3px;
 }
 
-.delete:hover{
-    background-color: red;
-    color: white;
-    border: 0.1 solid lightgrey;
-    border-radius: 3px;
+.delete:hover {
+  background-color: red;
+  color: white;
+  border: 0.1 solid lightgrey;
+  border-radius: 3px;
 }
 
-
-.pdetails{
-    width: 95%;
-    height: fit-content;
-    margin-left: 8px;
-    margin-top: 15px;
+.pdetails {
+  width: 95%;
+  height: fit-content;
+  margin-left: 8px;
+  margin-top: 15px;
 }
 
-.PDdisplay{
-    display: inline-block;
-    width: 500px;
-    border: 0.4px solid black;
-    background-color: azure;
-    padding: 10px 5px 14px 12px;
-    border-radius: 4px;
-    color:grey;
-    
+.PDdisplay {
+  display: inline-block;
+  width: 500px;
+  border: 0.4px solid black;
+  background-color: azure;
+  padding: 10px 5px 14px 12px;
+  border-radius: 4px;
+  color: grey;
 }
 
-input[type="text"],input[type="date"],input[type="email"],input[type="password"],select{
-    display: inline-block;
-    width: 500px;
-    border: 0.4px solid black;
-    background-color: white;
-    padding: 12px 5px 16px 12px;
-    border-radius: 4px;
-    color:black;
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="password"],
+select {
+  display: inline-block;
+  width: 500px;
+  border: 0.4px solid black;
+  background-color: white;
+  padding: 12px 5px 16px 12px;
+  border-radius: 4px;
+  color: black;
 }
 
-input[type="text"],input[type="number"],input[type="date"],input[type="email"]:hover{
-    background-color: white;
-    display: inline-block;
-    width: 500px;
-    border: 0.4px solid black;
-    padding: 12px 5px 16px 12px;
-    border-radius: 4px;
-    color: black;
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="email"]:hover {
+  background-color: white;
+  display: inline-block;
+  width: 500px;
+  border: 0.4px solid black;
+  padding: 12px 5px 16px 12px;
+  border-radius: 4px;
+  color: black;
 }
 
-
-
-
-.profileEditButton{
-    width:150px;
-    background-color: 0.4px solid black;
-    border: 0.4px solid black;
-    padding: 14px 5px 14px 5px;
-    margin-left: 5%;
-    border-radius: 4px;
-    
+.profileEditButton {
+  width: 150px;
+  background-color: 0.4px solid black;
+  border: 0.4px solid black;
+  padding: 14px 5px 14px 5px;
+  margin-left: 5%;
+  border-radius: 4px;
 }
 
-.update{
-    width: 80px;
+.update {
+  width: 80px;
 }
 
-.update:hover{
-    background-color: blue;
-    color: white;
+.update:hover {
+  background-color: blue;
+  color: white;
 }
 
-.cancle{
-    margin-left: 1px;
-    width: 80px;
+.cancle {
+  margin-left: 1px;
+  width: 80px;
 }
-.cancle:hover{
-    background-color: red;
-    color: white;
-    margin-left: 1px;
-}
-
-.ChangePassword{
-    width: 500px;
-    border: 0.4px solid black;
-    background-color: azure;
-    padding: 10px 5px 14px 12px;
-    border-radius: 4px;
-    margin-left: 8px;
-    margin-top: 15px;
-    text-align: center;
+.cancle:hover {
+  background-color: red;
+  color: white;
+  margin-left: 1px;
 }
 
-.ChangePassword:hover{
-    background-color: blue;
-    color: white;
+.ChangePassword {
+  width: 500px;
+  border: 0.4px solid black;
+  background-color: azure;
+  padding: 10px 5px 14px 12px;
+  border-radius: 4px;
+  margin-left: 8px;
+  margin-top: 15px;
+  text-align: center;
 }
 
-.selected{
-    background-color: blue;
-    color:white;
-    border-radius: 4px;
+.ChangePassword:hover {
+  background-color: blue;
+  color: white;
 }
 
-.platform{
-    padding-left: 20px;
+.selected {
+  background-color: blue;
+  color: white;
+  border-radius: 4px;
+}
+
+.platform {
+  padding-left: 20px;
 }
 
 /*******************************************create campaign************************/
 
-.CreateCampaing{
-    display: flex;
-    flex-direction: row;
-    width: 98%;
-    padding: 10px;
-    height: 100%;
-    font-family: Roboto;
-    overflow-y: hidden;
+.CreateCampaing {
+  display: flex;
+  flex-direction: row;
+  width: 98%;
+  padding: 10px;
+  height: 100%;
+  font-family: Roboto;
+  overflow-y: hidden;
 }
-.campType{
-    width: 30%;
-    min-width: fit-content;
-    margin-left: 5px;
-    margin-bottom: 10px;
-    height:35px;
-    margin-top: 15px;
-}
-
-.CCleft{
-    overflow-y: scroll;
-    height: 85vh;
-    padding-bottom: 30px;
-    padding-left: 30px;
-    width:60% ;
+.campType {
+  width: 30%;
+  min-width: fit-content;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  height: 35px;
+  margin-top: 15px;
 }
 
-.campType:hover{
-    background-color: #0eeccf9f;
-    border-radius: 4px;
+.CCleft {
+  overflow-y: scroll;
+  height: 85vh;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  width: 60%;
 }
 
-.lineCC{
-    width: 90%;
-    border-top: 0.8px solid black;
-    margin-top: 40px;
-    margin-bottom: 40px;
+.campType:hover {
+  background-color: #0eeccf9f;
+  border-radius: 4px;
 }
 
-.opted{
-    width: 30%;
-    background-color: rgba(12, 209, 209, 0.781);
-    border-radius: 3px;
-    color: white;
+.lineCC {
+  width: 90%;
+  border-top: 0.8px solid black;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
-
-.CCright{
-    width: 38%;
-    overflow-y: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.opted {
+  width: 30%;
+  background-color: rgba(12, 209, 209, 0.781);
+  border-radius: 3px;
+  color: white;
 }
 
-.CCname{
-    margin-bottom: 40px;
+.CCright {
+  width: 38%;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.CCrightContainer{   
-    width: 80%;
-    height: 80%;
-    background-color: rgba(50, 195, 176, 0.336);
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 25px;
+.CCname {
+  margin-bottom: 40px;
 }
 
-.CCrightContainer > img{
-    width: 50px;
-    height: 50px;
-    margin-bottom: 20px;
+.CCrightContainer {
+  width: 80%;
+  height: 80%;
+  background-color: rgba(50, 195, 176, 0.336);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+}
+
+.CCrightContainer > img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
 }
 
 /****************************************display campaign*************/
 
-.pre-launch{
-     width: fit-content !important;
-     padding: 5px !important;
-     padding-top: 2px !important;
-     padding-bottom: 2px !important;
-     position: relative;
-     bottom: 3px;
-     background-color: rgb(226, 105, 61);
-     font-size: 0.7em !important;
-     border-radius: 10px;
+.pre-launch {
+  width: fit-content !important;
+  padding: 5px !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  position: relative;
+  bottom: 3px;
+  background-color: rgb(226, 105, 61);
+  font-size: 0.7em !important;
+  border-radius: 10px;
 }
-.launch{
-    width: fit-content !important;
-    padding: 5px !important;
-    padding-top: 2px !important;
-    padding-bottom: 2px !important;
-    position: relative;
-    bottom: 3px;
-    background-color: yellowgreen;
-    font-size: 0.7em !important;
-    border-radius: 10px;
-}
-
-.budget{
-    font-size: larger;
-    margin-top: 10px;
-    text-decoration: double;
+.launch {
+  width: fit-content !important;
+  padding: 5px !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  position: relative;
+  bottom: 3px;
+  background-color: yellowgreen;
+  font-size: 0.7em !important;
+  border-radius: 10px;
 }
 
-.desc{
-    font-size: medium;
-    margin-top: 10px;
+.budget {
+  font-size: larger;
+  margin-top: 10px;
+  text-decoration: double;
 }
 
- .buttonEdit{
-    float: right;
-    width: 20px !important;
+.desc {
+  font-size: medium;
+  margin-top: 10px;
 }
 
-
-
-.emptyCamplist{
-    margin-top:2%;
-    width: 100%;
-    text-align: center;
-    height: fit-content; 
-    color: white;
+.buttonEdit {
+  float: right;
+  width: 20px !important;
 }
 
-.responseMsg{
+.emptyCamplist {
+  margin-top: 2%;
+  width: 100%;
+  text-align: center;
+  height: fit-content;
+  color: white;
+}
+
+.responseMsg {
   position: absolute;
   z-index: 1000;
   height: fit-content;
@@ -466,221 +455,215 @@ input[type="text"],input[type="number"],input[type="date"],input[type="email"]:h
   text-align: center;
   padding: 5px;
   color: white;
-  top:0
+  top: 0;
 }
 
-.success{
-    background-color: lightgreen;
+.success {
+  background-color: lightgreen;
 }
 
-.failed{
-    background-color: rgb(204, 37, 37);
+.failed {
+  background-color: rgb(204, 37, 37);
 }
 
+.showCampaign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
+  overflow-y: scroll;
+  background-image: url("../img/influencerShow.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 
-.showCampaign{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width:100%;
-    height: 90vh;
-    overflow-y: scroll;
-    background-color: #E9EDEA;
-    font-family: Roboto;
+  font-family: Roboto;
 }
 
-
-.objective{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.objective {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.emptyCamplistD{
-    width: 80%;
-    color: black;
-    text-align: center;
+.emptyCamplistD {
+  width: 80%;
+  color: black;
+  text-align: center;
 }
 
-.ShowcampaignName{
-    margin-top: 10px;
-    font-size:3em;
+.ShowcampaignName {
+  margin-top: 10px;
+  font-size: 3em;
 }
 
-.showDesc{
-    margin-top: 10px;
+.showDesc {
+  margin-top: 10px;
 }
 
-.showCampaignCard{
-    width: 96%;
-    height: fit-content;
-    background-color: #062e5694;
-    backdrop-filter: blur(4px);
-    margin: 10px;
-    border-radius: 5px;
-    padding: 15px; 
-    padding-left: 40px;
-    color: white;
+.showCampaignCard {
+  width: 96%;
+  height: fit-content;
+  background-color: #6b92f477;
+  backdrop-filter: blur(4px);
+  margin: 10px;
+  border-radius: 5px;
+  padding: 15px;
+  padding-left: 40px;
+  color: white;
 }
 
-
-.icontent{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content:flex-start;
-    width: 80%;
-    height: fit-content;
-    background-image: url('../img/influencerShow.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 10px;
-    border-radius: 5px;
-    color: white;
-    padding: 15px;
+.icontent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 80%;
+  height: fit-content;
+  margin: 10px;
+  border-radius: 5px;
+  color: white;
+  padding: 15px;
 }
 
-
-
-.influencerEntry{
-    width: 30%;
-    height: fit-content;
-    background-size: cover;
-    background-color: rgba(137, 137, 137, 0.466);
-    backdrop-filter: blur(2px);
-    color:white;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 300px;
+.influencerEntry {
+  width: 30%;
+  height: fit-content;
+  background-size: cover;
+  background-color: #e9edea80;
+  backdrop-filter: blur(2px);
+  color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+  opacity: 0.9;
 }
 
-.showIMG{
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
-
+.showIMG {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
 }
 
-.showIMG > img{
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
+.showIMG > img {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
 }
 
-
-.lineeli{
-    width: 80%;
-    border-top: 1px solid black;
+.lineeli {
+  width: 80%;
+  border-top: 1px solid black;
 }
 
-.desAndButton{
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-   
+.desAndButton {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.infMsg{
-    width: 97% !important;
-    height: 100px;
-    background-color: #dfdadc;
-    border: 0.8px solid black;
-    color: black;
-    border-radius: 5px;
-    padding: 5px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    
+.infMsg {
+  width: 97% !important;
+  height: 100px;
+  background-color: #dfdadc;
+  border: 0.8px solid black;
+  color: black;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
-.acceptButton{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.acceptButton {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
-.infMsg > *{
-    width: 150px;
+.infMsg > * {
+  width: 150px;
 }
-
 
 /* width */
 .infMsg::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  /* Track */
-  .infMsg::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
-    border-radius: 10px;
-  }
-   
-  /* Handle */
-  .infMsg::-webkit-scrollbar-thumb {
-    background: rgba(128, 128, 128, 0.788); 
-    border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  .infMsg::-webkit-scrollbar-thumb:hover {
-    background: grey; 
-  }
+  width: 5px;
+}
 
+/* Track */
+.infMsg::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
 
-.showName{
-    margin-bottom: 10px;
+/* Handle */
+.infMsg::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.788);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.infMsg::-webkit-scrollbar-thumb:hover {
+  background: grey;
+}
+
+.showName {
+  margin-bottom: 10px;
 }
 
 .icontent > h2 {
-    display: block !important;
-
+  display: block !important;
 }
 
 .icontent > p {
-    color: white;
+  color: white;
 }
 
-.showPlatform{
-    margin-top: 5px;
+.showPlatform {
+  margin-top: 5px;
 }
 
-
-
-@media screen and (max-width:500px) { 
-      .influencerEntry{
-        width: 95%;
-      }
+@media screen and (max-width: 500px) {
+  .influencerEntry {
+    width: 95%;
+  }
 }
 
-
-@media screen and (min-width:501px) and (max-width:1000px) { 
-    .influencerEntry{
-      width: 95%;
-    }
+@media screen and (min-width: 501px) and (max-width: 1000px) {
+  .influencerEntry {
+    width: 95%;
+  }
 }
 
-
-@media screen and (min-width:1000px) and (max-width:1200px) { 
-    .influencerEntry{
-      width: 45%;
-    }
+@media screen and (min-width: 1000px) and (max-width: 1200px) {
+  .influencerEntry {
+    width: 45%;
+  }
 }
 
-.ApplyCloseButton{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content:center ;
-    margin-top: 20px;
+.ApplyCloseButton {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.Hand {
+  color: white;
+}
+
+.lineShow {
+  width: 90%;
+  border-top: 1px solid white;
 }
