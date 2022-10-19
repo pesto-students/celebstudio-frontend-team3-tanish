@@ -138,15 +138,6 @@ const Hompage = () => {
                 <BsArrowRight />
               </span>
             </button>
-            <button className="startedButton" onClick={() => handleBusiness()}>
-              BusinessDummy
-            </button>
-            <button
-              className="startedButton"
-              onClick={() => handleInfluencer()}
-            >
-              InfluencerDummy
-            </button>
           </div>
         </header>
         <div className="container">

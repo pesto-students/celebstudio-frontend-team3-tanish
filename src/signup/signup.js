@@ -198,91 +198,15 @@ const Signup = (props) => {
           <div>
             <h2>Demo Login</h2>
             <button className="startedButton" onClick={() => handleBusiness()}>
-              BusinessDummy
+              Business Dummy Login
             </button>
             {"\u00A0"}
             <button
               className="startedButton"
               onClick={() => handleInfluencer()}
             >
-              InfluencerDummy
+              Influencer Dummy Login
             </button>
-          </div>
-          <h1>Sign into your Account</h1>
-          {displayStatus === "success" ? (
-            <div className="responseStatus signupsuccess">
-              Login Successfulll!! Redirecting to login Page.
-            </div>
-          ) : null}
-          {displayStatus === "failed" ? (
-            <div className="responseStatus signupfailed">{errMsg}</div>
-          ) : null}
-
-          <div className="signupContainer">
-            <div className="signupBody">
-              <div className="signupDesc">
-                If you do not have an account
-                <br />
-                create a new account
-              </div>
-              <h2 className="continueAs">Continue as</h2>
-              <div className="buttonSet">
-                <div className="switch">
-                  <input
-                    type="radio"
-                    value="business"
-                    name="user-type"
-                    onChange={handleChange}
-                  />{" "}
-                  Business {"\u00A0"}
-                  {"\u00A0"}
-                  <input
-                    type="radio"
-                    value="influencer"
-                    name="user-type"
-                    onChange={handleChange}
-                  />{" "}
-                  Influencer
-                </div>
-                <button
-                  className="signupbutton"
-                  onClick={() => {
-                    navigate(`/signup/${userType}`);
-                  }}
-                >
-                  Click here to proceed
-                </button>
-              </div>
-              <div className="lineSignup"></div>
-            </div>
-            <div className="loginBody">
-              <form onSubmit={handleLogin}>
-                <h3>Already a user</h3>
-                <input
-                  className="loginInput"
-                  required
-                  type="text"
-                  placeholder="E-mail"
-                  name="email"
-                  value={useLogin.value}
-                  onChange={setChange}
-                />
-                <br />
-                <input
-                  className="loginInput"
-                  required
-                  type="password"
-                  placeholder="password"
-                  name="password"
-                  value={useLogin.value}
-                  onChange={setChange}
-                />
-                <br />
-                <button className="signupbutton" type="submit">
-                  Login
-                </button>
-              </form>
-            </div>
           </div>
         </div>
         <ToastContainer />
