@@ -6,6 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getTOKEN, setData, setUserID, setUserType } from "../signup/authSlice";
+import { ToastContainer, toast } from "react-toastify";
 import LoadingSpinner from "../loader/loader";
 
 const Hompage = () => {
@@ -19,12 +20,12 @@ const Hompage = () => {
 
   const handleBusiness = async (event) => {
     setIsLoading(true);
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWFkMzA5ZmRkOWFjMDAxNmQ4NmIxYSIsImlhdCI6MTY2MjcwMjQwMiwiZXhwIjoxNjcwNDc4NDAyfQ.g9EKICrUn81y_2BrENP5jsiSPG5A0EWHoyHLew4eKXg";
+    toast.info("Login Request sent", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
     const request = {
       method: "post",
-      header:
-        ("Content-Type: application/json", `Authorization: Bearer ${token}`),
+      header: "Content-Type: application/json",
       url: "https://celebackend.herokuapp.com/api/v1/login",
       data: {
         password: "jitender",
@@ -71,16 +72,16 @@ const Hompage = () => {
 
   const handleInfluencer = async (event) => {
     setIsLoading(true);
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWFkMGRkZmRkOWFjMDAxNmQ4NmIwYyIsImlhdCI6MTY2MjcwMjE1OSwiZXhwIjoxNjcwNDc4MTU5fQ.4B00ZpzO5B8W2oePbtbbDyf81y4jV3lt32bvDBREhQw";
+    toast.info("Login Request sent", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
     const request = {
       method: "post",
-      header:
-        ("Content-Type: application/json", `Authorization: Bearer ${token}`),
+      header: "Content-Type: application/json",
       url: "https://celebackend.herokuapp.com/api/v1/login",
       data: {
-        password: "jitender",
-        email: "carryminati@gmail.com",
+        password: "123456",
+        email: "influencer@demo.com",
       },
     };
     await axios(request)
@@ -256,6 +257,7 @@ const Hompage = () => {
           </footer>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

@@ -1,51 +1,51 @@
-import React, { useState } from 'react';
-import './css/signup.css';
-import { useNavigate } from 'react-router-dom';
-import { getTOKEN,setData,setUserID,setUserType } from './authSlice';
-import axios from 'axios';
-import { useDispatch,useSelector } from 'react-redux';
-
+import React, { useState } from "react";
+import "./css/signup.css";
+import { useNavigate } from "react-router-dom";
+import { getTOKEN, setData, setUserID, setUserType } from "./authSlice";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../loader/loader";
+import { toast, ToastContainer } from "react-toastify";
 
 const Signup = (props) => {
-  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [error, errorMessage] = useState("");
- 
-  const user = useSelector(state => state.authDetails.userData)
-  const token = useSelector(state => state.authDetails.token);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const user = useSelector((state) => state.authDetails.userData);
+  const token = useSelector((state) => state.authDetails.token);
   const [displayStatus, setDispalyStatus] = useState();
   const [errMsg, setErrmsg] = useState("");
-  const [userType,handleUserType] = useState("");
-  const [useLogin,setuseLogin] = useState({
-    password:'',
-    email:'',
-  })
+  const [userType, handleUserType] = useState("");
+  const [useLogin, setuseLogin] = useState({
+    password: "",
+    email: "",
+  });
 
-
- 
   const handleChange = (event) => {
-   const utype = event.target.value;
-   handleUserType(utype);
-  }
+    const utype = event.target.value;
+    handleUserType(utype);
+  };
 
-    const setChange = (event) => {
-      const {name,value} = event.target;
-      setuseLogin({...useLogin, [name]:value});
-    }
+  const setChange = (event) => {
+    const { name, value } = event.target;
+    setuseLogin({ ...useLogin, [name]: value });
+  };
 
-    const handleLogin = async (event) => {
-      event.preventDefault();
-      //console.log(request.data);
-      setDispalyStatus();
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    //console.log(request.data);
+    setDispalyStatus();
 
-      const request = {
-        method:'post',
-        header:('Content-Type: application/json',`Authorization: Bearer ${token}`),
-        url:'https://celebackend.herokuapp.com/api/v1/login',
-        data: useLogin,
-      }
-      await axios(request)
+    const request = {
+      method: "post",
+      header:
+        ("Content-Type: application/json", `Authorization: Bearer ${token}`),
+      url: "https://celebackend.herokuapp.com/api/v1/login",
+      data: useLogin,
+    };
+    await axios(request)
       .then((res) => {
         //console.log(res);
         setDispalyStatus("success");
@@ -53,81 +53,242 @@ const Signup = (props) => {
         let token = res.data.token;
         let userId = res.data.user._id;
         let userType = res.data.user_type;
-       // console.log(userData, token, userId, userType);
-       
-        if(res.data.status === 'success' && res.data.user_type === 'Influencer'){
-        //  console.log(res.data);
-          dispatch(getTOKEN(token))
+        // console.log(userData, token, userId, userType);
+
+        if (
+          res.data.status === "success" &&
+          res.data.user_type === "Influencer"
+        ) {
+          //  console.log(res.data);
+          dispatch(getTOKEN(token));
           dispatch(setData(userData));
           dispatch(setUserID(userId));
           dispatch(setUserType(userType));
-          
-         
-          navigate('/idashboard');
-        }
-        else if(res.data.status === 'success' && res.data.user_type === 'Business'){
-          dispatch(getTOKEN(token))
+
+          navigate("/idashboard");
+        } else if (
+          res.data.status === "success" &&
+          res.data.user_type === "Business"
+        ) {
+          dispatch(getTOKEN(token));
           dispatch(setData(userData));
           dispatch(setUserID(userId));
           dispatch(setUserType(userType));
-          navigate('/bdashboard');
-        }
-        else{
+          navigate("/bdashboard");
+        } else {
           console.log("something went wrong");
         }
       })
       .catch((err) => {
-        setDispalyStatus('failed');
-        setErrmsg( err.response.data.message);
-        console.log(errorMessage)})
-    }
-   
-  
+        setDispalyStatus("failed");
+        setErrmsg(err.response.data.message);
+        console.log(errorMessage);
+      });
+  };
+
+  const handleBusiness = async (event) => {
+    setIsLoading(true);
+    const request = {
+      method: "post",
+      header: "Content-Type: application/json",
+      url: "https://celebackend.herokuapp.com/api/v1/login",
+      data: {
+        password: "jitender",
+        email: "rajveer@jitkush.com",
+      },
+    };
+    await axios(request)
+      .then((res) => {
+        setIsLoading(false);
+        //console.log(res);
+        let userData = res.data.user;
+        let token = res.data.token;
+        let userId = res.data.user._id;
+        let userType = res.data.user_type;
+        // console.log(userData, token, userId, userType);
+
+        if (
+          res.data.status === "success" &&
+          res.data.user_type === "Influencer"
+        ) {
+          //  console.log(res.data);
+          dispatch(getTOKEN(token));
+          dispatch(setData(userData));
+          dispatch(setUserID(userId));
+          dispatch(setUserType(userType));
+          navigate("/idashboard");
+        } else if (
+          res.data.status === "success" &&
+          res.data.user_type === "Business"
+        ) {
+          dispatch(getTOKEN(token));
+          dispatch(setData(userData));
+          dispatch(setUserID(userId));
+          dispatch(setUserType(userType));
+          navigate("/bdashboard");
+        } else {
+          console.log("something went wrong");
+        }
+      })
+      .catch((err) => {
+        setIsLoading(false);
+      });
+  };
+
+  const handleInfluencer = async (event) => {
+    setIsLoading(true);
+    toast.info("Login Request sent", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+    const request = {
+      method: "post",
+      header: "Content-Type: application/json",
+      url: "https://celebackend.herokuapp.com/api/v1/login",
+      data: {
+        password: "123456",
+        email: "influencer@demo.com",
+      },
+    };
+    await axios(request)
+      .then((res) => {
+        setIsLoading(false);
+        //console.log(res);
+        let userData = res.data.user;
+        let token = res.data.token;
+        let userId = res.data.user._id;
+        let userType = res.data.user_type;
+        // console.log(userData, token, userId, userType);
+
+        if (
+          res.data.status === "success" &&
+          res.data.user_type === "Influencer"
+        ) {
+          //  console.log(res.data);
+          dispatch(getTOKEN(token));
+          dispatch(setData(userData));
+          dispatch(setUserID(userId));
+          dispatch(setUserType(userType));
+
+          navigate("/idashboard");
+        } else if (
+          res.data.status === "success" &&
+          res.data.user_type === "Business"
+        ) {
+          dispatch(getTOKEN(token));
+          dispatch(setData(userData));
+          dispatch(setUserID(userId));
+          dispatch(setUserType(userType));
+          navigate("/bdashboard");
+        } else {
+          console.log("something went wrong");
+        }
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
+  };
+
   return (
-    <div className='Signupbody'>
-      <div className='signcelebstudio'>Celebstudio</div>
-      <div className='signContainer'>
+    <>
+      {isLoading ? <LoadingSpinner /> : null}
+      <div className="Signupbody">
+        <div className="signcelebstudio">Celebstudio</div>
+        <div className="signContainer">
+          <div>
+            <h2>Demo Login</h2>
+            <button className="startedButton" onClick={() => handleBusiness()}>
+              BusinessDummy
+            </button>
+            {"\u00A0"}
+            <button
+              className="startedButton"
+              onClick={() => handleInfluencer()}
+            >
+              InfluencerDummy
+            </button>
+          </div>
           <h1>Sign into your Account</h1>
-          {displayStatus === 'success' ? 
-          <div className='responseStatus signupsuccess'>
-            Login Successfulll!! Redirecting to login Page.
-          </div>:null}
-          {displayStatus === 'failed' ? 
-          <div className='responseStatus signupfailed'>
-            {errMsg}
-          </div>:null}
-          
-          
+          {displayStatus === "success" ? (
+            <div className="responseStatus signupsuccess">
+              Login Successfulll!! Redirecting to login Page.
+            </div>
+          ) : null}
+          {displayStatus === "failed" ? (
+            <div className="responseStatus signupfailed">{errMsg}</div>
+          ) : null}
 
-
-        <div className='signupContainer'>
-          <div className='signupBody'>
-          <div className='signupDesc'>If you do not have an account<br/>create a new account</div>
-            <h2 className='continueAs'>Continue as</h2>
-            <div className='buttonSet'>
-              <div className="switch">
-                <input type="radio" value="business" name="user-type" onChange={handleChange}/> Business {'\u00A0'}{'\u00A0'}
-                <input type="radio" value="influencer" name="user-type" onChange={handleChange}/> Influencer
+          <div className="signupContainer">
+            <div className="signupBody">
+              <div className="signupDesc">
+                If you do not have an account
+                <br />
+                create a new account
               </div>
-              <button className='signupbutton' onClick={() => {navigate(`/signup/${userType}`)}}>Click here to proceed</button>
-
+              <h2 className="continueAs">Continue as</h2>
+              <div className="buttonSet">
+                <div className="switch">
+                  <input
+                    type="radio"
+                    value="business"
+                    name="user-type"
+                    onChange={handleChange}
+                  />{" "}
+                  Business {"\u00A0"}
+                  {"\u00A0"}
+                  <input
+                    type="radio"
+                    value="influencer"
+                    name="user-type"
+                    onChange={handleChange}
+                  />{" "}
+                  Influencer
+                </div>
+                <button
+                  className="signupbutton"
+                  onClick={() => {
+                    navigate(`/signup/${userType}`);
+                  }}
+                >
+                  Click here to proceed
+                </button>
+              </div>
+              <div className="lineSignup"></div>
+            </div>
+            <div className="loginBody">
+              <form onSubmit={handleLogin}>
+                <h3>Already a user</h3>
+                <input
+                  className="loginInput"
+                  required
+                  type="text"
+                  placeholder="E-mail"
+                  name="email"
+                  value={useLogin.value}
+                  onChange={setChange}
+                />
+                <br />
+                <input
+                  className="loginInput"
+                  required
+                  type="password"
+                  placeholder="password"
+                  name="password"
+                  value={useLogin.value}
+                  onChange={setChange}
+                />
+                <br />
+                <button className="signupbutton" type="submit">
+                  Login
+                </button>
+              </form>
+            </div>
           </div>
-          <div className='lineSignup'></div>
-
-          </div>
-          <div className='loginBody'>
-          <form onSubmit={handleLogin}>
-              <h3>Already a user</h3>
-              <input className='loginInput' required type='text' placeholder='E-mail' name="email" value={useLogin.value} onChange={setChange} /><br/>
-              <input className='loginInput' required type='password' placeholder='password' name="password" value={useLogin.value} onChange={setChange} /><br/>
-              <button className='signupbutton' type='submit'>Login</button>
-            </form>
-
-          </div>
-    </div>
-    </div>
-    </div>
-  )
-}
+        </div>
+        <ToastContainer />
+      </div>
+    </>
+  );
+};
 
 export default Signup;
